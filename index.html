@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Paulifest Balões · Precificação Pro 2.0</title>
+<title>Paulifest Balões · Precificação Pro 3.0</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -113,6 +113,8 @@
 
   .cat-head { font-size:11px; letter-spacing:1.2px; text-transform:uppercase; color:var(--gold-deep); font-weight:700; margin:16px 0 4px; padding-bottom:5px; border-bottom:1px dashed var(--line); }
   .cat-head:first-child{ margin-top:4px; }
+  .size-head { font-size:12px; font-weight:700; color:var(--txt); margin:13px 0 2px; padding-left:2px; display:flex; align-items:center; gap:7px; }
+  .size-head::before{ content:''; width:5px; height:5px; border-radius:50%; background:var(--gold); }
 
   .cad-quick { background:linear-gradient(160deg,#FFFFFF,#FEFAF2); border:1.5px solid var(--gold-soft); border-radius:16px; padding:15px; margin-bottom:16px; box-shadow:var(--shadow-sm); }
   .cad-quick .qtt { font-size:12px; font-weight:700; color:var(--gold-deep); text-transform:uppercase; letter-spacing:1px; margin-bottom:11px; display:flex; align-items:center; gap:7px; }
@@ -183,6 +185,10 @@
   .r-final-row{ display:flex; justify-content:space-between; align-items:flex-end; position:relative; margin-top:4px; }
   .r-final-row .rl{ font-family:var(--display); font-size:14px; color:var(--gold-deep); font-style:italic; }
   .r-final-row .rv{ font-family:var(--display); font-weight:600; font-size:33px; line-height:1; color:var(--gold-deep); font-variant-numeric:tabular-nums; }
+  .r-final-row.big .rv{ font-size:36px; }
+  .r-orc-line{ display:flex; justify-content:space-between; align-items:baseline; padding:4px 0; position:relative; }
+  .r-orc-line .rl{ font-size:12.5px; color:var(--txt-dim); }
+  .r-orc-line .rv{ font-size:15px; font-weight:600; font-variant-numeric:tabular-nums; color:var(--txt-dim); }
   .r-log{ margin-top:13px; padding-top:13px; border-top:1px dashed var(--line); display:flex; justify-content:space-between; align-items:baseline; }
   .r-log .rl{ font-size:12px; color:var(--txt-faint); }
   .r-log .rv{ font-size:15px; font-weight:600; font-variant-numeric:tabular-nums; }
@@ -191,13 +197,40 @@
   .pp-chip { border:1.5px solid var(--line); background:var(--surface); border-radius:12px; padding:9px 13px; cursor:pointer; font-size:13px; font-weight:600; display:flex; align-items:center; gap:7px; transition:all .18s; }
   .pp-chip:active{ background:var(--gold-tint); }
   .pp-chip .pp-v { color:var(--gold-deep); font-variant-numeric:tabular-nums; }
-  .pp-added { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--line-soft); }
+  .pp-cat-group{ margin-bottom:14px; }
+  .pp-cat-bar{ display:flex; align-items:center; gap:8px; width:100%; padding:10px 12px; background:var(--gold-tint); border:1px solid var(--gold-soft); border-radius:12px; cursor:pointer; margin-bottom:9px; transition:background .15s; }
+  .pp-cat-bar:active{ background:var(--gold-soft); }
+  .pp-cat-bar .cb-arrow{ width:16px; height:16px; flex-shrink:0; transition:transform .22s; color:var(--gold-deep); }
+  .pp-cat-bar.collapsed .cb-arrow{ transform:rotate(-90deg); }
+  .pp-cat-bar .cb-name{ font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:var(--gold-deep); flex:1; }
+  .pp-cat-bar .cb-count{ background:var(--surface); color:var(--gold-deep); font-size:10px; font-weight:700; padding:2px 9px; border-radius:99px; }
+  .pp-cat-body{ overflow:hidden; }
+  .pp-cat-body.collapsed{ display:none; }
+  .pp-cat-chips{ display:flex; gap:8px; flex-wrap:wrap; padding-left:4px; }
+
+  .pp-added { display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid var(--line-soft); gap:10px; }
   .pp-added:last-child{ border-bottom:none; }
+  .pp-added .ppa-info{ flex:1; min-width:0; }
   .pp-added .ppa-name{ font-size:14px; font-weight:500; }
-  .pp-added .ppa-r{ display:flex; align-items:center; gap:12px; }
-  .pp-added .ppa-v{ font-weight:600; color:var(--gold-deep); font-variant-numeric:tabular-nums; }
+  .pp-added .ppa-sub{ font-size:11px; color:var(--txt-faint); margin-top:1px; font-variant-numeric:tabular-nums; }
+  .pp-added .ppa-r{ display:flex; align-items:center; gap:9px; flex-shrink:0; }
+  .pp-added .ppa-qty{ display:flex; align-items:center; gap:0; border:1.5px solid var(--line); border-radius:10px; overflow:hidden; }
+  .pp-added .ppa-qty button{ width:30px; height:32px; border:none; background:var(--surface-2); color:var(--gold-deep); font-size:17px; font-weight:700; cursor:pointer; display:grid; place-items:center; }
+  .pp-added .ppa-qty button:active{ background:var(--gold-tint); }
+  .pp-added .ppa-qty .qv{ width:32px; text-align:center; font-weight:700; font-size:14px; font-variant-numeric:tabular-nums; }
+  .pp-added .ppa-v{ font-weight:700; color:var(--gold-deep); font-variant-numeric:tabular-nums; min-width:74px; text-align:right; font-size:14px; }
   .pp-added .ppa-del{ background:none; border:none; cursor:pointer; color:var(--txt-faint); padding:3px; }
   .pp-added .ppa-del svg{ width:15px; height:15px; }
+
+  .lib-cat-group{ margin-bottom:12px; }
+  .lib-cat-bar{ display:flex; align-items:center; gap:8px; width:100%; padding:12px 13px; background:var(--gold-tint); border:1px solid var(--gold-soft); border-radius:13px; cursor:pointer; transition:background .15s; }
+  .lib-cat-bar:active{ background:var(--gold-soft); }
+  .lib-cat-bar .cb-arrow{ width:17px; height:17px; flex-shrink:0; transition:transform .22s; color:var(--gold-deep); }
+  .lib-cat-bar.collapsed .cb-arrow{ transform:rotate(-90deg); }
+  .lib-cat-bar .cb-name{ font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:var(--gold-deep); flex:1; }
+  .lib-cat-bar .cb-count{ background:var(--surface); color:var(--gold-deep); font-size:10px; font-weight:700; padding:2px 9px; border-radius:99px; }
+  .lib-cat-body{ padding-top:10px; }
+  .lib-cat-body.collapsed{ display:none; }
 
   .lib-row { border:1px solid var(--line); border-radius:14px; padding:14px; margin-bottom:10px; background:var(--surface); box-shadow:var(--shadow-sm); }
   .lib-row .lib-top { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
@@ -206,6 +239,12 @@
   .lib-row .lib-desc { font-size:12.5px; color:var(--txt-dim); }
   .lib-row .lib-actions { display:flex; gap:8px; margin-top:11px; }
   .lib-row .lib-actions .btn { flex:1; padding:9px; font-size:13px; }
+
+  .cat-manage-row{ display:grid; grid-template-columns:1fr 36px 36px; gap:8px; align-items:center; margin-bottom:9px; }
+  .cat-manage-row input{ padding:9px 11px; font-size:14px; }
+  .cat-manage-row .cm-btn{ height:40px; border-radius:10px; border:1px solid var(--line); background:var(--surface-2); display:grid; place-items:center; cursor:pointer; color:var(--txt-dim); }
+  .cat-manage-row .cm-btn.del:active{ background:#FBEAEA; color:var(--red); }
+  .cat-manage-row .cm-btn svg{ width:15px; height:15px; }
 
   .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:13px; border-radius:13px; border:none; cursor:pointer; font-family:var(--body); font-size:14.5px; font-weight:600; transition:all .18s; }
   .btn svg{ width:17px; height:17px; }
@@ -246,6 +285,17 @@
   .modal h3{ font-family:var(--display); font-size:21px; font-weight:600; margin-bottom:5px; }
   .modal p{ font-size:13px; color:var(--txt-dim); margin-bottom:18px; }
   .modal .mbtns{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:18px; }
+
+  .qty-modal-head{ background:var(--gold-tint); border:1px solid var(--gold-soft); border-radius:14px; padding:14px 16px; margin-bottom:18px; }
+  .qty-modal-head .qm-name{ font-family:var(--display); font-size:18px; font-weight:600; margin-bottom:3px; }
+  .qty-modal-head .qm-unit{ font-size:13px; color:var(--gold-deep); font-weight:600; font-variant-numeric:tabular-nums; }
+  .qty-stepper{ display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+  .qty-stepper button{ width:52px; height:52px; border-radius:14px; border:1.5px solid var(--line); background:var(--surface-2); color:var(--gold-deep); font-size:24px; font-weight:700; cursor:pointer; flex-shrink:0; }
+  .qty-stepper button:active{ background:var(--gold-tint); }
+  .qty-stepper input{ flex:1; text-align:center; font-size:22px; font-weight:700; padding:12px; font-variant-numeric:tabular-nums; }
+  .qty-subtotal{ display:flex; justify-content:space-between; align-items:baseline; padding:13px 16px; background:var(--surface-2); border-radius:13px; }
+  .qty-subtotal .ql{ font-size:12.5px; color:var(--txt-dim); font-weight:600; text-transform:uppercase; letter-spacing:.6px; }
+  .qty-subtotal .qv{ font-family:var(--display); font-size:22px; font-weight:600; color:var(--gold-deep); font-variant-numeric:tabular-nums; }
 </style>
 </head>
 <body>
@@ -257,7 +307,7 @@
     </div>
     <div class="brand-txt">
       <h1>Paulifest Balões</h1>
-      <span id="headSub">Precificação Pro 2.0</span>
+      <span id="headSub">Precificação Pro 3.0</span>
     </div>
     <div class="head-right">
       <div class="sync-pill" id="syncPill" onclick="setView('config')" style="cursor:pointer">
@@ -300,11 +350,13 @@
       <div class="r-line dim"><span class="rl">Mão de obra</span><span class="rv" id="rMO">R$ 0,00</span></div>
       <div class="r-line dim"><span class="rl">Equipe (ajudantes)</span><span class="rv" id="rEquipe">R$ 0,00</span></div>
       <div class="r-line dim"><span class="rl">Logística</span><span class="rv" id="rLogIncl">R$ 0,00</span></div>
-      <div class="r-line dim"><span class="rl">Extras (prontos)</span><span class="rv" id="rExtras">R$ 0,00</span></div>
       <div class="r-sub"><span class="rl">Custo total</span><span class="rv" id="rCustoTotal">R$ 0,00</span></div>
       <div class="r-divider"></div>
       <div class="r-line"><span class="rl">Lucro <small id="rLucroInfo">(markup 40%)</small></span><span class="rv" id="rLucro">R$ 0,00</span></div>
-      <div class="r-final-row"><span class="rl">Preço final</span><span class="rv" id="rFinal">R$ 0,00</span></div>
+      <div class="r-orc-line"><span class="rl">Preço do orçamento</span><span class="rv" id="rPrecoOrc">R$ 0,00</span></div>
+      <div class="r-orc-line"><span class="rl">+ Produtos prontos <small id="rProntosInfo"></small></span><span class="rv" id="rProntos">R$ 0,00</span></div>
+      <div class="r-divider"></div>
+      <div class="r-final-row big"><span class="rl">Total ao cliente</span><span class="rv" id="rFinal">R$ 0,00</span></div>
       <div class="r-log"><span class="rl">+ Logística cobrada à parte</span><span class="rv" id="rLogApart">R$ 0,00</span></div>
     </div>
 
@@ -343,12 +395,12 @@
 
     <div class="subview" id="sub-prontos">
       <div class="card">
-        <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div><div><div class="ttl">Adicionar produto pronto</div><div class="sub">Entra direto no preço final</div></div></div>
+        <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div><div><div class="ttl">Adicionar produto pronto</div><div class="sub">Toque pra escolher a quantidade</div></div></div>
         <div class="search-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input type="text" id="searchPP" placeholder="Buscar produto pronto..."></div>
-        <div class="pp-chip-row" id="ppChips"></div>
+        <div id="ppChips"></div>
       </div>
       <div class="card">
-        <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><div><div class="ttl">Prontos neste orçamento</div></div></div>
+        <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><div><div class="ttl">Prontos neste orçamento</div><div class="sub">Não recebem lucro — já é preço final</div></div></div>
         <div id="ppAdded"></div>
       </div>
     </div>
@@ -413,7 +465,7 @@
           <label class="fld"><span class="lbl">Lucro (%)</span><input type="number" id="lucroPct" step="1" min="0" value="40" inputmode="decimal"></label>
           <label class="fld"><span class="lbl">Tipo de cálculo</span><select id="lucroModo"><option value="markup">Markup (sobre custo)</option><option value="margem">Margem (sobre venda)</option></select></label>
         </div>
-        <p style="font-size:11.5px;color:var(--txt-faint)"><b>Markup:</b> preço = custo × (1 + %).<br><b>Margem:</b> preço = custo ÷ (1 − %).</p>
+        <p style="font-size:11.5px;color:var(--txt-faint)"><b>Markup:</b> preço = custo × (1 + %).<br><b>Margem:</b> preço = custo ÷ (1 − %).<br><b>Obs:</b> produtos prontos não entram nesse cálculo.</p>
       </div>
       <div class="card">
         <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 12a9 9 0 109-9 9 9 0 00-9 9z"/><path d="M12 7v5l3 2"/></svg></div><div><div class="ttl">Perda deste orçamento</div><div class="sub">Só sobre materiais + hélio</div></div></div>
@@ -459,12 +511,21 @@
     <p class="view-sub">Produtos prontos e modelos pra montar orçamento rápido.</p>
     <div class="subtabs" style="margin-top:4px">
       <button class="subtab active" data-lib="prontos">Produtos prontos</button>
+      <button class="subtab" data-lib="categorias">Categorias</button>
       <button class="subtab" data-lib="modelos">Modelos</button>
     </div>
     <div class="subview active" id="lib-prontos">
       <button class="new-btn" onclick="abrirModalPronto()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>Novo produto pronto</button>
       <div class="search-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input type="text" id="searchLibPP" placeholder="Buscar produto pronto..."></div>
       <div id="prontosList"></div>
+    </div>
+    <div class="subview" id="lib-categorias">
+      <div class="card" style="background:var(--gold-tint);border-color:var(--gold-soft)"><p style="font-size:13px;color:var(--gold-deep)"><b>Categorias dos produtos prontos.</b> Crie, renomeie ou apague. Categorias com produtos não podem ser apagadas — mova os produtos antes.</p></div>
+      <div class="card">
+        <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 7h18M3 12h18M3 17h18"/></svg></div><div><div class="ttl">Gerenciar categorias</div></div></div>
+        <div id="catManageList"></div>
+        <button class="add-line" onclick="addCatPronto()" style="margin-top:6px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>Nova categoria</button>
+      </div>
     </div>
     <div class="subview" id="lib-modelos">
       <div class="card" style="background:var(--gold-tint);border-color:var(--gold-soft)"><p style="font-size:13px;color:var(--gold-deep)"><b>Como criar um modelo:</b> abra/crie um orçamento, monte os materiais e hélio, e use "Salvar como modelo" na aba Lucro. Aqui você aplica em novos orçamentos.</p></div>
@@ -525,13 +586,33 @@
 <div class="toast" id="toast"></div>
 
 <div class="modal-bg" id="modalNovo"><div class="modal"><h3>Novo orçamento</h3><p>Dá um nome pra identificar depois.</p><label class="fld" style="margin-bottom:0"><span class="lbl">Nome do cliente / evento</span><input type="text" id="novoNome" placeholder="Ex: Aniversário Maria 15 anos"></label><div class="mbtns"><button class="btn btn-ghost" onclick="fecharModal('modalNovo')">Cancelar</button><button class="btn btn-gold" onclick="criarOrcamento()">Criar</button></div></div></div>
-<div class="modal-bg" id="modalPronto"><div class="modal"><h3 id="prontoTitulo">Novo produto pronto</h3><p>Item de venda rápida com preço final fechado.</p><label class="fld"><span class="lbl">Nome</span><input type="text" id="prontoNome" placeholder="Ex: Bubble personalizada"></label><label class="fld"><span class="lbl">Preço final (R$)</span><input type="number" id="prontoPreco" step="0.01" min="0" inputmode="decimal" placeholder="Ex: 80,00"></label><label class="fld" style="margin-bottom:0"><span class="lbl">Descrição (opcional)</span><textarea id="prontoDesc" placeholder="Ex: bubble 24 com glitter e personalização"></textarea></label><div class="mbtns"><button class="btn btn-ghost" onclick="fecharModal('modalPronto')">Cancelar</button><button class="btn btn-gold" onclick="salvarPronto()">Salvar</button></div></div></div>
+
+<div class="modal-bg" id="modalPronto"><div class="modal"><h3 id="prontoTitulo">Novo produto pronto</h3><p>Item de venda rápida com preço final fechado.</p><label class="fld"><span class="lbl">Nome</span><input type="text" id="prontoNome" placeholder="Ex: Bubble personalizada"></label><label class="fld"><span class="lbl">Categoria</span><select id="prontoCat"></select></label><label class="fld"><span class="lbl">Preço final (R$)</span><input type="number" id="prontoPreco" step="0.01" min="0" inputmode="decimal" placeholder="Ex: 80,00"></label><label class="fld" style="margin-bottom:0"><span class="lbl">Descrição (opcional)</span><textarea id="prontoDesc" placeholder="Ex: bubble 24 com glitter e personalização"></textarea></label><div class="mbtns"><button class="btn btn-ghost" onclick="fecharModal('modalPronto')">Cancelar</button><button class="btn btn-gold" onclick="salvarPronto()">Salvar</button></div></div></div>
+
 <div class="modal-bg" id="modalModelo"><div class="modal"><h3>Salvar como modelo</h3><p>Guarda os materiais e o hélio deste orçamento pra reusar.</p><label class="fld" style="margin-bottom:0"><span class="lbl">Nome do modelo</span><input type="text" id="modeloNome" placeholder="Ex: Arco desconstruído médio"></label><div class="mbtns"><button class="btn btn-ghost" onclick="fecharModal('modalModelo')">Cancelar</button><button class="btn btn-gold" onclick="salvarModelo()">Salvar modelo</button></div></div></div>
+
+<!-- MODAL QUANTIDADE PRODUTO PRONTO -->
+<div class="modal-bg" id="modalQtd"><div class="modal"><h3>Adicionar produto</h3><p>Escolha a quantidade. Já vem com 1 preenchido.</p>
+  <div class="qty-modal-head">
+    <div class="qm-name" id="qmName">Produto</div>
+    <div class="qm-unit" id="qmUnit">R$ 0,00 / un</div>
+  </div>
+  <div class="qty-stepper">
+    <button onclick="qmStep(-1)">−</button>
+    <input type="number" id="qmQty" min="1" step="1" value="1" inputmode="numeric" oninput="qmUpdate()">
+    <button onclick="qmStep(1)">+</button>
+  </div>
+  <div class="qty-subtotal"><span class="ql">Subtotal</span><span class="qv" id="qmSubtotal">R$ 0,00</span></div>
+  <div class="mbtns"><button class="btn btn-ghost" onclick="fecharModal('modalQtd')">Cancelar</button><button class="btn btn-gold" onclick="qmConfirmar()">Adicionar</button></div>
+</div></div>
 
 <script>
 "use strict";
 
 const CATEGORIAS = ['Balões','Bubble','Foils','Hélio','Personalização','Estruturas','Acessórios','Outros'];
+
+/* Categorias de PRODUTOS PRONTOS (editáveis) */
+const CAT_PRONTOS_DEFAULT = ['Arranjos','Bouquets','Bubbles','Decorações','Kits','Painéis','Balcão','Outros'];
 
 const CADASTRO_DEFAULT = [
   {n:'Balão 9"',cat:'Balões',o:'maior preço p marca',u:50,p:9.80},
@@ -587,55 +668,55 @@ const CADASTRO_DEFAULT = [
 
 /* ===== PRODUTOS PRONTOS — gerados da planilha CALCULADORA DE BALÕES (hélio ignorado) ===== */
 const PRONTOS_DEFAULT = [
-  {id:'pp_1',nome:'Base simples chão',preco:10.00,desc:'Importado da planilha'},
-  {id:'pp_2',nome:'Base orgânica chão',preco:15.00,desc:'Importado da planilha'},
-  {id:'pp_3',nome:'Acabamento bubble',preco:5.00,desc:'Importado da planilha'},
-  {id:'pp_4',nome:'Personalização vinil',preco:20.00,desc:'Importado da planilha'},
-  {id:'pp_5',nome:'Personalização 2 lados',preco:35.00,desc:'Importado da planilha'},
-  {id:'pp_6',nome:'Pintura a mão',preco:10.00,desc:'Importado da planilha'},
-  {id:'pp_7',nome:'Livre - entrega',preco:210.00,desc:'Importado da planilha'},
-  {id:'pp_8',nome:'Centro de mesa bubble (18")',preco:119.90,desc:'Importado da planilha'},
-  {id:'pp_9',nome:'Centro de mesa Foil',preco:79.90,desc:'Importado da planilha'},
-  {id:'pp_10',nome:'Arranjo bubble duplo (18")',preco:79.90,desc:'Importado da planilha'},
-  {id:'pp_11',nome:'Arranjo bubble glitter (18")',preco:89.90,desc:'Importado da planilha'},
-  {id:'pp_12',nome:'Arranjo bubble mini balões (24")',preco:109.90,desc:'Importado da planilha'},
-  {id:'pp_13',nome:'Arranjo bubble mix (24")',preco:135.00,desc:'Importado da planilha'},
-  {id:'pp_14',nome:'Arranjo bubble orgânico tradicional (18")',preco:125.90,desc:'Importado da planilha'},
-  {id:'pp_15',nome:'Arranjo bubble mix orgânico (24")',preco:159.90,desc:'Importado da planilha'},
-  {id:'pp_16',nome:'Bubble tower (18")',preco:105.00,desc:'Importado da planilha'},
-  {id:'pp_17',nome:'Bubble encapsulado (24")',preco:95.00,desc:'Importado da planilha'},
-  {id:'pp_18',nome:'Mini bubble (10")',preco:54.90,desc:'Importado da planilha'},
-  {id:'pp_19',nome:'Number tower 1und',preco:145.90,desc:'Importado da planilha'},
-  {id:'pp_20',nome:'Number tower 2und',preco:249.90,desc:'Importado da planilha'},
-  {id:'pp_21',nome:'Foil orgânico',preco:74.90,desc:'Importado da planilha'},
-  {id:'pp_22',nome:'Foil simples',preco:64.90,desc:'Importado da planilha'},
-  {id:'pp_23',nome:'Base simples número 18" (1 número)',preco:49.90,desc:'Importado da planilha'},
-  {id:'pp_24',nome:'Base simples número 18" (2 números)',preco:74.90,desc:'Importado da planilha'},
-  {id:'pp_25',nome:'Apliques p/ base',preco:5.00,desc:'Importado da planilha'},
-  {id:'pp_26',nome:'Bubble vareta c/ glitter',preco:69.90,desc:'Importado da planilha'},
-  {id:'pp_27',nome:'Bubble vareta c/ balões',preco:55.00,desc:'Importado da planilha'},
-  {id:'pp_28',nome:'Bubble na vareta duplo c/ glitter',preco:65.00,desc:'Importado da planilha'},
-  {id:'pp_29',nome:'Megatoon 11" standart',preco:17.90,desc:'Importado da planilha'},
-  {id:'pp_30',nome:'Megatoon 11" cromado',preco:18.90,desc:'Importado da planilha'},
-  {id:'pp_31',nome:'Cor customizada 11"',preco:21.90,desc:'Importado da planilha'},
-  {id:'pp_32',nome:'Transparente c/ glitter 11"',preco:29.90,desc:'Importado da planilha'},
-  {id:'pp_33',nome:'Pic pic 9/10"',preco:15.00,desc:'Importado da planilha'},
-  {id:'pp_34',nome:'Foil 18"',preco:39.90,desc:'Importado da planilha'},
-  {id:'pp_35',nome:'Número 32"',preco:99.90,desc:'Importado da planilha'},
-  {id:'pp_36',nome:'Bubble 18"',preco:39.90,desc:'Importado da planilha'},
-  {id:'pp_37',nome:'Bubble 18" c/ mini balões (5/6)',preco:89.90,desc:'Importado da planilha'},
-  {id:'pp_38',nome:'Bubble 18" encapsulado',preco:49.90,desc:'Importado da planilha'},
-  {id:'pp_39',nome:'Bubble 18" com glitter (10g max)',preco:59.90,desc:'Importado da planilha'},
-  {id:'pp_40',nome:'Bubble 24"',preco:65.00,desc:'Importado da planilha'},
-  {id:'pp_41',nome:'Bubble 24" c/ mini balões (8)',preco:128.00,desc:'Importado da planilha'},
-  {id:'pp_42',nome:'Bubble 24" encapsulado',preco:79.90,desc:'Importado da planilha'},
-  {id:'pp_43',nome:'Bubble 24" com glitter (15g max)',preco:89.90,desc:'Importado da planilha'},
-  {id:'pp_44',nome:'Peso água',preco:2.00,desc:'Importado da planilha'},
-  {id:'pp_45',nome:'Peso grintoy',preco:9.90,desc:'Importado da planilha'}
+  {id:'pp_1',nome:'Base simples chão',preco:10.00,cat:'Decorações',desc:'Importado da planilha'},
+  {id:'pp_2',nome:'Base orgânica chão',preco:15.00,cat:'Decorações',desc:'Importado da planilha'},
+  {id:'pp_3',nome:'Acabamento bubble',preco:5.00,cat:'Outros',desc:'Importado da planilha'},
+  {id:'pp_4',nome:'Personalização vinil',preco:20.00,cat:'Outros',desc:'Importado da planilha'},
+  {id:'pp_5',nome:'Personalização 2 lados',preco:35.00,cat:'Outros',desc:'Importado da planilha'},
+  {id:'pp_6',nome:'Pintura a mão',preco:10.00,cat:'Outros',desc:'Importado da planilha'},
+  {id:'pp_7',nome:'Livre - entrega',preco:210.00,cat:'Outros',desc:'Importado da planilha'},
+  {id:'pp_8',nome:'Centro de mesa bubble (18")',preco:119.90,cat:'Arranjos',desc:'Importado da planilha'},
+  {id:'pp_9',nome:'Centro de mesa Foil',preco:79.90,cat:'Arranjos',desc:'Importado da planilha'},
+  {id:'pp_10',nome:'Arranjo bubble duplo (18")',preco:79.90,cat:'Arranjos',desc:'Importado da planilha'},
+  {id:'pp_11',nome:'Arranjo bubble glitter (18")',preco:89.90,cat:'Arranjos',desc:'Importado da planilha'},
+  {id:'pp_12',nome:'Arranjo bubble mini balões (24")',preco:109.90,cat:'Arranjos',desc:'Importado da planilha'},
+  {id:'pp_13',nome:'Arranjo bubble mix (24")',preco:135.00,cat:'Arranjos',desc:'Importado da planilha'},
+  {id:'pp_14',nome:'Arranjo bubble orgânico tradicional (18")',preco:125.90,cat:'Arranjos',desc:'Importado da planilha'},
+  {id:'pp_15',nome:'Arranjo bubble mix orgânico (24")',preco:159.90,cat:'Arranjos',desc:'Importado da planilha'},
+  {id:'pp_16',nome:'Bubble tower (18")',preco:105.00,cat:'Bubbles',desc:'Importado da planilha'},
+  {id:'pp_17',nome:'Bubble encapsulado (24")',preco:95.00,cat:'Bubbles',desc:'Importado da planilha'},
+  {id:'pp_18',nome:'Mini bubble (10")',preco:54.90,cat:'Bubbles',desc:'Importado da planilha'},
+  {id:'pp_19',nome:'Number tower 1und',preco:145.90,cat:'Decorações',desc:'Importado da planilha'},
+  {id:'pp_20',nome:'Number tower 2und',preco:249.90,cat:'Decorações',desc:'Importado da planilha'},
+  {id:'pp_21',nome:'Foil orgânico',preco:74.90,cat:'Arranjos',desc:'Importado da planilha'},
+  {id:'pp_22',nome:'Foil simples',preco:64.90,cat:'Arranjos',desc:'Importado da planilha'},
+  {id:'pp_23',nome:'Base simples número 18" (1 número)',preco:49.90,cat:'Decorações',desc:'Importado da planilha'},
+  {id:'pp_24',nome:'Base simples número 18" (2 números)',preco:74.90,cat:'Decorações',desc:'Importado da planilha'},
+  {id:'pp_25',nome:'Apliques p/ base',preco:5.00,cat:'Outros',desc:'Importado da planilha'},
+  {id:'pp_26',nome:'Bubble vareta c/ glitter',preco:69.90,cat:'Bubbles',desc:'Importado da planilha'},
+  {id:'pp_27',nome:'Bubble vareta c/ balões',preco:55.00,cat:'Bubbles',desc:'Importado da planilha'},
+  {id:'pp_28',nome:'Bubble na vareta duplo c/ glitter',preco:65.00,cat:'Bubbles',desc:'Importado da planilha'},
+  {id:'pp_29',nome:'Megatoon 11" standart',preco:17.90,cat:'Balcão',desc:'Importado da planilha'},
+  {id:'pp_30',nome:'Megatoon 11" cromado',preco:18.90,cat:'Balcão',desc:'Importado da planilha'},
+  {id:'pp_31',nome:'Cor customizada 11"',preco:21.90,cat:'Balcão',desc:'Importado da planilha'},
+  {id:'pp_32',nome:'Transparente c/ glitter 11"',preco:29.90,cat:'Balcão',desc:'Importado da planilha'},
+  {id:'pp_33',nome:'Pic pic 9/10"',preco:15.00,cat:'Balcão',desc:'Importado da planilha'},
+  {id:'pp_34',nome:'Foil 18"',preco:39.90,cat:'Balcão',desc:'Importado da planilha'},
+  {id:'pp_35',nome:'Número 32"',preco:99.90,cat:'Balcão',desc:'Importado da planilha'},
+  {id:'pp_36',nome:'Bubble 18"',preco:39.90,cat:'Bubbles',desc:'Importado da planilha'},
+  {id:'pp_37',nome:'Bubble 18" c/ mini balões (5/6)',preco:89.90,cat:'Bubbles',desc:'Importado da planilha'},
+  {id:'pp_38',nome:'Bubble 18" encapsulado',preco:49.90,cat:'Bubbles',desc:'Importado da planilha'},
+  {id:'pp_39',nome:'Bubble 18" com glitter (10g max)',preco:59.90,cat:'Bubbles',desc:'Importado da planilha'},
+  {id:'pp_40',nome:'Bubble 24"',preco:65.00,cat:'Bubbles',desc:'Importado da planilha'},
+  {id:'pp_41',nome:'Bubble 24" c/ mini balões (8)',preco:128.00,cat:'Bubbles',desc:'Importado da planilha'},
+  {id:'pp_42',nome:'Bubble 24" encapsulado',preco:79.90,cat:'Bubbles',desc:'Importado da planilha'},
+  {id:'pp_43',nome:'Bubble 24" com glitter (15g max)',preco:89.90,cat:'Bubbles',desc:'Importado da planilha'},
+  {id:'pp_44',nome:'Peso água',preco:2.00,cat:'Balcão',desc:'Importado da planilha'},
+  {id:'pp_45',nome:'Peso grintoy',preco:9.90,cat:'Balcão',desc:'Importado da planilha'}
 ];
 
 let app = {
-  cadastro: [], prontos: [], modelos: [],
+  cadastro: [], prontos: [], modelos: [], catPronto: [],
   custoHelioM3: 232.7586,
   defPerda: 10, defLucro: 40, defLucroModo: 'markup',
   orcamentos: [], abertoId: null,
@@ -643,11 +724,15 @@ let app = {
 };
 const LS_KEY = 'paulifest_baloes_v4';
 
+/* estado de UI (não persistido na nuvem): categorias recolhidas */
+const collapsedPP = {};   // aba orçamento > prontos
+const collapsedLib = {};  // biblioteca > prontos
+
 /* ===================== ARMAZENAMENTO (Local + Firebase) ===================== */
 let fbApp=null, fbDb=null, fbDoc=null, fbReady=false, fbUnsub=null;
 let saveTimer=null, applyingRemote=false, lastSyncStamp=0;
 
-function setSyncStatus(state){ // 'on' | 'sync' | 'off'
+function setSyncStatus(state){
   const dot=document.getElementById('syncDot'), txt=document.getElementById('syncTxt');
   const cdot=document.getElementById('cfgSyncDot'), ct=document.getElementById('cfgSyncTitle'), cs=document.getElementById('cfgSyncSub');
   dot.className='sync-dot '+state;
@@ -683,10 +768,17 @@ function load(){
   if(raw){ try{ app = Object.assign(app, JSON.parse(raw)); }catch(e){} }
   if(!app.cadastro?.length) app.cadastro = JSON.parse(JSON.stringify(CADASTRO_DEFAULT));
   if(!app.prontos?.length)  app.prontos  = JSON.parse(JSON.stringify(PRONTOS_DEFAULT));
+  if(!app.catPronto?.length) app.catPronto = JSON.parse(JSON.stringify(CAT_PRONTOS_DEFAULT));
   if(!app.modelos)          app.modelos  = [];
   if(!app.orcamentos)       app.orcamentos = [];
   if(!app.fb)               app.fb = { apiKey:'', projectId:'', appId:'', code:'', enabled:false };
   app.cadastro.forEach((it,i)=>{ if(!it.id) it.id='cad_'+i+'_'+Math.random().toString(36).slice(2,5); });
+  // migração: produto pronto sem categoria
+  app.prontos.forEach(p=>{ if(!p.cat) p.cat='Outros'; });
+  // garante que toda categoria usada por algum pronto existe na lista
+  app.prontos.forEach(p=>{ if(!app.catPronto.includes(p.cat)) app.catPronto.push(p.cat); });
+  // migração: prontos dentro dos orçamentos agora têm qtd
+  app.orcamentos.forEach(o=>{ if(Array.isArray(o.prontos)) o.prontos.forEach(p=>{ if(!p.qtd) p.qtd=1; }); });
   app.abertoId = null;
 }
 
@@ -715,19 +807,16 @@ async function initFirebase(){
     fbDoc = fbDocFn(fbDb,'paulifest_sync', code.trim());
     fbReady=true;
 
-    // 1) Puxa o que tem na nuvem
     const snap = await fbGetDoc(fbDoc);
     if(snap.exists()){
       const remote=snap.data();
       const localTs = (JSON.parse(localStorage.getItem(LS_KEY)||'{}'))._ts || 0;
-      // nuvem mais nova -> aplica nuvem; senão sobe local
       if((remote._ts||0) >= localTs){ applyRemote(remote); }
       else { await pushToCloud(); }
     } else {
-      await pushToCloud(); // primeira vez: sobe local
+      await pushToCloud();
     }
 
-    // 2) Escuta mudanças em tempo real
     if(fbUnsub) fbUnsub();
     fbUnsub = fbOnSnapshot(fbDoc,(s)=>{
       if(!s.exists()) return;
@@ -743,10 +832,11 @@ async function initFirebase(){
 
 function applyRemote(remote){
   applyingRemote=true;
-  const localFb=app.fb; // preserva config local do firebase
+  const localFb=app.fb;
   lastSyncStamp=remote._ts||Date.now();
   app.cadastro = remote.cadastro||app.cadastro;
   app.prontos  = remote.prontos||app.prontos;
+  app.catPronto = remote.catPronto||app.catPronto;
   app.modelos  = remote.modelos||app.modelos;
   app.orcamentos = remote.orcamentos||app.orcamentos;
   app.custoHelioM3 = remote.custoHelioM3 ?? app.custoHelioM3;
@@ -754,13 +844,15 @@ function applyRemote(remote){
   app.defLucro = remote.defLucro ?? app.defLucro;
   app.defLucroModo = remote.defLucroModo || app.defLucroModo;
   app.fb = localFb;
+  // garante integridade pós-sync
+  app.prontos.forEach(p=>{ if(!p.cat) p.cat='Outros'; if(!app.catPronto.includes(p.cat)) app.catPronto.push(p.cat); });
+  app.orcamentos.forEach(o=>{ if(Array.isArray(o.prontos)) o.prontos.forEach(p=>{ if(!p.qtd) p.qtd=1; }); });
   persistLocal();
   applyingRemote=false;
-  // re-render da view ativa
   const activeView=document.querySelector('.view.active')?.id?.replace('view-','');
   if(activeView==='home') renderHome();
   if(activeView==='cadastro') renderCadastro();
-  if(activeView==='biblioteca'){ renderProntos(); renderModelos(); }
+  if(activeView==='biblioteca'){ renderProntos(); renderModelos(); renderCatManage(); }
   if(activeView==='orcamento') renderEditor();
 }
 
@@ -817,6 +909,43 @@ function tempoRel(ts){
   if(d<86400) return Math.floor(d/3600)+'h atrás';
   const dt=new Date(ts); return dt.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'});
 }
+
+/* ---- ORDENAÇÃO DE BALÕES (Alteração 1): tamanho -> acabamento ---- */
+function tamanhoBalao(nome){
+  // pega primeiro número (polegadas); número grande (40cm/80cm) vai pro fim
+  const n=nome.toLowerCase();
+  if(/\d+\s*cm/.test(n)){ const cm=parseFloat(n.match(/(\d+)\s*cm/)[1]); return 9000+cm; } // balões número ao fim
+  const m=n.match(/(\d+(?:[.,]\d+)?)\s*"?/);
+  if(m) return parseFloat(m[1].replace(',','.'));
+  return 99999;
+}
+const ORDEM_ACAB = ['', 'platino','pérola','perola','metalizado','metalizada','chrome','cromado','cromada'];
+function acabamentoBalao(nome){
+  const n=nome.toLowerCase();
+  if(/platino/.test(n)) return 1;
+  if(/p[ée]rola/.test(n)) return 2;
+  if(/metaliz/.test(n)) return 3;
+  if(/chrome|cromad/.test(n)) return 4;
+  return 0; // standard / liso
+}
+function ordenarBaloes(arr){
+  return [...arr].sort((a,b)=>{
+    const ta=tamanhoBalao(a.n), tb=tamanhoBalao(b.n);
+    if(ta!==tb) return ta-tb;
+    const aa=acabamentoBalao(a.n), ab=acabamentoBalao(b.n);
+    if(aa!==ab) return aa-ab;
+    return a.n.localeCompare(b.n,'pt-BR');
+  });
+}
+function labelTamanho(it){
+  const t=tamanhoBalao(it.n);
+  if(t>=9000) return 'Balão número';
+  const n=it.n.toLowerCase();
+  if(/\d+\s*"/.test(n)){ const pol=it.n.match(/(\d+(?:[.,]\d+)?)\s*"/); if(pol) return 'Balão '+pol[1]+'"'; }
+  // ex: "260", "11" megatoon" -> usa o número
+  const m=it.n.match(/(\d+)/); return m?('Balão '+m[1]):'Balões';
+}
+
 function novoOrcObj(nome){
   return {
     id: Date.now()+'_'+Math.random().toString(36).slice(2,6),
@@ -839,7 +968,7 @@ function setView(view){
   window.scrollTo(0,0);
   if(view==='home') renderHome();
   if(view==='cadastro') renderCadastro();
-  if(view==='biblioteca'){ renderProntos(); renderModelos(); }
+  if(view==='biblioteca'){ renderProntos(); renderModelos(); renderCatManage(); }
   if(view==='config') loadConfig();
   if(view==='orcamento') renderEditor();
 }
@@ -857,7 +986,6 @@ document.querySelectorAll('.subtabs').forEach(box=>{
       st.classList.add('active');
       const key=st.dataset.sub||st.dataset.lib;
       const prefix=st.dataset.sub?'sub-':'lib-';
-      const scope=st.dataset.sub?document:document;
       document.querySelectorAll('.subview').forEach(sv=>{
         if(sv.id.startsWith(prefix)) sv.classList.toggle('active', sv.id===prefix+key);
       });
@@ -922,22 +1050,43 @@ function renderEditor(){
   renderOrcList(); renderHelioList(); renderEquipe(); renderPPChips(); renderPPAdded();
   calcular();
 }
+
+/* Materiais — Balões agrupados por tamanho; demais categorias normais */
 function renderOrcList(filter=''){
   const o=orcAtual(); if(!o)return;
   const f=(filter||document.getElementById('searchOrc').value||'').toLowerCase();
   const itens=app.cadastro.filter(it=>!isHelioItem(it) && it.n.toLowerCase().includes(f));
   document.getElementById('orcCount').textContent=`${app.cadastro.filter(i=>!isHelioItem(i)).length} materiais`;
-  let html='', cat='';
-  itens.forEach(it=>{
-    if(it.cat!==cat){ cat=it.cat; html+=`<div class="cat-head">${esc(cat)}</div>`; }
-    const q=o.qtds[it.id]||0; const cu=custoUnit(it); const sub=q*cu;
-    html+=`<div class="item-row ${q>0?'has-qty':''}">
-      <div class="item-info"><div class="name">${esc(it.n)}</div><div class="meta">${brl(cu)}/un · ${esc(it.o||'')}</div></div>
-      <input type="number" min="0" inputmode="numeric" value="${q||''}" placeholder="0" oninput="setQtd('${it.id}',this.value)">
-      <div class="subtotal-tag">${brl(sub)}</div>
-    </div>`;
+
+  // separa por categoria preservando ordem das CATEGORIAS
+  const cats=[...new Set(itens.map(i=>i.cat))];
+  cats.sort((a,b)=>{ const ia=CATEGORIAS.indexOf(a), ib=CATEGORIAS.indexOf(b); return (ia<0?99:ia)-(ib<0?99:ib); });
+
+  let html='';
+  cats.forEach(cat=>{
+    let grupo=itens.filter(i=>i.cat===cat);
+    html+=`<div class="cat-head">${esc(cat)}</div>`;
+    if(cat==='Balões'){
+      grupo=ordenarBaloes(grupo);
+      let tamAtual=null;
+      grupo.forEach(it=>{
+        const tl=labelTamanho(it);
+        if(tl!==tamAtual){ tamAtual=tl; html+=`<div class="size-head">${esc(tl)}</div>`; }
+        html+=linhaMaterial(it,o);
+      });
+    } else {
+      grupo.forEach(it=>{ html+=linhaMaterial(it,o); });
+    }
   });
   document.getElementById('orcList').innerHTML=html||'<p style="color:var(--txt-faint);font-size:13px;text-align:center;padding:20px 0">Nenhum material encontrado.</p>';
+}
+function linhaMaterial(it,o){
+  const q=o.qtds[it.id]||0; const cu=custoUnit(it); const sub=q*cu;
+  return `<div class="item-row ${q>0?'has-qty':''}">
+    <div class="item-info"><div class="name">${esc(it.n)}</div><div class="meta">${brl(cu)}/un · ${esc(it.o||'')}</div></div>
+    <input type="number" min="0" inputmode="numeric" value="${q||''}" placeholder="0" oninput="setQtd('${it.id}',this.value)">
+    <div class="subtotal-tag">${brl(sub)}</div>
+  </div>`;
 }
 function setQtd(id,v){ const o=orcAtual(); if(!o)return; const q=Math.max(0,parseInt(v)||0); if(q)o.qtds[id]=q; else delete o.qtds[id]; o.atualizado=Date.now(); save(); calcular();
   const row=event.target.closest('.item-row'); if(row){ row.classList.toggle('has-qty',q>0); const it=app.cadastro.find(i=>i.id===id); const tag=row.querySelector('.subtotal-tag'); if(tag)tag.textContent=brl(q*custoUnit(it)); }
@@ -973,22 +1122,91 @@ function setAjudante(i,k,v){ const o=orcAtual(); if(!o)return; o.equipe[i][k]= k
 function delAjudante(i){ const o=orcAtual(); if(!o)return; o.equipe.splice(i,1); save(); renderEquipe(); calcular(); }
 document.getElementById('maoObra').addEventListener('input',e=>{ const o=orcAtual(); if(o){o.maoObra=num(e.target.value); save(); calcular();} });
 
+/* ---- PRODUTOS PRONTOS: chips agrupados por categoria recolhível (Alt 5,6,7) ---- */
 function renderPPChips(filter=''){
   const f=(filter||document.getElementById('searchPP').value||'').toLowerCase();
   const lista=app.prontos.filter(p=>p.nome.toLowerCase().includes(f));
-  document.getElementById('ppChips').innerHTML=lista.map(p=>`
-    <button class="pp-chip" onclick="addPronto('${p.id}')">${esc(p.nome)} <span class="pp-v">${brl(p.preco)}</span></button>`).join('')||'<p style="color:var(--txt-faint);font-size:13px">Nenhum produto pronto.</p>';
+  const box=document.getElementById('ppChips');
+  if(!lista.length){ box.innerHTML='<p style="color:var(--txt-faint);font-size:13px">Nenhum produto pronto.</p>'; return; }
+  // ordena categorias conforme app.catPronto, extras no fim
+  const cats=[...new Set(lista.map(p=>p.cat||'Outros'))].sort((a,b)=>{
+    const ia=app.catPronto.indexOf(a), ib=app.catPronto.indexOf(b);
+    return (ia<0?999:ia)-(ib<0?999:ib);
+  });
+  const buscando=!!f;
+  let html='';
+  cats.forEach(cat=>{
+    const grupo=lista.filter(p=>(p.cat||'Outros')===cat);
+    const col=buscando?false:(collapsedPP[cat]||false);
+    html+=`<div class="pp-cat-group">
+      <div class="pp-cat-bar ${col?'collapsed':''}" onclick="togglePP('${esc(cat)}')">
+        <svg class="cb-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+        <span class="cb-name">${esc(cat)}</span><span class="cb-count">${grupo.length}</span>
+      </div>
+      <div class="pp-cat-body ${col?'collapsed':''}">
+        <div class="pp-cat-chips">
+          ${grupo.map(p=>`<button class="pp-chip" onclick="abrirModalQtd('${p.id}')">${esc(p.nome)} <span class="pp-v">${brl(p.preco)}</span></button>`).join('')}
+        </div>
+      </div>
+    </div>`;
+  });
+  box.innerHTML=html;
 }
+function togglePP(cat){ collapsedPP[cat]=!collapsedPP[cat]; renderPPChips(); }
 document.getElementById('searchPP').addEventListener('input',()=>renderPPChips());
-function addPronto(id){ const o=orcAtual(); if(!o)return; const p=app.prontos.find(x=>x.id===id); if(!p)return; o.prontos=o.prontos||[]; o.prontos.push({nome:p.nome,preco:p.preco}); save(); renderPPAdded(); calcular(); toast(p.nome+' adicionado'); }
+
+/* ---- MODAL QUANTIDADE (Alt 2) ---- */
+let qmProntoId=null, qmPreco=0;
+function abrirModalQtd(id){
+  const p=app.prontos.find(x=>x.id===id); if(!p)return;
+  qmProntoId=id; qmPreco=p.preco;
+  document.getElementById('qmName').textContent=p.nome;
+  document.getElementById('qmUnit').textContent=brl(p.preco)+' / un';
+  document.getElementById('qmQty').value=1;
+  qmUpdate();
+  abrirModal('modalQtd');
+}
+function qmStep(d){
+  const inp=document.getElementById('qmQty');
+  let q=(parseInt(inp.value)||1)+d; if(q<1)q=1;
+  inp.value=q; qmUpdate();
+}
+function qmUpdate(){
+  let q=parseInt(document.getElementById('qmQty').value)||0; if(q<0)q=0;
+  document.getElementById('qmSubtotal').textContent=brl(q*qmPreco);
+}
+function qmConfirmar(){
+  const o=orcAtual(); if(!o){ fecharModal('modalQtd'); return; }
+  const p=app.prontos.find(x=>x.id===qmProntoId); if(!p){ fecharModal('modalQtd'); return; }
+  let q=parseInt(document.getElementById('qmQty').value)||1; if(q<1)q=1;
+  o.prontos=o.prontos||[];
+  // se já existe o mesmo produto, soma a quantidade
+  const ex=o.prontos.find(x=>x.nome===p.nome && x.preco===p.preco);
+  if(ex){ ex.qtd=(ex.qtd||1)+q; } else { o.prontos.push({nome:p.nome,preco:p.preco,qtd:q}); }
+  o.atualizado=Date.now(); save(); fecharModal('modalQtd'); renderPPAdded(); calcular();
+  toast(`${p.nome} × ${q} adicionado`);
+}
+
 function renderPPAdded(){
   const o=orcAtual(); if(!o)return;
   const arr=o.prontos||[];
-  document.getElementById('ppAdded').innerHTML=arr.length?arr.map((p,i)=>`
-    <div class="pp-added"><span class="ppa-name">${esc(p.nome)}</span>
-      <div class="ppa-r"><span class="ppa-v">${brl(p.preco)}</span>
-      <button class="ppa-del" onclick="delPronto(${i})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div></div>`).join(''):'<p style="color:var(--txt-faint);font-size:13px;text-align:center;padding:14px 0">Nenhum produto pronto adicionado.</p>';
+  document.getElementById('ppAdded').innerHTML=arr.length?arr.map((p,i)=>{
+    const q=p.qtd||1; const sub=q*p.preco;
+    return `<div class="pp-added">
+      <div class="ppa-info"><div class="ppa-name">${esc(p.nome)}</div><div class="ppa-sub">${brl(p.preco)} × ${q}</div></div>
+      <div class="ppa-r">
+        <div class="ppa-qty">
+          <button onclick="ppStep(${i},-1)">−</button>
+          <span class="qv">${q}</span>
+          <button onclick="ppStep(${i},1)">+</button>
+        </div>
+        <span class="ppa-v">${brl(sub)}</span>
+        <button class="ppa-del" onclick="delPronto(${i})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      </div>
+    </div>`;
+  }).join(''):'<p style="color:var(--txt-faint);font-size:13px;text-align:center;padding:14px 0">Nenhum produto pronto adicionado.</p>';
 }
+function ppStep(i,d){ const o=orcAtual(); if(!o)return; const p=o.prontos[i]; if(!p)return; p.qtd=(p.qtd||1)+d; if(p.qtd<1){ o.prontos.splice(i,1); } o.atualizado=Date.now(); save(); renderPPAdded(); calcular(); }
 function delPronto(i){ const o=orcAtual(); if(!o)return; o.prontos.splice(i,1); save(); renderPPAdded(); calcular(); }
 
 ['lucroPct','lucroModo','perdaPct'].forEach(id=>{
@@ -1027,16 +1245,28 @@ function calcular(){
   const subInsumos=custoMat+helioRS+perda;
   const mo=o.maoObra||0;
   const equipe=(o.equipe||[]).reduce((s,a)=>s+(a.valor||0),0);
-  const extras=(o.prontos||[]).reduce((s,p)=>s+(p.preco||0),0);
   const log=calcLogistica(o);
   const logIncl = o.log.modo==='incluso'?log.total:0;
   const logApart = o.log.modo==='apart'?log.total:0;
-  const custoTotal=subInsumos+mo+equipe+logIncl+extras;
-  let preco;
-  if(o.lucroModo==='margem'){ const m=Math.min(o.lucroPct,89)/100; preco=custoTotal/(1-m); }
-  else { preco=custoTotal*(1+o.lucroPct/100); }
-  const lucro=preco-custoTotal;
-  o.total=preco; save();
+
+  // CUSTO TOTAL — sem produtos prontos (Alt 3)
+  const custoTotal=subInsumos+mo+equipe+logIncl;
+
+  // LUCRO só sobre o orçamento principal (Alt 3)
+  let precoOrc;
+  if(o.lucroModo==='margem'){ const m=Math.min(o.lucroPct,89)/100; precoOrc=custoTotal/(1-m); }
+  else { precoOrc=custoTotal*(1+o.lucroPct/100); }
+  const lucro=precoOrc-custoTotal;
+
+  // PRODUTOS PRONTOS — somados só no final, sem margem (Alt 3 e 4)
+  const arr=o.prontos||[];
+  const prontosTotal=arr.reduce((s,p)=>s+(p.preco||0)*(p.qtd||1),0);
+  const prontosQtd=arr.reduce((s,p)=>s+(p.qtd||1),0);
+
+  // TOTAL AO CLIENTE = orçamento + prontos (Alt 4)
+  const precoFinal=precoOrc+prontosTotal;
+
+  o.total=precoFinal; save();
 
   // resumo
   document.getElementById('rCusto').textContent=brl(custoMat);
@@ -1047,11 +1277,13 @@ function calcular(){
   document.getElementById('rMO').textContent=brl(mo);
   document.getElementById('rEquipe').textContent=brl(equipe);
   document.getElementById('rLogIncl').textContent=brl(logIncl);
-  document.getElementById('rExtras').textContent=brl(extras);
   document.getElementById('rCustoTotal').textContent=brl(custoTotal);
   document.getElementById('rLucroInfo').textContent=`(${o.lucroModo==='margem'?'margem':'markup'} ${o.lucroPct}%)`;
   document.getElementById('rLucro').textContent=brl(lucro);
-  document.getElementById('rFinal').textContent=brl(preco);
+  document.getElementById('rPrecoOrc').textContent=brl(precoOrc);
+  document.getElementById('rProntos').textContent=brl(prontosTotal);
+  document.getElementById('rProntosInfo').textContent=prontosQtd?`(${prontosQtd} ${prontosQtd>1?'itens':'item'})`:'';
+  document.getElementById('rFinal').textContent=brl(precoFinal);
   document.getElementById('rLogApart').textContent=brl(logApart);
   // helio summary
   document.getElementById('helioM3').textContent=helioM3.toLocaleString('pt-BR',{minimumFractionDigits:3})+' m³';
@@ -1071,25 +1303,34 @@ function renderCadastro(filter=''){
   const f=(filter||document.getElementById('searchCad').value||'').toLowerCase();
   const itens=app.cadastro.filter(it=>it.n.toLowerCase().includes(f));
   document.getElementById('cadCount').textContent=`${app.cadastro.length} produtos cadastrados`;
-  let html='', cat='';
-  itens.forEach(it=>{
-    if(it.cat!==cat){ cat=it.cat; const cnt=app.cadastro.filter(x=>x.cat===cat).length; html+=`<div class="cad-cat-title">${esc(cat)} <span class="cc-num">${cnt}</span></div>`; }
-    const helio=isHelioItem(it);
-    html+=`<div class="cad-row" data-id="${it.id}">
-      <div class="cr-top">
-        <input class="cr-name" value="${esc(it.n)}" oninput="editCad('${it.id}','n',this.value)">
-        <div class="cr-actions"><button class="cr-btn del" onclick="delCad('${it.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/></svg></button></div>
-      </div>
-      <div class="cr-fields ${helio?'helio':''}">
-        <div class="cr-f"><span class="lbl">Categoria</span><select onchange="editCad('${it.id}','cat',this.value)">${CATEGORIAS.map(c=>`<option ${c===it.cat?'selected':''}>${c}</option>`).join('')}</select></div>
-        ${helio?
-          `<div class="cr-f"><span class="lbl">m³/un</span><input type="number" step="0.0001" value="${it.helioC||0}" inputmode="decimal" oninput="editCad('${it.id}','helioC',this.value)"></div>`
-          :
-          `<div class="cr-f"><span class="lbl">Preço pago</span><input type="number" step="0.01" value="${it.p}" inputmode="decimal" oninput="editCad('${it.id}','p',this.value)"></div>
-           <div class="cr-f"><span class="lbl">Qtd emb.</span><input type="number" step="1" value="${it.u}" inputmode="numeric" oninput="editCad('${it.id}','u',this.value)"></div>`}
-      </div>
-      <div class="cr-unit"><span>${helio?'Consumo':'Custo unitário'}</span><b>${helio?((it.helioC||0).toLocaleString('pt-BR',{minimumFractionDigits:4})+' m³'):brl(custoUnit(it))}</b></div>
-    </div>`;
+
+  const cats=[...new Set(itens.map(i=>i.cat))];
+  cats.sort((a,b)=>{ const ia=CATEGORIAS.indexOf(a), ib=CATEGORIAS.indexOf(b); return (ia<0?99:ia)-(ib<0?99:ib); });
+
+  let html='';
+  cats.forEach(cat=>{
+    let grupo=itens.filter(i=>i.cat===cat);
+    if(cat==='Balões') grupo=ordenarBaloes(grupo);
+    const cnt=app.cadastro.filter(x=>x.cat===cat).length;
+    html+=`<div class="cad-cat-title">${esc(cat)} <span class="cc-num">${cnt}</span></div>`;
+    grupo.forEach(it=>{
+      const helio=isHelioItem(it);
+      html+=`<div class="cad-row" data-id="${it.id}">
+        <div class="cr-top">
+          <input class="cr-name" value="${esc(it.n)}" oninput="editCad('${it.id}','n',this.value)">
+          <div class="cr-actions"><button class="cr-btn del" onclick="delCad('${it.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/></svg></button></div>
+        </div>
+        <div class="cr-fields ${helio?'helio':''}">
+          <div class="cr-f"><span class="lbl">Categoria</span><select onchange="editCad('${it.id}','cat',this.value)">${CATEGORIAS.map(c=>`<option ${c===it.cat?'selected':''}>${c}</option>`).join('')}</select></div>
+          ${helio?
+            `<div class="cr-f"><span class="lbl">m³/un</span><input type="number" step="0.0001" value="${it.helioC||0}" inputmode="decimal" oninput="editCad('${it.id}','helioC',this.value)"></div>`
+            :
+            `<div class="cr-f"><span class="lbl">Preço pago</span><input type="number" step="0.01" value="${it.p}" inputmode="decimal" oninput="editCad('${it.id}','p',this.value)"></div>
+             <div class="cr-f"><span class="lbl">Qtd emb.</span><input type="number" step="1" value="${it.u}" inputmode="numeric" oninput="editCad('${it.id}','u',this.value)"></div>`}
+        </div>
+        <div class="cr-unit"><span>${helio?'Consumo':'Custo unitário'}</span><b>${helio?((it.helioC||0).toLocaleString('pt-BR',{minimumFractionDigits:4})+' m³'):brl(custoUnit(it))}</b></div>
+      </div>`;
+    });
   });
   document.getElementById('cadList').innerHTML=html||'<p style="color:var(--txt-faint);font-size:13px;text-align:center;padding:24px 0">Nenhum produto encontrado.</p>';
 }
@@ -1114,26 +1355,52 @@ function addProdutoRapido(){
 function resetCadastro(){ if(!confirm('Restaurar a tabela original? Seus produtos cadastrados serão substituídos.'))return; app.cadastro=JSON.parse(JSON.stringify(CADASTRO_DEFAULT)); app.cadastro.forEach((it,i)=>it.id='cad_'+i+'_'+Math.random().toString(36).slice(2,5)); save(); renderCadastro(); toast('Tabela restaurada'); }
 document.getElementById('searchCad').addEventListener('input',()=>renderCadastro());
 
-/* ===================== BIBLIOTECA: PRONTOS ===================== */
+/* ===================== BIBLIOTECA: PRONTOS (agrupados por categoria recolhível) ===================== */
 let editPPId=null;
 function renderProntos(filter=''){
   const f=(filter||document.getElementById('searchLibPP').value||'').toLowerCase();
   const lista=app.prontos.filter(p=>p.nome.toLowerCase().includes(f));
-  document.getElementById('prontosList').innerHTML=lista.map(p=>`
-    <div class="lib-row">
-      <div class="lib-top"><span class="lib-name">${esc(p.nome)}</span><span class="lib-price">${brl(p.preco)}</span></div>
-      ${p.desc?`<div class="lib-desc">${esc(p.desc)}</div>`:''}
-      <div class="lib-actions">
-        <button class="btn btn-ghost" onclick="abrirModalPronto('${p.id}')">Editar</button>
-        <button class="btn btn-danger" onclick="delProntoLib('${p.id}')">Apagar</button>
+  const box=document.getElementById('prontosList');
+  if(!lista.length){ box.innerHTML='<p style="color:var(--txt-faint);font-size:13px;text-align:center;padding:20px 0">Nenhum produto pronto.</p>'; return; }
+  const cats=[...new Set(lista.map(p=>p.cat||'Outros'))].sort((a,b)=>{
+    const ia=app.catPronto.indexOf(a), ib=app.catPronto.indexOf(b);
+    return (ia<0?999:ia)-(ib<0?999:ib);
+  });
+  const buscando=!!f;
+  let html='';
+  cats.forEach(cat=>{
+    const grupo=lista.filter(p=>(p.cat||'Outros')===cat);
+    const col=buscando?false:(collapsedLib[cat]||false);
+    html+=`<div class="lib-cat-group">
+      <div class="lib-cat-bar ${col?'collapsed':''}" onclick="toggleLib('${esc(cat)}')">
+        <svg class="cb-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+        <span class="cb-name">${esc(cat)}</span><span class="cb-count">${grupo.length}</span>
       </div>
-    </div>`).join('')||'<p style="color:var(--txt-faint);font-size:13px;text-align:center;padding:20px 0">Nenhum produto pronto.</p>';
+      <div class="lib-cat-body ${col?'collapsed':''}">
+        ${grupo.map(p=>`
+          <div class="lib-row">
+            <div class="lib-top"><span class="lib-name">${esc(p.nome)}</span><span class="lib-price">${brl(p.preco)}</span></div>
+            ${p.desc?`<div class="lib-desc">${esc(p.desc)}</div>`:''}
+            <div class="lib-actions">
+              <button class="btn btn-ghost" onclick="abrirModalPronto('${p.id}')">Editar</button>
+              <button class="btn btn-danger" onclick="delProntoLib('${p.id}')">Apagar</button>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+  });
+  box.innerHTML=html;
 }
+function toggleLib(cat){ collapsedLib[cat]=!collapsedLib[cat]; renderProntos(); }
 document.getElementById('searchLibPP').addEventListener('input',()=>renderProntos());
+
 function abrirModalPronto(id){
   editPPId=id||null;
   document.getElementById('prontoTitulo').textContent=id?'Editar produto pronto':'Novo produto pronto';
-  const p=id?app.prontos.find(x=>x.id===id):{nome:'',preco:'',desc:''};
+  const p=id?app.prontos.find(x=>x.id===id):{nome:'',preco:'',desc:'',cat:app.catPronto[0]||'Outros'};
+  // popula categorias
+  const sel=document.getElementById('prontoCat');
+  sel.innerHTML=app.catPronto.map(c=>`<option ${c===p.cat?'selected':''}>${esc(c)}</option>`).join('');
   document.getElementById('prontoNome').value=p.nome||'';
   document.getElementById('prontoPreco').value=p.preco||'';
   document.getElementById('prontoDesc').value=p.desc||'';
@@ -1143,12 +1410,47 @@ function salvarPronto(){
   const nome=document.getElementById('prontoNome').value.trim();
   const preco=num(document.getElementById('prontoPreco').value);
   const desc=document.getElementById('prontoDesc').value.trim();
+  const cat=document.getElementById('prontoCat').value||'Outros';
   if(!nome){ toast('Dá um nome'); return; }
-  if(editPPId){ const p=app.prontos.find(x=>x.id===editPPId); p.nome=nome; p.preco=preco; p.desc=desc; }
-  else { app.prontos.push({id:'pp_'+Date.now()+'_'+Math.random().toString(36).slice(2,5),nome,preco,desc}); }
-  save(); fecharModal('modalPronto'); renderProntos(); toast('Salvo ✓');
+  if(editPPId){ const p=app.prontos.find(x=>x.id===editPPId); p.nome=nome; p.preco=preco; p.desc=desc; p.cat=cat; }
+  else { app.prontos.push({id:'pp_'+Date.now()+'_'+Math.random().toString(36).slice(2,5),nome,preco,desc,cat}); }
+  if(!app.catPronto.includes(cat)) app.catPronto.push(cat);
+  save(); fecharModal('modalPronto'); renderProntos(); renderCatManage(); toast('Salvo ✓');
 }
-function delProntoLib(id){ if(!confirm('Apagar este produto pronto?'))return; app.prontos=app.prontos.filter(p=>p.id!==id); save(); renderProntos(); }
+function delProntoLib(id){ if(!confirm('Apagar este produto pronto?'))return; app.prontos=app.prontos.filter(p=>p.id!==id); save(); renderProntos(); renderCatManage(); }
+
+/* ===================== BIBLIOTECA: GERENCIAR CATEGORIAS DE PRONTOS ===================== */
+function renderCatManage(){
+  const box=document.getElementById('catManageList'); if(!box)return;
+  box.innerHTML=app.catPronto.map((c,i)=>{
+    const uso=app.prontos.filter(p=>(p.cat||'Outros')===c).length;
+    return `<div class="cat-manage-row">
+      <input type="text" value="${esc(c)}" data-idx="${i}" onchange="renomearCat(${i},this.value)" placeholder="Nome da categoria">
+      <button class="cm-btn" title="${uso} produto(s)" style="font-size:11px;font-weight:700;color:var(--gold-deep)">${uso}</button>
+      <button class="cm-btn del" onclick="delCatPronto(${i})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/></svg></button>
+    </div>`;
+  }).join('')||'<p style="color:var(--txt-faint);font-size:13px;padding:10px 0">Nenhuma categoria. Crie a primeira.</p>';
+}
+function addCatPronto(){
+  const nome=prompt('Nome da nova categoria:'); if(!nome)return;
+  const n=nome.trim(); if(!n)return;
+  if(app.catPronto.some(c=>c.toLowerCase()===n.toLowerCase())){ toast('Categoria já existe'); return; }
+  app.catPronto.push(n); save(); renderCatManage(); toast('Categoria criada ✓');
+}
+function renomearCat(i,v){
+  const novo=v.trim(); const antigo=app.catPronto[i]; if(!novo||novo===antigo){ renderCatManage(); return; }
+  if(app.catPronto.some((c,idx)=>idx!==i && c.toLowerCase()===novo.toLowerCase())){ toast('Já existe uma categoria com esse nome'); renderCatManage(); return; }
+  // atualiza produtos que usavam a categoria antiga
+  app.prontos.forEach(p=>{ if((p.cat||'Outros')===antigo) p.cat=novo; });
+  app.catPronto[i]=novo; save(); renderProntos(); renderCatManage(); toast('Categoria renomeada ✓');
+}
+function delCatPronto(i){
+  const c=app.catPronto[i];
+  const uso=app.prontos.filter(p=>(p.cat||'Outros')===c).length;
+  if(uso>0){ toast(`"${c}" tem ${uso} produto(s). Mova antes de apagar.`); return; }
+  if(!confirm(`Apagar a categoria "${c}"?`))return;
+  app.catPronto.splice(i,1); save(); renderCatManage(); renderProntos();
+}
 
 /* ===================== BIBLIOTECA: MODELOS ===================== */
 function renderModelos(){
@@ -1218,4 +1520,3 @@ window.addEventListener('offline',()=>setSyncStatus('off'));
 </script>
 </body>
 </html>
-
