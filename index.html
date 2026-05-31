@@ -1,1 +1,1221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Paulifest Balões · Precificação Pro 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FBF8F3; --surface: #FFFFFF; --surface-2: #F6F1E9; --line: #ECE3D6; --line-soft: #F2EBDF;
+    --gold: #D98A2B; --gold-deep: #B86F1D; --gold-soft: #FBEFD9; --gold-tint: #FDF6EA;
+    --txt: #2C2620; --txt-dim: #8A8175; --txt-faint: #B3AA9C;
+    --green: #4F9E6A; --green-bg: #EAF5EE; --blue: #4A7BB5; --red: #C2565A; --amber:#E0A93B;
+    --radius: 18px;
+    --shadow-sm: 0 1px 3px rgba(60,45,25,0.05); --shadow: 0 6px 22px rgba(120,90,40,0.08); --shadow-lg: 0 14px 40px rgba(120,90,40,0.13);
+    --display: 'Fraunces', serif; --body: 'Outfit', sans-serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+  body { font-family: var(--body); background: var(--bg); color: var(--txt); min-height: 100vh; padding-bottom: 88px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+
+  header { position: sticky; top: 0; z-index: 50; background: rgba(251,248,243,0.88); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); padding: 15px 18px; }
+  .head-in { max-width:780px; margin:0 auto; display:flex; align-items:center; gap:11px; }
+  .brand-mark { width:40px; height:40px; flex-shrink:0; display:grid; place-items:center; border-radius:12px; background: linear-gradient(150deg,#F0A845,var(--gold-deep)); box-shadow:0 4px 14px rgba(217,138,43,0.3); }
+  .brand-mark svg{ width:22px; height:22px; }
+  .brand-txt h1 { font-family:var(--display); font-weight:600; font-size:19px; letter-spacing:.2px; line-height:1; }
+  .brand-txt span { font-size:10.5px; letter-spacing:2px; text-transform:uppercase; color:var(--txt-faint); font-weight:500; }
+  .head-right{ margin-left:auto; display:flex; align-items:center; gap:9px; }
+  .sync-pill{ display:flex; align-items:center; gap:6px; background:var(--surface); border:1px solid var(--line); border-radius:99px; padding:6px 11px; font-size:11px; font-weight:600; color:var(--txt-dim); }
+  .sync-dot{ width:8px; height:8px; border-radius:50%; background:var(--txt-faint); flex-shrink:0; transition:background .3s; }
+  .sync-dot.on{ background:var(--green); box-shadow:0 0 0 3px var(--green-bg); }
+  .sync-dot.sync{ background:var(--amber); animation:pulse 1s infinite; }
+  .sync-dot.off{ background:var(--red); }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.4;} }
+  .head-back { background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:8px 13px; font-family:var(--body); font-size:13px; font-weight:600; color:var(--txt-dim); cursor:pointer; display:none; align-items:center; gap:6px; transition:all .2s; }
+  .head-back:active{ background:var(--surface-2); }
+  .head-back svg{ width:14px; height:14px; }
+
+  .wrap { max-width: 780px; margin: 0 auto; padding: 20px 16px 0; }
+  .view { display:none; animation: fadeUp .32s cubic-bezier(0.25,0.46,0.45,0.94); }
+  .view.active { display:block; }
+  @keyframes fadeUp { from{opacity:0; transform:translateY(12px);} to{opacity:1; transform:translateY(0);} }
+
+  .view-title { font-family:var(--display); font-weight:600; font-size:27px; letter-spacing:.2px; margin-bottom:3px; }
+  .view-sub { color:var(--txt-dim); font-size:13.5px; margin-bottom:22px; }
+
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px; margin-bottom:14px; box-shadow:var(--shadow-sm); }
+  .card-h { display:flex; align-items:center; gap:9px; margin-bottom:16px; }
+  .card-h .ic { width:32px; height:32px; flex-shrink:0; border-radius:9px; background:var(--gold-tint); display:grid; place-items:center; }
+  .card-h .ic svg{ width:17px; height:17px; stroke:var(--gold); }
+  .card-h .ttl { font-size:14.5px; font-weight:600; }
+  .card-h .sub { font-size:11.5px; color:var(--txt-faint); margin-top:1px; }
+  .card-h .right { margin-left:auto; }
+
+  label.fld { display:block; margin-bottom:13px; }
+  label.fld .lbl { display:block; font-size:12px; color:var(--txt-dim); margin-bottom:6px; font-weight:500; }
+  input[type=number], input[type=text], select, textarea { width:100%; background:var(--surface); border:1.5px solid var(--line); border-radius:12px; color:var(--txt); font-family:var(--body); font-size:15px; padding:11px 13px; outline:none; transition:border-color .2s, box-shadow .2s; appearance:none; }
+  input:focus, select:focus, textarea:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(217,138,43,0.12); }
+  input::placeholder, textarea::placeholder { color:var(--txt-faint); }
+  textarea { resize:vertical; min-height:54px; font-size:14px; }
+  select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%23D98A2B' d='M1 1l5 5 5-5'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; padding-right:36px; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .grid2 label.fld{ margin-bottom:0; }
+  .grid3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+  .grid3 label.fld{ margin-bottom:0; }
+
+  .search-box { position:relative; margin-bottom:14px; }
+  .search-box svg { position:absolute; left:13px; top:50%; transform:translateY(-50%); width:16px; height:16px; stroke:var(--txt-faint); }
+  .search-box input { padding-left:38px; }
+
+  .new-btn { width:100%; padding:16px; border:none; border-radius:16px; cursor:pointer; background:linear-gradient(150deg,#F0A845,var(--gold-deep)); color:#fff; font-family:var(--body); font-size:15px; font-weight:600; display:flex; align-items:center; justify-content:center; gap:9px; box-shadow:0 8px 22px rgba(217,138,43,0.3); transition:transform .15s; margin-bottom:18px; }
+  .new-btn:active{ transform:translateY(1px); }
+  .new-btn svg{ width:19px; height:19px; }
+
+  .home-stats { display:grid; grid-template-columns:1fr 1fr; gap:11px; margin-bottom:22px; }
+  .stat-card { background:linear-gradient(160deg,#FFFFFF,#FEFAF2); border:1px solid var(--gold-soft); border-radius:16px; padding:15px 16px; box-shadow:var(--shadow-sm); }
+  .stat-card .sv { font-family:var(--display); font-weight:600; font-size:23px; color:var(--gold-deep); font-variant-numeric:tabular-nums; line-height:1; }
+  .stat-card .sl { font-size:11px; color:var(--txt-faint); text-transform:uppercase; letter-spacing:.8px; margin-top:6px; font-weight:600; }
+
+  .sec-label { font-size:11.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--txt-faint); font-weight:600; margin:0 4px 12px; }
+
+  .orc-card { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px 17px; margin-bottom:11px; box-shadow:var(--shadow-sm); cursor:pointer; transition:transform .15s, box-shadow .2s, border-color .2s; display:flex; align-items:center; gap:14px; }
+  .orc-card:active{ transform:scale(0.99); }
+  .orc-card:hover{ border-color:var(--gold); box-shadow:var(--shadow); }
+  .orc-card .oc-ic { width:46px; height:46px; flex-shrink:0; border-radius:13px; background:var(--gold-tint); display:grid; place-items:center; }
+  .orc-card .oc-ic svg{ width:24px; height:24px; }
+  .orc-card .oc-body{ flex:1; min-width:0; }
+  .orc-card .oc-name{ font-size:15.5px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .orc-card .oc-meta{ font-size:12px; color:var(--txt-faint); margin-top:2px; }
+  .orc-card .oc-price{ text-align:right; flex-shrink:0; }
+  .orc-card .oc-price .v{ font-family:var(--display); font-weight:600; font-size:18px; color:var(--gold-deep); font-variant-numeric:tabular-nums; }
+  .orc-card .oc-price .l{ font-size:10px; color:var(--txt-faint); text-transform:uppercase; letter-spacing:.5px; }
+  .orc-del { background:none; border:none; cursor:pointer; padding:6px; color:var(--txt-faint); flex-shrink:0; border-radius:8px; }
+  .orc-del:active{ background:var(--surface-2); }
+  .orc-del svg{ width:17px; height:17px; }
+
+  .empty-state { text-align:center; padding:50px 20px; }
+  .empty-state .es-ic { width:74px; height:74px; margin:0 auto 18px; border-radius:50%; background:var(--gold-tint); display:grid; place-items:center; }
+  .empty-state .es-ic svg{ width:36px; height:36px; }
+  .empty-state h3 { font-family:var(--display); font-size:19px; font-weight:600; margin-bottom:6px; }
+  .empty-state p { color:var(--txt-dim); font-size:13.5px; max-width:260px; margin:0 auto; }
+
+  .item-row { display:grid; grid-template-columns:1fr 72px; gap:12px; align-items:center; padding:11px 0; border-bottom:1px solid var(--line-soft); }
+  .item-row:last-child{ border-bottom:none; }
+  .item-info .name{ font-size:14px; font-weight:500; }
+  .item-info .meta{ font-size:11px; color:var(--txt-faint); margin-top:1px; }
+  .item-row input{ text-align:center; padding:9px 4px; font-weight:600; }
+  .item-row.has-qty .name{ color:var(--gold-deep); font-weight:600; }
+  .item-row.has-qty input{ border-color:var(--gold); background:var(--gold-tint); }
+  .subtotal-tag { grid-column:1/-1; justify-self:end; font-size:12px; color:var(--green); font-weight:600; font-variant-numeric:tabular-nums; margin-top:-3px; display:none; }
+  .item-row.has-qty .subtotal-tag{ display:block; }
+
+  .cat-head { font-size:11px; letter-spacing:1.2px; text-transform:uppercase; color:var(--gold-deep); font-weight:700; margin:16px 0 4px; padding-bottom:5px; border-bottom:1px dashed var(--line); }
+  .cat-head:first-child{ margin-top:4px; }
+
+  .cad-quick { background:linear-gradient(160deg,#FFFFFF,#FEFAF2); border:1.5px solid var(--gold-soft); border-radius:16px; padding:15px; margin-bottom:16px; box-shadow:var(--shadow-sm); }
+  .cad-quick .qtt { font-size:12px; font-weight:700; color:var(--gold-deep); text-transform:uppercase; letter-spacing:1px; margin-bottom:11px; display:flex; align-items:center; gap:7px; }
+  .cad-quick .qtt svg{ width:15px; height:15px; }
+  .cq-grid { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-bottom:9px; }
+  .cq-grid .full{ grid-column:1/-1; }
+  .cad-quick label .lbl{ font-size:10.5px; color:var(--txt-dim); margin-bottom:4px; display:block; font-weight:600; }
+  .cad-quick input, .cad-quick select{ padding:9px 11px; font-size:14px; }
+
+  .cad-count { font-size:12px; color:var(--txt-faint); margin:0 4px 10px; font-weight:600; }
+
+  .cad-cat-title { font-size:11px; letter-spacing:1.2px; text-transform:uppercase; color:var(--gold-deep); font-weight:700; margin:18px 0 8px; padding-bottom:5px; border-bottom:1px dashed var(--line); display:flex; align-items:center; gap:8px; }
+  .cad-cat-title .cc-num{ background:var(--gold-tint); color:var(--gold-deep); font-size:10px; padding:1px 8px; border-radius:99px; }
+
+  .cad-row { border:1px solid var(--line); border-radius:14px; padding:12px 13px; margin-bottom:9px; background:var(--surface); box-shadow:var(--shadow-sm); transition:border-color .2s, box-shadow .2s; }
+  .cad-row:focus-within{ border-color:var(--gold); box-shadow:0 0 0 3px rgba(217,138,43,0.1); }
+  .cad-row .cr-top { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+  .cad-row .cr-name { flex:1; font-size:14.5px; font-weight:600; border:none; padding:4px 0; background:transparent; border-bottom:1.5px solid transparent; border-radius:0; }
+  .cad-row .cr-name:focus{ box-shadow:none; border-bottom-color:var(--gold); }
+  .cad-row .cr-actions{ display:flex; gap:4px; flex-shrink:0; }
+  .cad-row .cr-btn{ background:var(--surface-2); border:1px solid var(--line); border-radius:9px; width:32px; height:32px; display:grid; place-items:center; cursor:pointer; color:var(--txt-dim); transition:all .15s; }
+  .cad-row .cr-btn:active{ background:var(--gold-tint); }
+  .cad-row .cr-btn.del:active{ background:#FBEAEA; color:var(--red); }
+  .cad-row .cr-btn svg{ width:15px; height:15px; }
+  .cr-fields{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:8px; }
+  .cr-fields.helio{ grid-template-columns:1.4fr 1fr; }
+  .cr-f .lbl{ font-size:10px; color:var(--txt-faint); margin-bottom:4px; display:block; font-weight:600; text-transform:uppercase; letter-spacing:.4px; }
+  .cr-f input, .cr-f select{ padding:8px 10px; font-size:13.5px; }
+  .cr-unit{ display:flex; justify-content:space-between; align-items:center; margin-top:10px; padding-top:9px; border-top:1px dashed var(--line); }
+  .cr-unit span{ font-size:10.5px; color:var(--txt-dim); text-transform:uppercase; letter-spacing:.6px; font-weight:600; }
+  .cr-unit b{ font-family:var(--body); font-size:15px; color:var(--gold-deep); font-variant-numeric:tabular-nums; }
+  .saved-flash{ animation:savedFlash .8s ease; }
+  @keyframes savedFlash{ 0%{ border-color:var(--green); box-shadow:0 0 0 3px var(--green-bg);} 100%{ } }
+
+  .helio-row{ display:grid; grid-template-columns:1fr 66px; gap:12px; align-items:center; padding:11px 0; border-bottom:1px solid var(--line-soft); }
+  .helio-row:last-of-type{ border-bottom:none; }
+  .helio-row .h-name{ font-size:14px; font-weight:500; }
+  .helio-row .h-cons{ font-size:11px; color:var(--txt-faint); }
+  .helio-row input{ text-align:center; padding:9px 4px; font-weight:600; }
+  .helio-row.has-qty .h-name{ color:var(--gold-deep); font-weight:600; }
+  .helio-row.has-qty input{ border-color:var(--gold); background:var(--gold-tint); }
+  .helio-summary{ margin-top:14px; padding:15px; border-radius:14px; background:var(--gold-tint); border:1px solid var(--gold-soft); display:flex; justify-content:space-between; align-items:center; }
+  .helio-summary .hs-l{ font-size:12px; color:var(--gold-deep); text-transform:uppercase; letter-spacing:.8px; font-weight:600; }
+  .helio-summary .hs-v{ text-align:right; }
+  .helio-summary .hs-v .m3{ font-size:12.5px; color:var(--txt-dim); font-weight:500; }
+  .helio-summary .hs-v .rs{ font-size:18px; font-weight:700; color:var(--gold-deep); font-variant-numeric:tabular-nums; }
+
+  .dyn-row { display:grid; grid-template-columns:1fr 110px 40px; gap:10px; align-items:center; margin-bottom:10px; }
+  .dyn-row input{ padding:9px 11px; font-size:14px; }
+  .dyn-row .dyn-del { background:var(--surface-2); border:1px solid var(--line); border-radius:10px; cursor:pointer; height:40px; display:grid; place-items:center; color:var(--txt-faint); }
+  .dyn-row .dyn-del svg{ width:16px; height:16px; }
+  .add-line { width:100%; padding:11px; border:1.5px dashed var(--line); border-radius:12px; background:var(--surface); color:var(--gold-deep); font-family:var(--body); font-weight:600; font-size:13.5px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:7px; transition:all .2s; }
+  .add-line:active{ background:var(--gold-tint); }
+  .add-line svg{ width:16px; height:16px; }
+
+  .resumo { background:linear-gradient(165deg,#FFFFFF,#FEFAF2); border:1.5px solid var(--gold-soft); border-radius:20px; padding:20px; margin-bottom:14px; box-shadow:var(--shadow-lg); position:relative; overflow:hidden; }
+  .resumo::before{ content:''; position:absolute; top:-50%; right:-20%; width:200px; height:200px; border-radius:50%; background:radial-gradient(circle,rgba(217,138,43,0.1),transparent 70%); pointer-events:none; }
+  .resumo .r-tag{ font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gold-deep); font-weight:700; margin-bottom:14px; position:relative; }
+  .r-line{ display:flex; justify-content:space-between; align-items:baseline; padding:5px 0; position:relative; }
+  .r-line .rl{ font-size:13px; color:var(--txt-dim); }
+  .r-line .rl small{ color:var(--txt-faint); font-size:11px; }
+  .r-line .rv{ font-size:15px; font-weight:600; font-variant-numeric:tabular-nums; }
+  .r-line.dim .rv{ color:var(--txt-dim); font-weight:500; }
+  .r-sub { display:flex; justify-content:space-between; align-items:baseline; padding:7px 0; position:relative; }
+  .r-sub .rl{ font-size:12.5px; font-weight:600; color:var(--txt); }
+  .r-sub .rv{ font-size:15px; font-weight:700; font-variant-numeric:tabular-nums; }
+  .r-divider{ height:1px; background:var(--line); margin:9px 0; }
+  .r-final-row{ display:flex; justify-content:space-between; align-items:flex-end; position:relative; margin-top:4px; }
+  .r-final-row .rl{ font-family:var(--display); font-size:14px; color:var(--gold-deep); font-style:italic; }
+  .r-final-row .rv{ font-family:var(--display); font-weight:600; font-size:33px; line-height:1; color:var(--gold-deep); font-variant-numeric:tabular-nums; }
+  .r-log{ margin-top:13px; padding-top:13px; border-top:1px dashed var(--line); display:flex; justify-content:space-between; align-items:baseline; }
+  .r-log .rl{ font-size:12px; color:var(--txt-faint); }
+  .r-log .rv{ font-size:15px; font-weight:600; font-variant-numeric:tabular-nums; }
+
+  .pp-chip-row { display:flex; gap:8px; flex-wrap:wrap; }
+  .pp-chip { border:1.5px solid var(--line); background:var(--surface); border-radius:12px; padding:9px 13px; cursor:pointer; font-size:13px; font-weight:600; display:flex; align-items:center; gap:7px; transition:all .18s; }
+  .pp-chip:active{ background:var(--gold-tint); }
+  .pp-chip .pp-v { color:var(--gold-deep); font-variant-numeric:tabular-nums; }
+  .pp-added { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--line-soft); }
+  .pp-added:last-child{ border-bottom:none; }
+  .pp-added .ppa-name{ font-size:14px; font-weight:500; }
+  .pp-added .ppa-r{ display:flex; align-items:center; gap:12px; }
+  .pp-added .ppa-v{ font-weight:600; color:var(--gold-deep); font-variant-numeric:tabular-nums; }
+  .pp-added .ppa-del{ background:none; border:none; cursor:pointer; color:var(--txt-faint); padding:3px; }
+  .pp-added .ppa-del svg{ width:15px; height:15px; }
+
+  .lib-row { border:1px solid var(--line); border-radius:14px; padding:14px; margin-bottom:10px; background:var(--surface); box-shadow:var(--shadow-sm); }
+  .lib-row .lib-top { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
+  .lib-row .lib-name { font-size:15px; font-weight:600; flex:1; }
+  .lib-row .lib-price { font-family:var(--display); font-weight:600; color:var(--gold-deep); font-variant-numeric:tabular-nums; }
+  .lib-row .lib-desc { font-size:12.5px; color:var(--txt-dim); }
+  .lib-row .lib-actions { display:flex; gap:8px; margin-top:11px; }
+  .lib-row .lib-actions .btn { flex:1; padding:9px; font-size:13px; }
+
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:13px; border-radius:13px; border:none; cursor:pointer; font-family:var(--body); font-size:14.5px; font-weight:600; transition:all .18s; }
+  .btn svg{ width:17px; height:17px; }
+  .btn-ghost{ background:var(--surface); color:var(--txt-dim); border:1.5px solid var(--line); }
+  .btn-ghost:active{ background:var(--surface-2); }
+  .btn-gold{ background:linear-gradient(150deg,#F0A845,var(--gold-deep)); color:#fff; box-shadow:0 6px 18px rgba(217,138,43,0.28); }
+  .btn-gold:active{ transform:translateY(1px); }
+  .btn-danger{ background:var(--surface); color:var(--red); border:1.5px solid #EFD3D4; }
+  .btn-save { position:sticky; bottom:96px; z-index:40; }
+
+  .sync-row{ display:flex; align-items:center; gap:9px; padding:11px 13px; border-radius:13px; background:var(--surface-2); border:1px solid var(--line); margin-bottom:14px; }
+  .sync-row .srd{ width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .sync-row .srt{ font-size:13px; font-weight:600; }
+  .sync-row .srs{ font-size:11px; color:var(--txt-faint); margin-top:1px; }
+  .btn-row2{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:4px; }
+
+  .tabbar { position:fixed; bottom:0; left:0; right:0; z-index:60; background:rgba(255,255,255,0.94); backdrop-filter:blur(18px); border-top:1px solid var(--line); display:grid; grid-template-columns:repeat(5,1fr); padding:8px 6px calc(8px + env(safe-area-inset-bottom)); }
+  .tab { background:none; border:none; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:4px; color:var(--txt-faint); padding:6px 2px; border-radius:10px; transition:color .2s; }
+  .tab svg{ width:20px; height:20px; }
+  .tab span{ font-size:9.5px; font-weight:600; letter-spacing:.1px; }
+  .tab.active{ color:var(--gold-deep); }
+  .tab:disabled{ opacity:.32; }
+
+  .subtabs { display:flex; gap:6px; overflow-x:auto; padding-bottom:4px; margin-bottom:16px; -ms-overflow-style:none; scrollbar-width:none; }
+  .subtabs::-webkit-scrollbar{ display:none; }
+  .subtab { white-space:nowrap; padding:8px 14px; border-radius:99px; border:1.5px solid var(--line); background:var(--surface); color:var(--txt-dim); font-family:var(--body); font-size:13px; font-weight:600; cursor:pointer; transition:all .18s; }
+  .subtab.active { background:var(--gold-deep); color:#fff; border-color:var(--gold-deep); }
+  .subview { display:none; }
+  .subview.active { display:block; animation:fadeUp .25s; }
+
+  .toast { position:fixed; bottom:100px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--txt); color:#fff; padding:11px 20px; border-radius:99px; font-size:13px; font-weight:600; opacity:0; pointer-events:none; transition:all .3s; z-index:100; box-shadow:var(--shadow-lg); }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  .modal-bg { position:fixed; inset:0; background:rgba(44,38,32,0.4); backdrop-filter:blur(4px); z-index:200; display:none; align-items:flex-end; justify-content:center; }
+  .modal-bg.show{ display:flex; animation:fadeUp .25s; }
+  .modal { background:var(--surface); width:100%; max-width:480px; border-radius:24px 24px 0 0; padding:24px 22px calc(24px + env(safe-area-inset-bottom)); box-shadow:var(--shadow-lg); max-height:90vh; overflow-y:auto; }
+  @media(min-width:520px){ .modal-bg{ align-items:center; } .modal{ border-radius:24px; } }
+  .modal h3{ font-family:var(--display); font-size:21px; font-weight:600; margin-bottom:5px; }
+  .modal p{ font-size:13px; color:var(--txt-dim); margin-bottom:18px; }
+  .modal .mbtns{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:18px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-in">
+    <div class="brand-mark">
+      <svg viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="9" rx="6" ry="7.2" stroke="#fff" stroke-width="1.7"/><path d="M10.8 15.5l1.2 1.6 1.2-1.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 17v4.5" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></svg>
+    </div>
+    <div class="brand-txt">
+      <h1>Paulifest Balões</h1>
+      <span id="headSub">Precificação Pro 2.0</span>
+    </div>
+    <div class="head-right">
+      <div class="sync-pill" id="syncPill" onclick="setView('config')" style="cursor:pointer">
+        <span class="sync-dot off" id="syncDot"></span><span id="syncTxt">Offline</span>
+      </div>
+      <button class="head-back" id="headBack" onclick="voltarHome()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg> Salvar
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- HOME -->
+  <section class="view active" id="view-home">
+    <h2 class="view-title">Meus orçamentos</h2>
+    <p class="view-sub">Toque num orçamento pra continuar editando.</p>
+    <button class="new-btn" onclick="novoOrcamento()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+      Novo orçamento
+    </button>
+    <div class="home-stats" id="homeStats"></div>
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+      <input type="text" id="searchHome" placeholder="Buscar orçamento por nome...">
+    </div>
+    <div id="orcamentosList"></div>
+  </section>
+
+  <!-- ORÇAMENTO -->
+  <section class="view" id="view-orcamento">
+    <div class="resumo" id="resumoPanel">
+      <div class="r-tag" id="resumoNome">Resumo</div>
+      <div class="r-line dim"><span class="rl">Materiais</span><span class="rv" id="rCusto">R$ 0,00</span></div>
+      <div class="r-line dim"><span class="rl">Hélio</span><span class="rv" id="rHelio">R$ 0,00</span></div>
+      <div class="r-line dim"><span class="rl">Perda <small id="rPerdaPct">(10%)</small></span><span class="rv" id="rPerda">R$ 0,00</span></div>
+      <div class="r-sub"><span class="rl">Subtotal insumos</span><span class="rv" id="rSubInsumos">R$ 0,00</span></div>
+      <div class="r-divider"></div>
+      <div class="r-line dim"><span class="rl">Mão de obra</span><span class="rv" id="rMO">R$ 0,00</span></div>
+      <div class="r-line dim"><span class="rl">Equipe (ajudantes)</span><span class="rv" id="rEquipe">R$ 0,00</span></div>
+      <div class="r-line dim"><span class="rl">Logística</span><span class="rv" id="rLogIncl">R$ 0,00</span></div>
+      <div class="r-line dim"><span class="rl">Extras (prontos)</span><span class="rv" id="rExtras">R$ 0,00</span></div>
+      <div class="r-sub"><span class="rl">Custo total</span><span class="rv" id="rCustoTotal">R$ 0,00</span></div>
+      <div class="r-divider"></div>
+      <div class="r-line"><span class="rl">Lucro <small id="rLucroInfo">(markup 40%)</small></span><span class="rv" id="rLucro">R$ 0,00</span></div>
+      <div class="r-final-row"><span class="rl">Preço final</span><span class="rv" id="rFinal">R$ 0,00</span></div>
+      <div class="r-log"><span class="rl">+ Logística cobrada à parte</span><span class="rv" id="rLogApart">R$ 0,00</span></div>
+    </div>
+
+    <div class="subtabs">
+      <button class="subtab active" data-sub="materiais">Materiais</button>
+      <button class="subtab" data-sub="helio">Hélio</button>
+      <button class="subtab" data-sub="prontos">Prontos</button>
+      <button class="subtab" data-sub="trabalho">Trabalho</button>
+      <button class="subtab" data-sub="logistica">Logística</button>
+      <button class="subtab" data-sub="config">Lucro</button>
+    </div>
+
+    <div class="subview active" id="sub-materiais">
+      <div class="card">
+        <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><div><div class="ttl">Identificação</div></div></div>
+        <label class="fld" style="margin-bottom:0"><span class="lbl">Nome do orçamento / cliente</span><input type="text" id="orcNome" placeholder="Ex: Aniversário Maria 15 anos"></label>
+      </div>
+      <div class="card">
+        <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg></div><div><div class="ttl">Materiais</div><div class="sub" id="orcCount"></div></div></div>
+        <div class="search-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input type="text" id="searchOrc" placeholder="Buscar material..."></div>
+        <div id="orcList"></div>
+      </div>
+    </div>
+
+    <div class="subview" id="sub-helio">
+      <div class="card">
+        <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><div class="ttl">Valor do hélio</div></div></div>
+        <label class="fld" style="margin-bottom:0"><span class="lbl">R$ por m³ (cilindro 5,8 m³)</span><input type="number" id="custoHelioM3" step="0.01" value="232.7586" inputmode="decimal"></label>
+      </div>
+      <div class="card">
+        <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><ellipse cx="12" cy="9" rx="6" ry="7"/><path d="M12 16v5M10.5 14.5L12 16l1.5-1.5"/></svg></div><div><div class="ttl">Balões com hélio</div></div></div>
+        <div id="helioList"></div>
+        <div class="helio-summary"><span class="hs-l">Total hélio</span><div class="hs-v"><div class="m3" id="helioM3">0,000 m³</div><div class="rs" id="helioRS">R$ 0,00</div></div></div>
+      </div>
+    </div>
+
+    <div class="subview" id="sub-prontos">
+      <div class="card">
+        <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div><div><div class="ttl">Adicionar produto pronto</div><div class="sub">Entra direto no preço final</div></div></div>
+        <div class="search-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input type="text" id="searchPP" placeholder="Buscar produto pronto..."></div>
+        <div class="pp-chip-row" id="ppChips"></div>
+      </div>
+      <div class="card">
+        <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><div><div class="ttl">Prontos neste orçamento</div></div></div>
+        <div id="ppAdded"></div>
+      </div>
+    </div>
+
+    <div class="subview" id="sub-trabalho">
+      <div class="card">
+        <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><div><div class="ttl">Mão de obra</div><div class="sub">Valor do seu trabalho em R$</div></div></div>
+        <label class="fld" style="margin-bottom:0"><span class="lbl">Valor da mão de obra (R$)</span><input type="number" id="maoObra" step="0.01" min="0" value="0" inputmode="decimal" placeholder="Ex: 150,00"></label>
+      </div>
+      <div class="card">
+        <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div><div class="ttl">Ajudantes</div><div class="sub">Cada um com valor individual</div></div></div>
+        <div id="equipeList"></div>
+        <button class="add-line" onclick="addAjudante()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>Adicionar ajudante</button>
+      </div>
+    </div>
+
+    <div class="subview" id="sub-logistica">
+      <div class="card">
+        <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7"/><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="18.5" r="2"/></svg></div><div><div class="ttl">Combustível</div></div></div>
+        <div class="grid2" style="margin-bottom:13px">
+          <label class="fld"><span class="lbl">Distância (km)</span><input type="number" id="logDist" step="0.1" min="0" value="0" inputmode="decimal"></label>
+          <label class="fld"><span class="lbl">Ida e volta?</span><select id="logIV"><option value="2">Sim</option><option value="1">Não</option></select></label>
+        </div>
+        <div class="grid2">
+          <label class="fld"><span class="lbl">Consumo (km/L)</span><input type="number" id="logConsumo" step="0.1" min="0.1" value="7.5" inputmode="decimal"></label>
+          <label class="fld"><span class="lbl">Gasolina (R$/L)</span><input type="number" id="logGas" step="0.01" min="0" value="7.00" inputmode="decimal"></label>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><div class="ttl">Custos extras de logística</div></div></div>
+        <div class="grid2" style="margin-bottom:13px">
+          <label class="fld"><span class="lbl">Pedágio (R$)</span><input type="number" id="logPedagio" step="0.01" min="0" value="0" inputmode="decimal"></label>
+          <label class="fld"><span class="lbl">Estacionamento (R$)</span><input type="number" id="logEstac" step="0.01" min="0" value="0" inputmode="decimal"></label>
+        </div>
+        <div class="grid2" style="margin-bottom:13px">
+          <label class="fld"><span class="lbl">Taxa (R$)</span><input type="number" id="logTaxa" step="0.01" min="0" value="0" inputmode="decimal"></label>
+          <label class="fld"><span class="lbl">Desmontagem (R$)</span><input type="number" id="logDesm" step="0.01" min="0" value="0" inputmode="decimal"></label>
+        </div>
+        <label class="fld" style="margin-bottom:0"><span class="lbl">Outros extras (R$)</span><input type="number" id="logExtra" step="0.01" min="0" value="0" inputmode="decimal"></label>
+      </div>
+      <div class="card">
+        <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div><div><div class="ttl">Como cobrar?</div></div></div>
+        <label class="fld" style="margin-bottom:0"><span class="lbl">Logística entra no...</span>
+          <select id="logModo"><option value="apart">Cobrar à parte (não soma no preço final)</option><option value="incluso">Incluir no custo (entra no lucro também)</option></select>
+        </label>
+      </div>
+      <div class="resumo">
+        <div class="r-tag">Total logística</div>
+        <div class="r-line"><span class="rl">Distância total</span><span class="rv" id="logDistTot">0 km</span></div>
+        <div class="r-line"><span class="rl">Combustível</span><span class="rv" id="logComb">R$ 0,00</span></div>
+        <div class="r-line"><span class="rl">Pedágio + estac.</span><span class="rv" id="logPedEst">R$ 0,00</span></div>
+        <div class="r-line"><span class="rl">Taxa + desm. + extras</span><span class="rv" id="logOutros">R$ 0,00</span></div>
+        <div class="r-divider"></div>
+        <div class="r-final-row"><span class="rl">Total</span><span class="rv" id="logTotal">R$ 0,00</span></div>
+      </div>
+    </div>
+
+    <div class="subview" id="sub-config">
+      <div class="card">
+        <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 1v6m0 10v6M4.2 4.2l4.3 4.3m7 7l4.3 4.3M1 12h6m10 0h6"/></svg></div><div><div class="ttl">Lucro deste orçamento</div></div></div>
+        <div class="grid2" style="margin-bottom:13px">
+          <label class="fld"><span class="lbl">Lucro (%)</span><input type="number" id="lucroPct" step="1" min="0" value="40" inputmode="decimal"></label>
+          <label class="fld"><span class="lbl">Tipo de cálculo</span><select id="lucroModo"><option value="markup">Markup (sobre custo)</option><option value="margem">Margem (sobre venda)</option></select></label>
+        </div>
+        <p style="font-size:11.5px;color:var(--txt-faint)"><b>Markup:</b> preço = custo × (1 + %).<br><b>Margem:</b> preço = custo ÷ (1 − %).</p>
+      </div>
+      <div class="card">
+        <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 12a9 9 0 109-9 9 9 0 00-9 9z"/><path d="M12 7v5l3 2"/></svg></div><div><div class="ttl">Perda deste orçamento</div><div class="sub">Só sobre materiais + hélio</div></div></div>
+        <label class="fld" style="margin-bottom:0"><span class="lbl">Perda (%)</span><input type="number" id="perdaPct" step="1" min="0" max="90" value="10" inputmode="decimal"></label>
+      </div>
+      <button class="btn btn-ghost" onclick="abrirModalModelo()" style="margin-bottom:14px">Salvar como modelo</button>
+    </div>
+
+    <button class="btn btn-gold btn-save" onclick="salvarEVoltar()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
+      Salvar e voltar
+    </button>
+    <div style="height:10px"></div>
+  </section>
+
+  <!-- CADASTRO -->
+  <section class="view" id="view-cadastro">
+    <h2 class="view-title">Cadastro</h2>
+    <p class="view-sub">Edição instantânea — tudo salva sozinho enquanto você digita.</p>
+    <div class="cad-quick">
+      <div class="qtt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>Cadastro rápido</div>
+      <div class="cq-grid">
+        <label class="full"><span class="lbl">Nome do produto</span><input type="text" id="qkNome" placeholder="Ex: Balão 12 metalizado"></label>
+        <label><span class="lbl">Categoria</span><select id="qkCat"></select></label>
+        <label><span class="lbl">Obs (opcional)</span><input type="text" id="qkObs" placeholder="Ex: Pct 50un"></label>
+        <label><span class="lbl">Preço pago (R$)</span><input type="number" id="qkPreco" step="0.01" min="0" inputmode="decimal" placeholder="0,00"></label>
+        <label><span class="lbl">Qtd na embalagem</span><input type="number" id="qkQtd" step="1" min="1" inputmode="numeric" placeholder="1"></label>
+      </div>
+      <button class="btn btn-gold" onclick="addProdutoRapido()">Adicionar produto</button>
+    </div>
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+      <input type="text" id="searchCad" placeholder="Buscar produto cadastrado...">
+    </div>
+    <div class="cad-count" id="cadCount"></div>
+    <div id="cadList"></div>
+    <button class="btn btn-ghost" onclick="resetCadastro()" style="margin-bottom:14px">Restaurar tabela original</button>
+  </section>
+
+  <!-- BIBLIOTECA -->
+  <section class="view" id="view-biblioteca">
+    <h2 class="view-title">Biblioteca</h2>
+    <p class="view-sub">Produtos prontos e modelos pra montar orçamento rápido.</p>
+    <div class="subtabs" style="margin-top:4px">
+      <button class="subtab active" data-lib="prontos">Produtos prontos</button>
+      <button class="subtab" data-lib="modelos">Modelos</button>
+    </div>
+    <div class="subview active" id="lib-prontos">
+      <button class="new-btn" onclick="abrirModalPronto()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>Novo produto pronto</button>
+      <div class="search-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input type="text" id="searchLibPP" placeholder="Buscar produto pronto..."></div>
+      <div id="prontosList"></div>
+    </div>
+    <div class="subview" id="lib-modelos">
+      <div class="card" style="background:var(--gold-tint);border-color:var(--gold-soft)"><p style="font-size:13px;color:var(--gold-deep)"><b>Como criar um modelo:</b> abra/crie um orçamento, monte os materiais e hélio, e use "Salvar como modelo" na aba Lucro. Aqui você aplica em novos orçamentos.</p></div>
+      <div id="modelosList"></div>
+    </div>
+  </section>
+
+  <!-- CONFIG -->
+  <section class="view" id="view-config">
+    <h2 class="view-title">Config</h2>
+    <p class="view-sub">Padrões globais aplicados a novos orçamentos.</p>
+    <div class="card">
+      <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 1v6m0 10v6M4.2 4.2l4.3 4.3m7 7l4.3 4.3M1 12h6m10 0h6"/></svg></div><div><div class="ttl">Padrões de precificação</div></div></div>
+      <div class="grid2" style="margin-bottom:13px">
+        <label class="fld"><span class="lbl">Lucro padrão (%)</span><input type="number" id="cfgLucro" step="1" min="0" value="40" inputmode="decimal"></label>
+        <label class="fld"><span class="lbl">Tipo</span><select id="cfgLucroModo"><option value="markup">Markup</option><option value="margem">Margem</option></select></label>
+      </div>
+      <label class="fld" style="margin-bottom:0"><span class="lbl">Perda padrão (%)</span><input type="number" id="cfgPerda" step="1" min="0" max="90" value="10" inputmode="decimal"></label>
+    </div>
+
+    <!-- SINCRONIZAÇÃO FIREBASE -->
+    <div class="card">
+      <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h6l2-3h6a2 2 0 012 2z"/><path d="M12 11v6M9 14h6"/></svg></div><div><div class="ttl">Sincronização Firebase</div><div class="sub">Mesmos dados em qualquer dispositivo</div></div></div>
+      <div class="sync-row">
+        <span class="srd" id="cfgSyncDot" style="background:var(--red)"></span>
+        <div><div class="srt" id="cfgSyncTitle">Offline (só este aparelho)</div><div class="srs" id="cfgSyncSub">Preencha os campos e conecte pra sincronizar.</div></div>
+      </div>
+      <label class="fld"><span class="lbl">API Key</span><input type="text" id="fbApiKey" placeholder="AIza..." autocomplete="off"></label>
+      <label class="fld"><span class="lbl">Project ID</span><input type="text" id="fbProjectId" placeholder="meu-projeto-12345" autocomplete="off"></label>
+      <label class="fld"><span class="lbl">App ID</span><input type="text" id="fbAppId" placeholder="1:123...:web:abc..." autocomplete="off"></label>
+      <label class="fld"><span class="lbl">Código de sincronização (mesmo em todos os aparelhos)</span><input type="text" id="fbSyncCode" placeholder="Ex: paulifest-loja" autocomplete="off"></label>
+      <div class="btn-row2">
+        <button class="btn btn-gold" onclick="fbConectar()">Conectar</button>
+        <button class="btn btn-ghost" onclick="fbTestar()">Testar conexão</button>
+      </div>
+      <button class="btn btn-danger" onclick="fbDesconectar()" style="margin-top:10px">Desconectar</button>
+      <p style="font-size:11px;color:var(--txt-faint);margin-top:12px">Sem conexão, o app usa o armazenamento local. Quando a internet volta, sincroniza sozinho.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg></div><div><div class="ttl">Dados</div></div></div>
+      <p style="font-size:13px;color:var(--txt-dim);margin-bottom:14px">Tudo salvo automaticamente no navegador (e na nuvem, se conectado).</p>
+      <button class="btn btn-danger" onclick="resetTudo()">Apagar tudo</button>
+    </div>
+    <div style="height:14px"></div>
+  </section>
+
+</div>
+
+<nav class="tabbar">
+  <button class="tab active" data-view="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg><span>Início</span></button>
+  <button class="tab" data-view="orcamento" data-needs-orc><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg><span>Orçamento</span></button>
+  <button class="tab" data-view="cadastro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span>Cadastro</span></button>
+  <button class="tab" data-view="biblioteca"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span>Biblioteca</span></button>
+  <button class="tab" data-view="config"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span>Config</span></button>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal-bg" id="modalNovo"><div class="modal"><h3>Novo orçamento</h3><p>Dá um nome pra identificar depois.</p><label class="fld" style="margin-bottom:0"><span class="lbl">Nome do cliente / evento</span><input type="text" id="novoNome" placeholder="Ex: Aniversário Maria 15 anos"></label><div class="mbtns"><button class="btn btn-ghost" onclick="fecharModal('modalNovo')">Cancelar</button><button class="btn btn-gold" onclick="criarOrcamento()">Criar</button></div></div></div>
+<div class="modal-bg" id="modalPronto"><div class="modal"><h3 id="prontoTitulo">Novo produto pronto</h3><p>Item de venda rápida com preço final fechado.</p><label class="fld"><span class="lbl">Nome</span><input type="text" id="prontoNome" placeholder="Ex: Bubble personalizada"></label><label class="fld"><span class="lbl">Preço final (R$)</span><input type="number" id="prontoPreco" step="0.01" min="0" inputmode="decimal" placeholder="Ex: 80,00"></label><label class="fld" style="margin-bottom:0"><span class="lbl">Descrição (opcional)</span><textarea id="prontoDesc" placeholder="Ex: bubble 24 com glitter e personalização"></textarea></label><div class="mbtns"><button class="btn btn-ghost" onclick="fecharModal('modalPronto')">Cancelar</button><button class="btn btn-gold" onclick="salvarPronto()">Salvar</button></div></div></div>
+<div class="modal-bg" id="modalModelo"><div class="modal"><h3>Salvar como modelo</h3><p>Guarda os materiais e o hélio deste orçamento pra reusar.</p><label class="fld" style="margin-bottom:0"><span class="lbl">Nome do modelo</span><input type="text" id="modeloNome" placeholder="Ex: Arco desconstruído médio"></label><div class="mbtns"><button class="btn btn-ghost" onclick="fecharModal('modalModelo')">Cancelar</button><button class="btn btn-gold" onclick="salvarModelo()">Salvar modelo</button></div></div></div>
+
+<script>
+"use strict";
+
+const CATEGORIAS = ['Balões','Bubble','Foils','Hélio','Personalização','Estruturas','Acessórios','Outros'];
+
+const CADASTRO_DEFAULT = [
+  {n:'Balão 9"',cat:'Balões',o:'maior preço p marca',u:50,p:9.80},
+  {n:'Balão 7"',cat:'Balões',o:'maior preço p marca',u:50,p:7.42},
+  {n:'Balão 5"',cat:'Balões',o:'maior preço p marca',u:50,p:6.60},
+  {n:'Balão 16"',cat:'Balões',o:'maior preço p marca',u:12,p:10.56},
+  {n:'Balão 5" platino',cat:'Balões',o:'maior preço p marca',u:25,p:6.39},
+  {n:'Balão 5" pérola',cat:'Balões',o:'maior preço p marca',u:25,p:4.15},
+  {n:'Balão 7" metalizado',cat:'Balões',o:'maior preço p marca',u:50,p:7.90},
+  {n:'Balão 9" Platino',cat:'Balões',o:'maior preço p marca',u:25,p:15.04},
+  {n:'Balão 9" pérola',cat:'Balões',o:'maior preço p marca',u:25,p:7.07},
+  {n:'Balão 9" metalizado',cat:'Balões',o:'maior preço p marca',u:25,p:6.65},
+  {n:'Balão 16" platino',cat:'Balões',o:'maior preço p marca',u:12,p:22.50},
+  {n:'Balão 16" PÉROLA',cat:'Balões',o:'maior preço p marca',u:12,p:14.26},
+  {n:'Balão 25"',cat:'Balões',o:'maior preço p marca',u:1,p:3.38},
+  {n:'Balão 260',cat:'Balões',o:'maior preço p marca',u:25,p:4.70},
+  {n:'Balão 260 platino',cat:'Balões',o:'maior preço p marca',u:25,p:10.46},
+  {n:'Balão 10" platino',cat:'Balões',o:'maior preço p marca',u:25,p:16.73},
+  {n:'11" standart Megatoon',cat:'Balões',o:'Pct 50un',u:50,p:14.86},
+  {n:'11" chrome Megatoon',cat:'Balões',o:'Pct 25un',u:25,p:14.08},
+  {n:'25" PLATINO',cat:'Balões',o:'unidade',u:1,p:9.22},
+  {n:'Balão número 40cm',cat:'Balões',o:'unidade',u:1,p:2.30},
+  {n:'Balão número 80cm',cat:'Balões',o:'unidade',u:1,p:6.43},
+  {n:'Bubble 24"',cat:'Bubble',o:'maior preço p marca',u:50,p:65.55},
+  {n:'Bubble 18"',cat:'Bubble',o:'maior preço p marca',u:50,p:37.00},
+  {n:'Bubble 10"',cat:'Bubble',o:'maior preço p marca',u:50,p:29.99},
+  {n:'Bubble Megatoon 18"',cat:'Bubble',o:'unidade',u:1,p:4.30},
+  {n:'Bubble Megatoon 24"',cat:'Bubble',o:'unidade',u:1,p:5.17},
+  {n:'Estrela 18"',cat:'Foils',o:'unidade',u:1,p:3.90},
+  {n:'Coração 18"',cat:'Foils',o:'unidade',u:1,p:3.90},
+  {n:'Redondo 18"',cat:'Foils',o:'unidade',u:1,p:3.50},
+  {n:'Coração 30"',cat:'Foils',o:'unidade',u:1,p:5.85},
+  {n:'Hélio 9"',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.008},
+  {n:'Hélio 10"',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.010},
+  {n:'Hélio 11" Megatoon',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.0125},
+  {n:'Hélio 16"',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.042},
+  {n:'Hélio 25"',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.178},
+  {n:'Hélio BUBBLE 18"',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.025},
+  {n:'Hélio BUBBLE 24"',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.045},
+  {n:'Hélio BUBBLE 36"',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.130},
+  {n:'Hélio BUBBLE 50"',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.400},
+  {n:'Hélio FOIL 18"',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.017},
+  {n:'Hélio N FOIL 32"',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.045},
+  {n:'Vinil personalizado',cat:'Personalização',o:'Vendido por unidade',u:33,p:83.00},
+  {n:'Glitter para bubble',cat:'Personalização',o:'Vendido por peso',u:50,p:25.00},
+  {n:'Vareta topo bolo',cat:'Estruturas',o:'Vendido por unidade',u:1,p:1.00},
+  {n:'Vareta bubble',cat:'Estruturas',o:'Vendido por unidade',u:50,p:39.59},
+  {n:'Peso de balão',cat:'Acessórios',o:'Vendido por unidade',u:1,p:4.00},
+  {n:'CETIM 7MM',cat:'Acessórios',o:'unidade',u:10,p:6.70},
+  {n:'CETIM 38MM',cat:'Acessórios',o:'unidade',u:10,p:6.70},
+  {n:'FIXA BALÃO UN',cat:'Acessórios',o:'unidade',u:100,p:58.00}
+];
+
+/* ===== PRODUTOS PRONTOS — gerados da planilha CALCULADORA DE BALÕES (hélio ignorado) ===== */
+const PRONTOS_DEFAULT = [
+  {id:'pp_1',nome:'Base simples chão',preco:10.00,desc:'Importado da planilha'},
+  {id:'pp_2',nome:'Base orgânica chão',preco:15.00,desc:'Importado da planilha'},
+  {id:'pp_3',nome:'Acabamento bubble',preco:5.00,desc:'Importado da planilha'},
+  {id:'pp_4',nome:'Personalização vinil',preco:20.00,desc:'Importado da planilha'},
+  {id:'pp_5',nome:'Personalização 2 lados',preco:35.00,desc:'Importado da planilha'},
+  {id:'pp_6',nome:'Pintura a mão',preco:10.00,desc:'Importado da planilha'},
+  {id:'pp_7',nome:'Livre - entrega',preco:210.00,desc:'Importado da planilha'},
+  {id:'pp_8',nome:'Centro de mesa bubble (18")',preco:119.90,desc:'Importado da planilha'},
+  {id:'pp_9',nome:'Centro de mesa Foil',preco:79.90,desc:'Importado da planilha'},
+  {id:'pp_10',nome:'Arranjo bubble duplo (18")',preco:79.90,desc:'Importado da planilha'},
+  {id:'pp_11',nome:'Arranjo bubble glitter (18")',preco:89.90,desc:'Importado da planilha'},
+  {id:'pp_12',nome:'Arranjo bubble mini balões (24")',preco:109.90,desc:'Importado da planilha'},
+  {id:'pp_13',nome:'Arranjo bubble mix (24")',preco:135.00,desc:'Importado da planilha'},
+  {id:'pp_14',nome:'Arranjo bubble orgânico tradicional (18")',preco:125.90,desc:'Importado da planilha'},
+  {id:'pp_15',nome:'Arranjo bubble mix orgânico (24")',preco:159.90,desc:'Importado da planilha'},
+  {id:'pp_16',nome:'Bubble tower (18")',preco:105.00,desc:'Importado da planilha'},
+  {id:'pp_17',nome:'Bubble encapsulado (24")',preco:95.00,desc:'Importado da planilha'},
+  {id:'pp_18',nome:'Mini bubble (10")',preco:54.90,desc:'Importado da planilha'},
+  {id:'pp_19',nome:'Number tower 1und',preco:145.90,desc:'Importado da planilha'},
+  {id:'pp_20',nome:'Number tower 2und',preco:249.90,desc:'Importado da planilha'},
+  {id:'pp_21',nome:'Foil orgânico',preco:74.90,desc:'Importado da planilha'},
+  {id:'pp_22',nome:'Foil simples',preco:64.90,desc:'Importado da planilha'},
+  {id:'pp_23',nome:'Base simples número 18" (1 número)',preco:49.90,desc:'Importado da planilha'},
+  {id:'pp_24',nome:'Base simples número 18" (2 números)',preco:74.90,desc:'Importado da planilha'},
+  {id:'pp_25',nome:'Apliques p/ base',preco:5.00,desc:'Importado da planilha'},
+  {id:'pp_26',nome:'Bubble vareta c/ glitter',preco:69.90,desc:'Importado da planilha'},
+  {id:'pp_27',nome:'Bubble vareta c/ balões',preco:55.00,desc:'Importado da planilha'},
+  {id:'pp_28',nome:'Bubble na vareta duplo c/ glitter',preco:65.00,desc:'Importado da planilha'},
+  {id:'pp_29',nome:'Megatoon 11" standart',preco:17.90,desc:'Importado da planilha'},
+  {id:'pp_30',nome:'Megatoon 11" cromado',preco:18.90,desc:'Importado da planilha'},
+  {id:'pp_31',nome:'Cor customizada 11"',preco:21.90,desc:'Importado da planilha'},
+  {id:'pp_32',nome:'Transparente c/ glitter 11"',preco:29.90,desc:'Importado da planilha'},
+  {id:'pp_33',nome:'Pic pic 9/10"',preco:15.00,desc:'Importado da planilha'},
+  {id:'pp_34',nome:'Foil 18"',preco:39.90,desc:'Importado da planilha'},
+  {id:'pp_35',nome:'Número 32"',preco:99.90,desc:'Importado da planilha'},
+  {id:'pp_36',nome:'Bubble 18"',preco:39.90,desc:'Importado da planilha'},
+  {id:'pp_37',nome:'Bubble 18" c/ mini balões (5/6)',preco:89.90,desc:'Importado da planilha'},
+  {id:'pp_38',nome:'Bubble 18" encapsulado',preco:49.90,desc:'Importado da planilha'},
+  {id:'pp_39',nome:'Bubble 18" com glitter (10g max)',preco:59.90,desc:'Importado da planilha'},
+  {id:'pp_40',nome:'Bubble 24"',preco:65.00,desc:'Importado da planilha'},
+  {id:'pp_41',nome:'Bubble 24" c/ mini balões (8)',preco:128.00,desc:'Importado da planilha'},
+  {id:'pp_42',nome:'Bubble 24" encapsulado',preco:79.90,desc:'Importado da planilha'},
+  {id:'pp_43',nome:'Bubble 24" com glitter (15g max)',preco:89.90,desc:'Importado da planilha'},
+  {id:'pp_44',nome:'Peso água',preco:2.00,desc:'Importado da planilha'},
+  {id:'pp_45',nome:'Peso grintoy',preco:9.90,desc:'Importado da planilha'}
+];
+
+let app = {
+  cadastro: [], prontos: [], modelos: [],
+  custoHelioM3: 232.7586,
+  defPerda: 10, defLucro: 40, defLucroModo: 'markup',
+  orcamentos: [], abertoId: null,
+  fb: { apiKey:'', projectId:'', appId:'', code:'', enabled:false }
+};
+const LS_KEY = 'paulifest_baloes_v4';
+
+/* ===================== ARMAZENAMENTO (Local + Firebase) ===================== */
+let fbApp=null, fbDb=null, fbDoc=null, fbReady=false, fbUnsub=null;
+let saveTimer=null, applyingRemote=false, lastSyncStamp=0;
+
+function setSyncStatus(state){ // 'on' | 'sync' | 'off'
+  const dot=document.getElementById('syncDot'), txt=document.getElementById('syncTxt');
+  const cdot=document.getElementById('cfgSyncDot'), ct=document.getElementById('cfgSyncTitle'), cs=document.getElementById('cfgSyncSub');
+  dot.className='sync-dot '+state;
+  if(state==='on'){ txt.textContent='Sincronizado'; if(cdot)cdot.style.background='var(--green)'; if(ct)ct.textContent='Conectado e sincronizado'; if(cs)cs.textContent='Dados salvos na nuvem em tempo real.'; }
+  else if(state==='sync'){ txt.textContent='Sincronizando'; if(cdot)cdot.style.background='var(--amber)'; if(ct)ct.textContent='Sincronizando...'; if(cs)cs.textContent='Enviando alterações pra nuvem.'; }
+  else { txt.textContent= app.fb.enabled ? 'Offline' : 'Local'; if(cdot)cdot.style.background='var(--red)'; if(ct)ct.textContent= app.fb.enabled?'Offline (sem conexão)':'Offline (só este aparelho)'; if(cs)cs.textContent= app.fb.enabled?'Sem internet — usando dados locais.':'Preencha os campos e conecte pra sincronizar.'; }
+}
+
+function persistLocal(){ localStorage.setItem(LS_KEY, JSON.stringify(app)); }
+
+function save(){
+  persistLocal();
+  if(applyingRemote) return;
+  if(fbReady && fbDoc){
+    setSyncStatus('sync');
+    clearTimeout(saveTimer);
+    saveTimer=setTimeout(pushToCloud, 700);
+  }
+}
+
+async function pushToCloud(){
+  if(!fbReady||!fbDoc) return;
+  try{
+    const payload=JSON.parse(JSON.stringify(app));
+    payload._ts=Date.now(); lastSyncStamp=payload._ts;
+    await fbSetDoc(fbDoc, payload);
+    setSyncStatus('on');
+  }catch(e){ console.warn('Push falhou',e); setSyncStatus('off'); }
+}
+
+function load(){
+  const raw = localStorage.getItem(LS_KEY);
+  if(raw){ try{ app = Object.assign(app, JSON.parse(raw)); }catch(e){} }
+  if(!app.cadastro?.length) app.cadastro = JSON.parse(JSON.stringify(CADASTRO_DEFAULT));
+  if(!app.prontos?.length)  app.prontos  = JSON.parse(JSON.stringify(PRONTOS_DEFAULT));
+  if(!app.modelos)          app.modelos  = [];
+  if(!app.orcamentos)       app.orcamentos = [];
+  if(!app.fb)               app.fb = { apiKey:'', projectId:'', appId:'', code:'', enabled:false };
+  app.cadastro.forEach((it,i)=>{ if(!it.id) it.id='cad_'+i+'_'+Math.random().toString(36).slice(2,5); });
+  app.abertoId = null;
+}
+
+/* ===================== FIREBASE (carregamento dinâmico) ===================== */
+let fbInitDb, fbInitApp, fbDocFn, fbGetDoc, fbSetDocFn, fbOnSnapshot;
+async function loadFirebaseSDK(){
+  if(window._fbLoaded) return true;
+  const appMod = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js');
+  const fsMod  = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js');
+  fbInitApp = appMod.initializeApp;
+  fbInitDb = fsMod.getFirestore; fbDocFn = fsMod.doc; fbGetDoc = fsMod.getDoc;
+  fbSetDocFn = fsMod.setDoc; fbOnSnapshot = fsMod.onSnapshot;
+  window._fbLoaded=true; return true;
+}
+async function fbSetDoc(ref,data){ return fbSetDocFn(ref,data); }
+
+async function initFirebase(){
+  const {apiKey,projectId,appId,code}=app.fb;
+  if(!apiKey||!projectId||!appId||!code){ setSyncStatus('off'); return false; }
+  try{
+    setSyncStatus('sync');
+    await loadFirebaseSDK();
+    const cfg={ apiKey, projectId, appId, authDomain:`${projectId}.firebaseapp.com`, storageBucket:`${projectId}.appspot.com` };
+    fbApp = fbInitApp(cfg, 'paulifest-'+Date.now());
+    fbDb  = fbInitDb(fbApp);
+    fbDoc = fbDocFn(fbDb,'paulifest_sync', code.trim());
+    fbReady=true;
+
+    // 1) Puxa o que tem na nuvem
+    const snap = await fbGetDoc(fbDoc);
+    if(snap.exists()){
+      const remote=snap.data();
+      const localTs = (JSON.parse(localStorage.getItem(LS_KEY)||'{}'))._ts || 0;
+      // nuvem mais nova -> aplica nuvem; senão sobe local
+      if((remote._ts||0) >= localTs){ applyRemote(remote); }
+      else { await pushToCloud(); }
+    } else {
+      await pushToCloud(); // primeira vez: sobe local
+    }
+
+    // 2) Escuta mudanças em tempo real
+    if(fbUnsub) fbUnsub();
+    fbUnsub = fbOnSnapshot(fbDoc,(s)=>{
+      if(!s.exists()) return;
+      const d=s.data();
+      if((d._ts||0) > lastSyncStamp){ applyRemote(d); }
+      setSyncStatus(navigator.onLine?'on':'off');
+    },(err)=>{ console.warn(err); setSyncStatus('off'); });
+
+    setSyncStatus(navigator.onLine?'on':'off');
+    return true;
+  }catch(e){ console.warn('Firebase init falhou',e); fbReady=false; setSyncStatus('off'); return false; }
+}
+
+function applyRemote(remote){
+  applyingRemote=true;
+  const localFb=app.fb; // preserva config local do firebase
+  lastSyncStamp=remote._ts||Date.now();
+  app.cadastro = remote.cadastro||app.cadastro;
+  app.prontos  = remote.prontos||app.prontos;
+  app.modelos  = remote.modelos||app.modelos;
+  app.orcamentos = remote.orcamentos||app.orcamentos;
+  app.custoHelioM3 = remote.custoHelioM3 ?? app.custoHelioM3;
+  app.defPerda = remote.defPerda ?? app.defPerda;
+  app.defLucro = remote.defLucro ?? app.defLucro;
+  app.defLucroModo = remote.defLucroModo || app.defLucroModo;
+  app.fb = localFb;
+  persistLocal();
+  applyingRemote=false;
+  // re-render da view ativa
+  const activeView=document.querySelector('.view.active')?.id?.replace('view-','');
+  if(activeView==='home') renderHome();
+  if(activeView==='cadastro') renderCadastro();
+  if(activeView==='biblioteca'){ renderProntos(); renderModelos(); }
+  if(activeView==='orcamento') renderEditor();
+}
+
+async function fbConectar(){
+  app.fb.apiKey=document.getElementById('fbApiKey').value.trim();
+  app.fb.projectId=document.getElementById('fbProjectId').value.trim();
+  app.fb.appId=document.getElementById('fbAppId').value.trim();
+  app.fb.code=document.getElementById('fbSyncCode').value.trim();
+  if(!app.fb.apiKey||!app.fb.projectId||!app.fb.appId||!app.fb.code){ toast('Preencha todos os campos'); return; }
+  app.fb.enabled=true; persistLocal();
+  const ok=await initFirebase();
+  toast(ok?'Conectado à nuvem ✓':'Falha ao conectar');
+}
+async function fbTestar(){
+  const ak=document.getElementById('fbApiKey').value.trim();
+  const pid=document.getElementById('fbProjectId').value.trim();
+  const aid=document.getElementById('fbAppId').value.trim();
+  const cd=document.getElementById('fbSyncCode').value.trim();
+  if(!ak||!pid||!aid||!cd){ toast('Preencha todos os campos'); return; }
+  toast('Testando...');
+  try{
+    await loadFirebaseSDK();
+    const t=fbInitApp({apiKey:ak,projectId:pid,appId:aid,authDomain:`${pid}.firebaseapp.com`},'test-'+Date.now());
+    const db=fbInitDb(t);
+    await fbGetDoc(fbDocFn(db,'paulifest_sync',cd));
+    toast('Conexão OK ✓');
+  }catch(e){ console.warn(e); toast('Falhou: confira os dados'); }
+}
+function fbDesconectar(){
+  if(fbUnsub){ fbUnsub(); fbUnsub=null; }
+  fbReady=false; fbApp=null; fbDb=null; fbDoc=null;
+  app.fb={ apiKey:'', projectId:'', appId:'', code:'', enabled:false };
+  persistLocal();
+  document.getElementById('fbApiKey').value='';
+  document.getElementById('fbProjectId').value='';
+  document.getElementById('fbAppId').value='';
+  document.getElementById('fbSyncCode').value='';
+  setSyncStatus('off');
+  toast('Desconectado da nuvem');
+}
+
+/* ===================== HELPERS ===================== */
+const BRL = new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
+function brl(v){ return BRL.format(isFinite(v)?v:0); }
+function num(v){ const n=parseFloat(String(v).replace(',','.')); return isFinite(n)?n:0; }
+function custoUnit(it){ return it.u>0 ? it.p/it.u : 0; }
+function isHelioItem(it){ return it.cat==='Hélio'; }
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+let toastTimer;
+function toast(m){ const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),1800); }
+function tempoRel(ts){
+  const d=(Date.now()-ts)/1000;
+  if(d<60) return 'agora'; if(d<3600) return Math.floor(d/60)+' min atrás';
+  if(d<86400) return Math.floor(d/3600)+'h atrás';
+  const dt=new Date(ts); return dt.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'});
+}
+function novoOrcObj(nome){
+  return {
+    id: Date.now()+'_'+Math.random().toString(36).slice(2,6),
+    nome: nome || 'Sem nome',
+    qtds:{}, helioQtds:{}, maoObra:0, equipe:[], prontos:[],
+    perdaPct: app.defPerda, lucroPct: app.defLucro, lucroModo: app.defLucroModo,
+    custoHelioM3: app.custoHelioM3,
+    log:{dist:0,iv:2,consumo:7.5,gas:7.00,pedagio:0,estac:0,taxa:0,desm:0,extra:0,modo:'apart'},
+    total:0, atualizado:Date.now()
+  };
+}
+function orcAtual(){ return app.orcamentos.find(o=>o.id===app.abertoId); }
+
+/* ===================== NAVEGAÇÃO ===================== */
+function setView(view){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+view).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.view===view));
+  document.getElementById('headBack').style.display = view==='orcamento' ? 'flex':'none';
+  window.scrollTo(0,0);
+  if(view==='home') renderHome();
+  if(view==='cadastro') renderCadastro();
+  if(view==='biblioteca'){ renderProntos(); renderModelos(); }
+  if(view==='config') loadConfig();
+  if(view==='orcamento') renderEditor();
+}
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    const v=t.dataset.view;
+    if(v==='orcamento' && !app.abertoId){ toast('Abra ou crie um orçamento'); return; }
+    setView(v);
+  });
+});
+document.querySelectorAll('.subtabs').forEach(box=>{
+  box.querySelectorAll('.subtab').forEach(st=>{
+    st.addEventListener('click',()=>{
+      box.querySelectorAll('.subtab').forEach(x=>x.classList.remove('active'));
+      st.classList.add('active');
+      const key=st.dataset.sub||st.dataset.lib;
+      const prefix=st.dataset.sub?'sub-':'lib-';
+      const scope=st.dataset.sub?document:document;
+      document.querySelectorAll('.subview').forEach(sv=>{
+        if(sv.id.startsWith(prefix)) sv.classList.toggle('active', sv.id===prefix+key);
+      });
+    });
+  });
+});
+
+/* ===================== HOME ===================== */
+function novoOrcamento(){ document.getElementById('novoNome').value=''; abrirModal('modalNovo'); setTimeout(()=>document.getElementById('novoNome').focus(),200); }
+function criarOrcamento(){
+  const nome=document.getElementById('novoNome').value.trim()||'Sem nome';
+  const o=novoOrcObj(nome); app.orcamentos.unshift(o); app.abertoId=o.id; save();
+  fecharModal('modalNovo'); document.querySelector('.tab[data-needs-orc]').disabled=false; setView('orcamento');
+}
+function abrirOrcamento(id){ app.abertoId=id; setView('orcamento'); }
+function delOrcamento(id,e){ e.stopPropagation(); if(!confirm('Apagar este orçamento?'))return; app.orcamentos=app.orcamentos.filter(o=>o.id!==id); save(); renderHome(); }
+function voltarHome(){ const o=orcAtual(); if(o){ o.nome=document.getElementById('orcNome').value.trim()||o.nome; o.atualizado=Date.now(); save(); } setView('home'); }
+function salvarEVoltar(){ voltarHome(); toast('Orçamento salvo'); }
+
+function renderHome(filter=''){
+  const f=(filter||document.getElementById('searchHome').value||'').toLowerCase();
+  const stats=document.getElementById('homeStats');
+  const total=app.orcamentos.length;
+  const ultimo=total?Math.max(...app.orcamentos.map(o=>o.atualizado)):0;
+  const somaFinal=app.orcamentos.reduce((s,o)=>s+(o.total||0),0);
+  stats.innerHTML=`
+    <div class="stat-card"><div class="sv">${total}</div><div class="sl">Orçamentos</div></div>
+    <div class="stat-card"><div class="sv" style="font-size:18px">${total?tempoRel(ultimo):'—'}</div><div class="sl">Última edição</div></div>
+    <div class="stat-card" style="grid-column:1/-1"><div class="sv">${brl(somaFinal)}</div><div class="sl">Soma dos preços finais</div></div>`;
+  const list=document.getElementById('orcamentosList');
+  const filtrados=app.orcamentos.filter(o=>o.nome.toLowerCase().includes(f));
+  if(!app.orcamentos.length){
+    list.innerHTML=`<div class="empty-state"><div class="es-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#D98A2B" stroke-width="1.6"><ellipse cx="12" cy="9" rx="6" ry="7.2"/><path d="M10.8 15.5l1.2 1.6 1.2-1.6M12 17v4.5"/></svg></div><h3>Nenhum orçamento ainda</h3><p>Toque em "Novo orçamento" pra criar o primeiro.</p></div>`;
+    return;
+  }
+  list.innerHTML=filtrados.map(o=>`
+    <div class="orc-card" onclick="abrirOrcamento('${o.id}')">
+      <div class="oc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#D98A2B" stroke-width="1.6"><ellipse cx="12" cy="9" rx="6" ry="7.2"/><path d="M10.8 15.5l1.2 1.6 1.2-1.6M12 17v4.5"/></svg></div>
+      <div class="oc-body"><div class="oc-name">${esc(o.nome)}</div><div class="oc-meta">${tempoRel(o.atualizado)}</div></div>
+      <div class="oc-price"><div class="v">${brl(o.total||0)}</div><div class="l">Final</div></div>
+      <button class="orc-del" onclick="delOrcamento('${o.id}',event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg></button>
+    </div>`).join('');
+}
+document.getElementById('searchHome').addEventListener('input',()=>renderHome());
+
+/* ===================== EDITOR DE ORÇAMENTO ===================== */
+function renderEditor(){
+  const o=orcAtual(); if(!o) return;
+  document.getElementById('resumoNome').textContent=o.nome;
+  document.getElementById('orcNome').value=o.nome;
+  document.getElementById('custoHelioM3').value=o.custoHelioM3;
+  document.getElementById('maoObra').value=o.maoObra||0;
+  document.getElementById('lucroPct').value=o.lucroPct;
+  document.getElementById('lucroModo').value=o.lucroModo;
+  document.getElementById('perdaPct').value=o.perdaPct;
+  const L=o.log;
+  document.getElementById('logDist').value=L.dist; document.getElementById('logIV').value=L.iv;
+  document.getElementById('logConsumo').value=L.consumo; document.getElementById('logGas').value=L.gas;
+  document.getElementById('logPedagio').value=L.pedagio; document.getElementById('logEstac').value=L.estac;
+  document.getElementById('logTaxa').value=L.taxa; document.getElementById('logDesm').value=L.desm;
+  document.getElementById('logExtra').value=L.extra; document.getElementById('logModo').value=L.modo;
+  renderOrcList(); renderHelioList(); renderEquipe(); renderPPChips(); renderPPAdded();
+  calcular();
+}
+function renderOrcList(filter=''){
+  const o=orcAtual(); if(!o)return;
+  const f=(filter||document.getElementById('searchOrc').value||'').toLowerCase();
+  const itens=app.cadastro.filter(it=>!isHelioItem(it) && it.n.toLowerCase().includes(f));
+  document.getElementById('orcCount').textContent=`${app.cadastro.filter(i=>!isHelioItem(i)).length} materiais`;
+  let html='', cat='';
+  itens.forEach(it=>{
+    if(it.cat!==cat){ cat=it.cat; html+=`<div class="cat-head">${esc(cat)}</div>`; }
+    const q=o.qtds[it.id]||0; const cu=custoUnit(it); const sub=q*cu;
+    html+=`<div class="item-row ${q>0?'has-qty':''}">
+      <div class="item-info"><div class="name">${esc(it.n)}</div><div class="meta">${brl(cu)}/un · ${esc(it.o||'')}</div></div>
+      <input type="number" min="0" inputmode="numeric" value="${q||''}" placeholder="0" oninput="setQtd('${it.id}',this.value)">
+      <div class="subtotal-tag">${brl(sub)}</div>
+    </div>`;
+  });
+  document.getElementById('orcList').innerHTML=html||'<p style="color:var(--txt-faint);font-size:13px;text-align:center;padding:20px 0">Nenhum material encontrado.</p>';
+}
+function setQtd(id,v){ const o=orcAtual(); if(!o)return; const q=Math.max(0,parseInt(v)||0); if(q)o.qtds[id]=q; else delete o.qtds[id]; o.atualizado=Date.now(); save(); calcular();
+  const row=event.target.closest('.item-row'); if(row){ row.classList.toggle('has-qty',q>0); const it=app.cadastro.find(i=>i.id===id); const tag=row.querySelector('.subtotal-tag'); if(tag)tag.textContent=brl(q*custoUnit(it)); }
+}
+document.getElementById('searchOrc').addEventListener('input',()=>renderOrcList());
+document.getElementById('orcNome').addEventListener('input',e=>{ const o=orcAtual(); if(o){o.nome=e.target.value; document.getElementById('resumoNome').textContent=e.target.value||'Resumo'; save();} });
+
+function renderHelioList(){
+  const o=orcAtual(); if(!o)return;
+  const helios=app.cadastro.filter(isHelioItem);
+  document.getElementById('helioList').innerHTML=helios.map(it=>{
+    const q=o.helioQtds[it.id]||0;
+    return `<div class="helio-row ${q>0?'has-qty':''}">
+      <div><div class="h-name">${esc(it.n)}</div><div class="h-cons">${(it.helioC||0).toLocaleString('pt-BR',{minimumFractionDigits:3})} m³/un</div></div>
+      <input type="number" min="0" inputmode="numeric" value="${q||''}" placeholder="0" oninput="setHelioQtd('${it.id}',this.value)">
+    </div>`;
+  }).join('');
+}
+function setHelioQtd(id,v){ const o=orcAtual(); if(!o)return; const q=Math.max(0,parseInt(v)||0); if(q)o.helioQtds[id]=q; else delete o.helioQtds[id]; o.atualizado=Date.now(); save(); calcular(); renderHelioList(); }
+document.getElementById('custoHelioM3').addEventListener('input',e=>{ const o=orcAtual(); if(o){o.custoHelioM3=num(e.target.value); save(); calcular();} });
+
+function renderEquipe(){
+  const o=orcAtual(); if(!o)return;
+  document.getElementById('equipeList').innerHTML=(o.equipe||[]).map((aj,i)=>`
+    <div class="dyn-row">
+      <input type="text" value="${esc(aj.nome||'')}" placeholder="Nome do ajudante" oninput="setAjudante(${i},'nome',this.value)">
+      <input type="number" min="0" inputmode="decimal" value="${aj.valor||''}" placeholder="R$" oninput="setAjudante(${i},'valor',this.value)">
+      <button class="dyn-del" onclick="delAjudante(${i})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/></svg></button>
+    </div>`).join('');
+}
+function addAjudante(){ const o=orcAtual(); if(!o)return; o.equipe=o.equipe||[]; o.equipe.push({nome:'',valor:0}); save(); renderEquipe(); }
+function setAjudante(i,k,v){ const o=orcAtual(); if(!o)return; o.equipe[i][k]= k==='valor'?num(v):v; save(); calcular(); }
+function delAjudante(i){ const o=orcAtual(); if(!o)return; o.equipe.splice(i,1); save(); renderEquipe(); calcular(); }
+document.getElementById('maoObra').addEventListener('input',e=>{ const o=orcAtual(); if(o){o.maoObra=num(e.target.value); save(); calcular();} });
+
+function renderPPChips(filter=''){
+  const f=(filter||document.getElementById('searchPP').value||'').toLowerCase();
+  const lista=app.prontos.filter(p=>p.nome.toLowerCase().includes(f));
+  document.getElementById('ppChips').innerHTML=lista.map(p=>`
+    <button class="pp-chip" onclick="addPronto('${p.id}')">${esc(p.nome)} <span class="pp-v">${brl(p.preco)}</span></button>`).join('')||'<p style="color:var(--txt-faint);font-size:13px">Nenhum produto pronto.</p>';
+}
+document.getElementById('searchPP').addEventListener('input',()=>renderPPChips());
+function addPronto(id){ const o=orcAtual(); if(!o)return; const p=app.prontos.find(x=>x.id===id); if(!p)return; o.prontos=o.prontos||[]; o.prontos.push({nome:p.nome,preco:p.preco}); save(); renderPPAdded(); calcular(); toast(p.nome+' adicionado'); }
+function renderPPAdded(){
+  const o=orcAtual(); if(!o)return;
+  const arr=o.prontos||[];
+  document.getElementById('ppAdded').innerHTML=arr.length?arr.map((p,i)=>`
+    <div class="pp-added"><span class="ppa-name">${esc(p.nome)}</span>
+      <div class="ppa-r"><span class="ppa-v">${brl(p.preco)}</span>
+      <button class="ppa-del" onclick="delPronto(${i})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div></div>`).join(''):'<p style="color:var(--txt-faint);font-size:13px;text-align:center;padding:14px 0">Nenhum produto pronto adicionado.</p>';
+}
+function delPronto(i){ const o=orcAtual(); if(!o)return; o.prontos.splice(i,1); save(); renderPPAdded(); calcular(); }
+
+['lucroPct','lucroModo','perdaPct'].forEach(id=>{
+  document.getElementById(id).addEventListener('input',e=>{ const o=orcAtual(); if(!o)return;
+    if(id==='lucroPct')o.lucroPct=num(e.target.value);
+    if(id==='lucroModo')o.lucroModo=e.target.value;
+    if(id==='perdaPct')o.perdaPct=num(e.target.value);
+    save(); calcular();
+  });
+});
+['logDist','logIV','logConsumo','logGas','logPedagio','logEstac','logTaxa','logDesm','logExtra','logModo'].forEach(id=>{
+  document.getElementById(id).addEventListener('input',e=>{ const o=orcAtual(); if(!o)return;
+    const k=id.replace('log','').toLowerCase();
+    const map={dist:'dist',iv:'iv',consumo:'consumo',gas:'gas',pedagio:'pedagio',estac:'estac',taxa:'taxa',desm:'desm',extra:'extra',modo:'modo'};
+    const key=map[k]; if(!key)return;
+    o.log[key]= (key==='modo')? e.target.value : num(e.target.value);
+    save(); calcular();
+  });
+});
+
+/* ===================== CÁLCULO ===================== */
+function calcLogistica(o){
+  const L=o.log; const distTot=L.dist*L.iv;
+  const comb=L.consumo>0?(distTot/L.consumo)*L.gas:0;
+  const pedEst=L.pedagio+L.estac; const outros=L.taxa+L.desm+L.extra;
+  return {distTot,comb,pedEst,outros,total:comb+pedEst+outros};
+}
+function calcular(){
+  const o=orcAtual(); if(!o)return;
+  let custoMat=0;
+  for(const id in o.qtds){ const it=app.cadastro.find(i=>i.id===id); if(it)custoMat+=o.qtds[id]*custoUnit(it); }
+  let helioM3=0;
+  for(const id in o.helioQtds){ const it=app.cadastro.find(i=>i.id===id); if(it)helioM3+=o.helioQtds[id]*(it.helioC||0); }
+  const helioRS=helioM3*(o.custoHelioM3/5.8);
+  const perda=(custoMat+helioRS)*(o.perdaPct/100);
+  const subInsumos=custoMat+helioRS+perda;
+  const mo=o.maoObra||0;
+  const equipe=(o.equipe||[]).reduce((s,a)=>s+(a.valor||0),0);
+  const extras=(o.prontos||[]).reduce((s,p)=>s+(p.preco||0),0);
+  const log=calcLogistica(o);
+  const logIncl = o.log.modo==='incluso'?log.total:0;
+  const logApart = o.log.modo==='apart'?log.total:0;
+  const custoTotal=subInsumos+mo+equipe+logIncl+extras;
+  let preco;
+  if(o.lucroModo==='margem'){ const m=Math.min(o.lucroPct,89)/100; preco=custoTotal/(1-m); }
+  else { preco=custoTotal*(1+o.lucroPct/100); }
+  const lucro=preco-custoTotal;
+  o.total=preco; save();
+
+  // resumo
+  document.getElementById('rCusto').textContent=brl(custoMat);
+  document.getElementById('rHelio').textContent=brl(helioRS);
+  document.getElementById('rPerdaPct').textContent=`(${o.perdaPct}%)`;
+  document.getElementById('rPerda').textContent=brl(perda);
+  document.getElementById('rSubInsumos').textContent=brl(subInsumos);
+  document.getElementById('rMO').textContent=brl(mo);
+  document.getElementById('rEquipe').textContent=brl(equipe);
+  document.getElementById('rLogIncl').textContent=brl(logIncl);
+  document.getElementById('rExtras').textContent=brl(extras);
+  document.getElementById('rCustoTotal').textContent=brl(custoTotal);
+  document.getElementById('rLucroInfo').textContent=`(${o.lucroModo==='margem'?'margem':'markup'} ${o.lucroPct}%)`;
+  document.getElementById('rLucro').textContent=brl(lucro);
+  document.getElementById('rFinal').textContent=brl(preco);
+  document.getElementById('rLogApart').textContent=brl(logApart);
+  // helio summary
+  document.getElementById('helioM3').textContent=helioM3.toLocaleString('pt-BR',{minimumFractionDigits:3})+' m³';
+  document.getElementById('helioRS').textContent=brl(helioRS);
+  // logistica painel
+  document.getElementById('logDistTot').textContent=log.distTot.toLocaleString('pt-BR')+' km';
+  document.getElementById('logComb').textContent=brl(log.comb);
+  document.getElementById('logPedEst').textContent=brl(log.pedEst);
+  document.getElementById('logOutros').textContent=brl(log.outros);
+  document.getElementById('logTotal').textContent=brl(log.total);
+}
+
+/* ===================== CADASTRO ===================== */
+function renderCadastro(filter=''){
+  const sel=document.getElementById('qkCat');
+  if(sel && !sel.options.length){ sel.innerHTML=CATEGORIAS.map(c=>`<option value="${c}">${c}</option>`).join(''); }
+  const f=(filter||document.getElementById('searchCad').value||'').toLowerCase();
+  const itens=app.cadastro.filter(it=>it.n.toLowerCase().includes(f));
+  document.getElementById('cadCount').textContent=`${app.cadastro.length} produtos cadastrados`;
+  let html='', cat='';
+  itens.forEach(it=>{
+    if(it.cat!==cat){ cat=it.cat; const cnt=app.cadastro.filter(x=>x.cat===cat).length; html+=`<div class="cad-cat-title">${esc(cat)} <span class="cc-num">${cnt}</span></div>`; }
+    const helio=isHelioItem(it);
+    html+=`<div class="cad-row" data-id="${it.id}">
+      <div class="cr-top">
+        <input class="cr-name" value="${esc(it.n)}" oninput="editCad('${it.id}','n',this.value)">
+        <div class="cr-actions"><button class="cr-btn del" onclick="delCad('${it.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/></svg></button></div>
+      </div>
+      <div class="cr-fields ${helio?'helio':''}">
+        <div class="cr-f"><span class="lbl">Categoria</span><select onchange="editCad('${it.id}','cat',this.value)">${CATEGORIAS.map(c=>`<option ${c===it.cat?'selected':''}>${c}</option>`).join('')}</select></div>
+        ${helio?
+          `<div class="cr-f"><span class="lbl">m³/un</span><input type="number" step="0.0001" value="${it.helioC||0}" inputmode="decimal" oninput="editCad('${it.id}','helioC',this.value)"></div>`
+          :
+          `<div class="cr-f"><span class="lbl">Preço pago</span><input type="number" step="0.01" value="${it.p}" inputmode="decimal" oninput="editCad('${it.id}','p',this.value)"></div>
+           <div class="cr-f"><span class="lbl">Qtd emb.</span><input type="number" step="1" value="${it.u}" inputmode="numeric" oninput="editCad('${it.id}','u',this.value)"></div>`}
+      </div>
+      <div class="cr-unit"><span>${helio?'Consumo':'Custo unitário'}</span><b>${helio?((it.helioC||0).toLocaleString('pt-BR',{minimumFractionDigits:4})+' m³'):brl(custoUnit(it))}</b></div>
+    </div>`;
+  });
+  document.getElementById('cadList').innerHTML=html||'<p style="color:var(--txt-faint);font-size:13px;text-align:center;padding:24px 0">Nenhum produto encontrado.</p>';
+}
+function editCad(id,k,v){
+  const it=app.cadastro.find(i=>i.id===id); if(!it)return;
+  if(k==='p'||k==='helioC')it[k]=num(v); else if(k==='u')it[k]=Math.max(1,parseInt(v)||1); else it[k]=v;
+  save();
+  const row=document.querySelector(`.cad-row[data-id="${id}"]`);
+  if(row){ const b=row.querySelector('.cr-unit b'); if(b)b.textContent=isHelioItem(it)?((it.helioC||0).toLocaleString('pt-BR',{minimumFractionDigits:4})+' m³'):brl(custoUnit(it)); row.classList.add('saved-flash'); setTimeout(()=>row.classList.remove('saved-flash'),800); }
+}
+function delCad(id){ if(!confirm('Apagar este produto do cadastro?'))return; app.cadastro=app.cadastro.filter(i=>i.id!==id); save(); renderCadastro(); }
+function addProdutoRapido(){
+  const n=document.getElementById('qkNome').value.trim();
+  if(!n){ toast('Dá um nome pro produto'); return; }
+  const it={ id:'cad_'+Date.now()+'_'+Math.random().toString(36).slice(2,5),
+    n, cat:document.getElementById('qkCat').value, o:document.getElementById('qkObs').value.trim()||'',
+    p:num(document.getElementById('qkPreco').value), u:Math.max(1,parseInt(document.getElementById('qkQtd').value)||1) };
+  app.cadastro.push(it); save();
+  ['qkNome','qkObs','qkPreco','qkQtd'].forEach(x=>document.getElementById(x).value='');
+  renderCadastro(); toast('Produto adicionado ✓');
+}
+function resetCadastro(){ if(!confirm('Restaurar a tabela original? Seus produtos cadastrados serão substituídos.'))return; app.cadastro=JSON.parse(JSON.stringify(CADASTRO_DEFAULT)); app.cadastro.forEach((it,i)=>it.id='cad_'+i+'_'+Math.random().toString(36).slice(2,5)); save(); renderCadastro(); toast('Tabela restaurada'); }
+document.getElementById('searchCad').addEventListener('input',()=>renderCadastro());
+
+/* ===================== BIBLIOTECA: PRONTOS ===================== */
+let editPPId=null;
+function renderProntos(filter=''){
+  const f=(filter||document.getElementById('searchLibPP').value||'').toLowerCase();
+  const lista=app.prontos.filter(p=>p.nome.toLowerCase().includes(f));
+  document.getElementById('prontosList').innerHTML=lista.map(p=>`
+    <div class="lib-row">
+      <div class="lib-top"><span class="lib-name">${esc(p.nome)}</span><span class="lib-price">${brl(p.preco)}</span></div>
+      ${p.desc?`<div class="lib-desc">${esc(p.desc)}</div>`:''}
+      <div class="lib-actions">
+        <button class="btn btn-ghost" onclick="abrirModalPronto('${p.id}')">Editar</button>
+        <button class="btn btn-danger" onclick="delProntoLib('${p.id}')">Apagar</button>
+      </div>
+    </div>`).join('')||'<p style="color:var(--txt-faint);font-size:13px;text-align:center;padding:20px 0">Nenhum produto pronto.</p>';
+}
+document.getElementById('searchLibPP').addEventListener('input',()=>renderProntos());
+function abrirModalPronto(id){
+  editPPId=id||null;
+  document.getElementById('prontoTitulo').textContent=id?'Editar produto pronto':'Novo produto pronto';
+  const p=id?app.prontos.find(x=>x.id===id):{nome:'',preco:'',desc:''};
+  document.getElementById('prontoNome').value=p.nome||'';
+  document.getElementById('prontoPreco').value=p.preco||'';
+  document.getElementById('prontoDesc').value=p.desc||'';
+  abrirModal('modalPronto');
+}
+function salvarPronto(){
+  const nome=document.getElementById('prontoNome').value.trim();
+  const preco=num(document.getElementById('prontoPreco').value);
+  const desc=document.getElementById('prontoDesc').value.trim();
+  if(!nome){ toast('Dá um nome'); return; }
+  if(editPPId){ const p=app.prontos.find(x=>x.id===editPPId); p.nome=nome; p.preco=preco; p.desc=desc; }
+  else { app.prontos.push({id:'pp_'+Date.now()+'_'+Math.random().toString(36).slice(2,5),nome,preco,desc}); }
+  save(); fecharModal('modalPronto'); renderProntos(); toast('Salvo ✓');
+}
+function delProntoLib(id){ if(!confirm('Apagar este produto pronto?'))return; app.prontos=app.prontos.filter(p=>p.id!==id); save(); renderProntos(); }
+
+/* ===================== BIBLIOTECA: MODELOS ===================== */
+function renderModelos(){
+  document.getElementById('modelosList').innerHTML=(app.modelos||[]).map(m=>`
+    <div class="lib-row">
+      <div class="lib-top"><span class="lib-name">${esc(m.nome)}</span></div>
+      <div class="lib-desc">${Object.keys(m.qtds||{}).length} materiais · ${Object.keys(m.helioQtds||{}).length} tipos de hélio</div>
+      <div class="lib-actions">
+        <button class="btn btn-gold" onclick="aplicarModelo('${m.id}')">Usar em novo orçamento</button>
+        <button class="btn btn-danger" onclick="delModelo('${m.id}')">Apagar</button>
+      </div>
+    </div>`).join('')||'<p style="color:var(--txt-faint);font-size:13px;text-align:center;padding:20px 0">Nenhum modelo salvo.</p>';
+}
+function abrirModalModelo(){ document.getElementById('modeloNome').value=''; abrirModal('modalModelo'); }
+function salvarModelo(){
+  const o=orcAtual(); if(!o)return;
+  const nome=document.getElementById('modeloNome').value.trim(); if(!nome){ toast('Dá um nome'); return; }
+  app.modelos.push({ id:'md_'+Date.now(), nome, qtds:JSON.parse(JSON.stringify(o.qtds)), helioQtds:JSON.parse(JSON.stringify(o.helioQtds)), perdaPct:o.perdaPct, lucroPct:o.lucroPct, lucroModo:o.lucroModo });
+  save(); fecharModal('modalModelo'); toast('Modelo salvo ✓');
+}
+function aplicarModelo(id){
+  const m=app.modelos.find(x=>x.id===id); if(!m)return;
+  const o=novoOrcObj('Novo - '+m.nome);
+  o.qtds=JSON.parse(JSON.stringify(m.qtds||{})); o.helioQtds=JSON.parse(JSON.stringify(m.helioQtds||{}));
+  o.perdaPct=m.perdaPct??app.defPerda; o.lucroPct=m.lucroPct??app.defLucro; o.lucroModo=m.lucroModo||app.defLucroModo;
+  app.orcamentos.unshift(o); app.abertoId=o.id; save();
+  document.querySelector('.tab[data-needs-orc]').disabled=false; setView('orcamento'); toast('Modelo aplicado ✓');
+}
+function delModelo(id){ if(!confirm('Apagar este modelo?'))return; app.modelos=app.modelos.filter(m=>m.id!==id); save(); renderModelos(); }
+
+/* ===================== CONFIG ===================== */
+function loadConfig(){
+  document.getElementById('cfgLucro').value=app.defLucro;
+  document.getElementById('cfgLucroModo').value=app.defLucroModo;
+  document.getElementById('cfgPerda').value=app.defPerda;
+  document.getElementById('fbApiKey').value=app.fb.apiKey||'';
+  document.getElementById('fbProjectId').value=app.fb.projectId||'';
+  document.getElementById('fbAppId').value=app.fb.appId||'';
+  document.getElementById('fbSyncCode').value=app.fb.code||'';
+}
+['cfgLucro','cfgLucroModo','cfgPerda'].forEach(id=>{
+  document.getElementById(id).addEventListener('input',e=>{
+    if(id==='cfgLucro')app.defLucro=num(e.target.value);
+    if(id==='cfgLucroModo')app.defLucroModo=e.target.value;
+    if(id==='cfgPerda')app.defPerda=num(e.target.value);
+    save();
+  });
+});
+function resetTudo(){ if(!confirm('Apagar TODOS os dados deste aparelho? (não afeta a nuvem se houver)'))return; localStorage.removeItem(LS_KEY); location.reload(); }
+
+/* ===================== MODAIS ===================== */
+function abrirModal(id){ document.getElementById(id).classList.add('show'); }
+function fecharModal(id){ document.getElementById(id).classList.remove('show'); }
+document.querySelectorAll('.modal-bg').forEach(m=>m.addEventListener('click',e=>{ if(e.target===m)m.classList.remove('show'); }));
+
+/* ===================== INIT ===================== */
+window.addEventListener('online',()=>{ if(fbReady){ setSyncStatus('on'); pushToCloud(); } else setSyncStatus('off'); });
+window.addEventListener('offline',()=>setSyncStatus('off'));
+
+(function init(){
+  load();
+  document.querySelector('.tab[data-needs-orc]').disabled = !app.abertoId;
+  setSyncStatus('off');
+  setView('home');
+  if(app.fb && app.fb.enabled && app.fb.apiKey){ initFirebase(); }
+})();
+</script>
+</body>
+</html>
 
