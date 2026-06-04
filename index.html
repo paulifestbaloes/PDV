@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Paulifest Balões · Precificação Pro 3.0</title>
+<title>Paulifest Balões · Precificação Pro 3.1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -55,7 +55,7 @@
 
   label.fld { display:block; margin-bottom:13px; }
   label.fld .lbl { display:block; font-size:12px; color:var(--txt-dim); margin-bottom:6px; font-weight:500; }
-  input[type=number], input[type=text], select, textarea { width:100%; background:var(--surface); border:1.5px solid var(--line); border-radius:12px; color:var(--txt); font-family:var(--body); font-size:15px; padding:11px 13px; outline:none; transition:border-color .2s, box-shadow .2s; appearance:none; }
+  input[type=number], input[type=text], input[type=date], select, textarea { width:100%; background:var(--surface); border:1.5px solid var(--line); border-radius:12px; color:var(--txt); font-family:var(--body); font-size:15px; padding:11px 13px; outline:none; transition:border-color .2s, box-shadow .2s; appearance:none; }
   input:focus, select:focus, textarea:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(217,138,43,0.12); }
   input::placeholder, textarea::placeholder { color:var(--txt-faint); }
   textarea { resize:vertical; min-height:54px; font-size:14px; }
@@ -91,6 +91,9 @@
   .orc-card .oc-price{ text-align:right; flex-shrink:0; }
   .orc-card .oc-price .v{ font-family:var(--display); font-weight:600; font-size:18px; color:var(--gold-deep); font-variant-numeric:tabular-nums; }
   .orc-card .oc-price .l{ font-size:10px; color:var(--txt-faint); text-transform:uppercase; letter-spacing:.5px; }
+  .orc-card.sold .oc-price .v{ color:var(--green); }
+  .orc-card.sold .oc-ic{ background:var(--green-bg); }
+  .orc-card.sold .oc-ic svg{ stroke:var(--green); }
   .orc-del { background:none; border:none; cursor:pointer; padding:6px; color:var(--txt-faint); flex-shrink:0; border-radius:8px; }
   .orc-del:active{ background:var(--surface-2); }
   .orc-del svg{ width:17px; height:17px; }
@@ -162,6 +165,14 @@
   .helio-summary .hs-v .m3{ font-size:12.5px; color:var(--txt-dim); font-weight:500; }
   .helio-summary .hs-v .rs{ font-size:18px; font-weight:700; color:var(--gold-deep); font-variant-numeric:tabular-nums; }
 
+  .avulso-row{ background:var(--surface-2); border:1px solid var(--line); border-radius:12px; padding:11px; margin-bottom:9px; }
+  .avulso-grid{ display:grid; grid-template-columns:1.4fr 1fr 70px 36px; gap:7px; align-items:end; }
+  .avulso-grid .lbl{ font-size:10px; color:var(--txt-faint); display:block; margin-bottom:3px; font-weight:600; text-transform:uppercase; letter-spacing:.4px; }
+  .avulso-grid input{ padding:8px 10px; font-size:13.5px; }
+  .avulso-grid .av-del{ height:38px; border-radius:10px; border:1px solid var(--line); background:var(--surface); color:var(--red); cursor:pointer; display:grid; place-items:center; }
+  .avulso-grid .av-del svg{ width:14px; height:14px; }
+  .avulso-sub{ margin-top:7px; font-size:11.5px; color:var(--gold-deep); font-weight:600; font-variant-numeric:tabular-nums; text-align:right; }
+
   .dyn-row { display:grid; grid-template-columns:1fr 110px 40px; gap:10px; align-items:center; margin-bottom:10px; }
   .dyn-row input{ padding:9px 11px; font-size:14px; }
   .dyn-row .dyn-del { background:var(--surface-2); border:1px solid var(--line); border-radius:10px; cursor:pointer; height:40px; display:grid; place-items:center; color:var(--txt-faint); }
@@ -192,6 +203,8 @@
   .r-log{ margin-top:13px; padding-top:13px; border-top:1px dashed var(--line); display:flex; justify-content:space-between; align-items:baseline; }
   .r-log .rl{ font-size:12px; color:var(--txt-faint); }
   .r-log .rv{ font-size:15px; font-weight:600; font-variant-numeric:tabular-nums; }
+
+  .sold-badge{ display:inline-flex; align-items:center; gap:5px; background:var(--green-bg); color:var(--green); padding:3px 9px; border-radius:99px; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; margin-left:8px; }
 
   .pp-chip-row { display:flex; gap:8px; flex-wrap:wrap; }
   .pp-chip { border:1.5px solid var(--line); background:var(--surface); border-radius:12px; padding:9px 13px; cursor:pointer; font-size:13px; font-weight:600; display:flex; align-items:center; gap:7px; transition:all .18s; }
@@ -252,6 +265,8 @@
   .btn-ghost:active{ background:var(--surface-2); }
   .btn-gold{ background:linear-gradient(150deg,#F0A845,var(--gold-deep)); color:#fff; box-shadow:0 6px 18px rgba(217,138,43,0.28); }
   .btn-gold:active{ transform:translateY(1px); }
+  .btn-green{ background:linear-gradient(150deg,#62B57F,#3F8657); color:#fff; box-shadow:0 6px 18px rgba(63,134,87,0.28); }
+  .btn-green:active{ transform:translateY(1px); }
   .btn-danger{ background:var(--surface); color:var(--red); border:1.5px solid #EFD3D4; }
   .btn-save { position:sticky; bottom:96px; z-index:40; }
 
@@ -261,7 +276,7 @@
   .sync-row .srs{ font-size:11px; color:var(--txt-faint); margin-top:1px; }
   .btn-row2{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:4px; }
 
-  .tabbar { position:fixed; bottom:0; left:0; right:0; z-index:60; background:rgba(255,255,255,0.94); backdrop-filter:blur(18px); border-top:1px solid var(--line); display:grid; grid-template-columns:repeat(5,1fr); padding:8px 6px calc(8px + env(safe-area-inset-bottom)); }
+  .tabbar { position:fixed; bottom:0; left:0; right:0; z-index:60; background:rgba(255,255,255,0.94); backdrop-filter:blur(18px); border-top:1px solid var(--line); display:grid; grid-template-columns:repeat(6,1fr); padding:8px 4px calc(8px + env(safe-area-inset-bottom)); }
   .tab { background:none; border:none; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:4px; color:var(--txt-faint); padding:6px 2px; border-radius:10px; transition:color .2s; }
   .tab svg{ width:20px; height:20px; }
   .tab span{ font-size:9.5px; font-weight:600; letter-spacing:.1px; }
@@ -296,6 +311,35 @@
   .qty-subtotal{ display:flex; justify-content:space-between; align-items:baseline; padding:13px 16px; background:var(--surface-2); border-radius:13px; }
   .qty-subtotal .ql{ font-size:12.5px; color:var(--txt-dim); font-weight:600; text-transform:uppercase; letter-spacing:.6px; }
   .qty-subtotal .qv{ font-family:var(--display); font-size:22px; font-weight:600; color:var(--gold-deep); font-variant-numeric:tabular-nums; }
+
+  /* Dashboard */
+  .dash-month-bar{ display:flex; gap:8px; align-items:center; margin-bottom:14px; }
+  .dash-month-bar select{ flex:1; }
+  .dash-grid{ display:grid; grid-template-columns:1fr 1fr; gap:11px; margin-bottom:14px; }
+  .dash-card{ background:linear-gradient(160deg,#FFFFFF,#FEFAF2); border:1px solid var(--gold-soft); border-radius:16px; padding:15px 16px; box-shadow:var(--shadow-sm); }
+  .dash-card.full{ grid-column:1/-1; }
+  .dash-card.green{ background:linear-gradient(160deg,#FFFFFF,#F0F8F3); border-color:#CFE5D8; }
+  .dash-card .dv{ font-family:var(--display); font-weight:600; font-size:22px; color:var(--gold-deep); font-variant-numeric:tabular-nums; line-height:1.1; }
+  .dash-card.green .dv{ color:var(--green); }
+  .dash-card .dl{ font-size:11px; color:var(--txt-faint); text-transform:uppercase; letter-spacing:.8px; margin-top:6px; font-weight:600; }
+  .dash-card .ds{ font-size:11.5px; color:var(--txt-dim); margin-top:4px; }
+  .sale-row{ display:flex; align-items:center; gap:11px; padding:12px 0; border-bottom:1px solid var(--line-soft); cursor:pointer; }
+  .sale-row:last-child{ border-bottom:none; }
+  .sale-row:active{ background:var(--surface-2); }
+  .sale-row .sr-ic{ width:38px; height:38px; flex-shrink:0; border-radius:11px; background:var(--green-bg); display:grid; place-items:center; color:var(--green); }
+  .sale-row .sr-ic svg{ width:18px; height:18px; }
+  .sale-row .sr-body{ flex:1; min-width:0; }
+  .sale-row .sr-name{ font-size:14px; font-weight:600; }
+  .sale-row .sr-date{ font-size:11.5px; color:var(--txt-faint); margin-top:1px; }
+  .sale-row .sr-v{ font-family:var(--display); font-weight:600; font-size:16px; color:var(--gold-deep); font-variant-numeric:tabular-nums; }
+
+  /* Histórico — detalhe */
+  .detail-section{ margin-top:14px; }
+  .detail-section h4{ font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold-deep); font-weight:700; margin-bottom:10px; }
+  .detail-line{ display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px solid var(--line-soft); font-size:13.5px; }
+  .detail-line:last-child{ border-bottom:none; }
+  .detail-line .dn{ color:var(--txt-dim); }
+  .detail-line .dv{ font-weight:600; font-variant-numeric:tabular-nums; }
 </style>
 </head>
 <body>
@@ -307,7 +351,7 @@
     </div>
     <div class="brand-txt">
       <h1>Paulifest Balões</h1>
-      <span id="headSub">Precificação Pro 3.0</span>
+      <span id="headSub">Precificação Pro 3.1</span>
     </div>
     <div class="head-right">
       <div class="sync-pill" id="syncPill" onclick="setView('config')" style="cursor:pointer">
@@ -384,12 +428,17 @@
     <div class="subview" id="sub-helio">
       <div class="card">
         <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><div class="ttl">Valor do hélio</div></div></div>
-        <label class="fld" style="margin-bottom:0"><span class="lbl">R$ por m³ (cilindro 5,8 m³)</span><input type="number" id="custoHelioM3" step="0.01" value="232.7586" inputmode="decimal"></label>
+        <label class="fld" style="margin-bottom:0"><span class="lbl">R$ por m³ (preço do metro cúbico)</span><input type="number" id="custoHelioM3" step="0.0001" value="232.7586" inputmode="decimal"></label>
       </div>
       <div class="card">
         <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><ellipse cx="12" cy="9" rx="6" ry="7"/><path d="M12 16v5M10.5 14.5L12 16l1.5-1.5"/></svg></div><div><div class="ttl">Balões com hélio</div></div></div>
         <div id="helioList"></div>
         <div class="helio-summary"><span class="hs-l">Total hélio</span><div class="hs-v"><div class="m3" id="helioM3">0,000 m³</div><div class="rs" id="helioRS">R$ 0,00</div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><div class="ttl">Calculadora livre de hélio</div><div class="sub">Itens não cadastrados — só neste orçamento</div></div></div>
+        <div id="avulsoList"></div>
+        <button class="add-line" onclick="addAvulso()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>Adicionar item avulso</button>
       </div>
     </div>
 
@@ -471,6 +520,10 @@
         <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 12a9 9 0 109-9 9 9 0 00-9 9z"/><path d="M12 7v5l3 2"/></svg></div><div><div class="ttl">Perda deste orçamento</div><div class="sub">Só sobre materiais + hélio</div></div></div>
         <label class="fld" style="margin-bottom:0"><span class="lbl">Perda (%)</span><input type="number" id="perdaPct" step="1" min="0" max="90" value="10" inputmode="decimal"></label>
       </div>
+      <button class="btn btn-green" onclick="abrirModalVenda()" style="margin-bottom:10px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+        Marcar como vendido
+      </button>
       <button class="btn btn-ghost" onclick="abrirModalModelo()" style="margin-bottom:14px">Salvar como modelo</button>
     </div>
 
@@ -479,6 +532,44 @@
       Salvar e voltar
     </button>
     <div style="height:10px"></div>
+  </section>
+
+  <!-- HISTÓRICO -->
+  <section class="view" id="view-historico">
+    <h2 class="view-title">Histórico</h2>
+    <p class="view-sub">Orçamentos marcados como vendidos.</p>
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+      <input type="text" id="searchHist" placeholder="Buscar por nome do cliente...">
+    </div>
+    <div id="histList"></div>
+  </section>
+
+  <!-- DETALHE DO HISTÓRICO -->
+  <section class="view" id="view-histDetail">
+    <h2 class="view-title" id="hdNome">Detalhe</h2>
+    <p class="view-sub" id="hdDate">—</p>
+    <div class="card" id="hdSummary"></div>
+    <div class="card">
+      <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg></div><div><div class="ttl">Itens vendidos</div></div></div>
+      <div id="hdItems"></div>
+    </div>
+    <button class="btn btn-ghost" onclick="reabrirVenda()" style="margin-bottom:10px">Desfazer venda / Reabrir</button>
+    <button class="btn btn-danger" onclick="excluirHistorico()" style="margin-bottom:14px">Apagar do histórico</button>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section class="view" id="view-dashboard">
+    <h2 class="view-title">Dashboard</h2>
+    <p class="view-sub">Fechamento mensal por data de venda.</p>
+    <div class="dash-month-bar">
+      <select id="dashMonth"></select>
+    </div>
+    <div class="dash-grid" id="dashCards"></div>
+    <div class="card">
+      <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><div><div class="ttl">Vendas do mês</div></div></div>
+      <div id="dashSales"></div>
+    </div>
   </section>
 
   <!-- CADASTRO -->
@@ -546,7 +637,6 @@
       <label class="fld" style="margin-bottom:0"><span class="lbl">Perda padrão (%)</span><input type="number" id="cfgPerda" step="1" min="0" max="90" value="10" inputmode="decimal"></label>
     </div>
 
-    <!-- SINCRONIZAÇÃO FIREBASE -->
     <div class="card">
       <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h6l2-3h6a2 2 0 012 2z"/><path d="M12 11v6M9 14h6"/></svg></div><div><div class="ttl">Sincronização Firebase</div><div class="sub">Mesmos dados em qualquer dispositivo</div></div></div>
       <div class="sync-row">
@@ -578,9 +668,10 @@
 <nav class="tabbar">
   <button class="tab active" data-view="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg><span>Início</span></button>
   <button class="tab" data-view="orcamento" data-needs-orc><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg><span>Orçamento</span></button>
+  <button class="tab" data-view="historico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Histórico</span></button>
+  <button class="tab" data-view="dashboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg><span>Dashboard</span></button>
   <button class="tab" data-view="cadastro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span>Cadastro</span></button>
   <button class="tab" data-view="biblioteca"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span>Biblioteca</span></button>
-  <button class="tab" data-view="config"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span>Config</span></button>
 </nav>
 
 <div class="toast" id="toast"></div>
@@ -589,146 +680,146 @@
 
 <div class="modal-bg" id="modalPronto"><div class="modal"><h3 id="prontoTitulo">Novo produto pronto</h3><p>Item de venda rápida com preço final fechado.</p><label class="fld"><span class="lbl">Nome</span><input type="text" id="prontoNome" placeholder="Ex: Bubble personalizada"></label><label class="fld"><span class="lbl">Categoria</span><select id="prontoCat"></select></label><label class="fld"><span class="lbl">Preço final (R$)</span><input type="number" id="prontoPreco" step="0.01" min="0" inputmode="decimal" placeholder="Ex: 80,00"></label><label class="fld" style="margin-bottom:0"><span class="lbl">Descrição (opcional)</span><textarea id="prontoDesc" placeholder="Ex: bubble 24 com glitter e personalização"></textarea></label><div class="mbtns"><button class="btn btn-ghost" onclick="fecharModal('modalPronto')">Cancelar</button><button class="btn btn-gold" onclick="salvarPronto()">Salvar</button></div></div></div>
 
-<div class="modal-bg" id="modalModelo"><div class="modal"><h3>Salvar como modelo</h3><p>Guarda os materiais e o hélio deste orçamento pra reusar.</p><label class="fld" style="margin-bottom:0"><span class="lbl">Nome do modelo</span><input type="text" id="modeloNome" placeholder="Ex: Arco desconstruído médio"></label><div class="mbtns"><button class="btn btn-ghost" onclick="fecharModal('modalModelo')">Cancelar</button><button class="btn btn-gold" onclick="salvarModelo()">Salvar modelo</button></div></div></div>
+<div class="modal-bg" id="modalModelo"><div class="modal"><h3>Salvar como modelo</h3><p>Guarda os materiais e o hélio deste orçamento pra reusar.</p><label class="fld" style="margin-bottom:0"><span class="lbl">Nome do modelo</span><input type="text" id="modeloNome" placeholder="Ex: Arco desconstruído médio"></label><div class="mbtns"><button class="btn btn-ghost" onclick="fecharModal('modalModelo')">Cancelar</button><button class="btn btn-gold" onclick="salvarModelo()">Salvar</button></div></div></div>
 
-<!-- MODAL QUANTIDADE PRODUTO PRONTO -->
-<div class="modal-bg" id="modalQtd"><div class="modal"><h3>Adicionar produto</h3><p>Escolha a quantidade. Já vem com 1 preenchido.</p>
-  <div class="qty-modal-head">
-    <div class="qm-name" id="qmName">Produto</div>
-    <div class="qm-unit" id="qmUnit">R$ 0,00 / un</div>
-  </div>
-  <div class="qty-stepper">
-    <button onclick="qmStep(-1)">−</button>
-    <input type="number" id="qmQty" min="1" step="1" value="1" inputmode="numeric" oninput="qmUpdate()">
-    <button onclick="qmStep(1)">+</button>
-  </div>
-  <div class="qty-subtotal"><span class="ql">Subtotal</span><span class="qv" id="qmSubtotal">R$ 0,00</span></div>
-  <div class="mbtns"><button class="btn btn-ghost" onclick="fecharModal('modalQtd')">Cancelar</button><button class="btn btn-gold" onclick="qmConfirmar()">Adicionar</button></div>
-</div></div>
+<div class="modal-bg" id="modalQtd"><div class="modal"><h3>Quantidade</h3><p>Quantos itens desse produto pronto?</p><div class="qty-modal-head"><div class="qm-name" id="qmName">—</div><div class="qm-unit" id="qmUnit">—</div></div><div class="qty-stepper"><button onclick="qmStep(-1)">−</button><input type="number" id="qmQty" min="1" value="1" inputmode="numeric" oninput="qmUpdate()"><button onclick="qmStep(1)">+</button></div><div class="qty-subtotal"><span class="ql">Subtotal</span><span class="qv" id="qmSubtotal">R$ 0,00</span></div><div class="mbtns"><button class="btn btn-ghost" onclick="fecharModal('modalQtd')">Cancelar</button><button class="btn btn-gold" onclick="qmConfirmar()">Adicionar</button></div></div></div>
+
+<div class="modal-bg" id="modalVenda"><div class="modal"><h3>Marcar como vendido</h3><p>Confirme a data da venda. Esse orçamento sai da Home e vai pro Histórico.</p><label class="fld" style="margin-bottom:0"><span class="lbl">Data da venda</span><input type="date" id="vendaData"></label><div class="mbtns"><button class="btn btn-ghost" onclick="fecharModal('modalVenda')">Cancelar</button><button class="btn btn-green" onclick="confirmarVenda()">Confirmar venda</button></div></div></div>
 
 <script>
-"use strict";
+const LS_KEY = 'paulifest_pro_31';
 
-const CATEGORIAS = ['Balões','Bubble','Foils','Hélio','Personalização','Estruturas','Acessórios','Outros'];
-
-/* Categorias de PRODUTOS PRONTOS (editáveis) */
-const CAT_PRONTOS_DEFAULT = ['Arranjos','Bouquets','Bubbles','Decorações','Kits','Painéis','Balcão','Outros'];
+/* ===================== DADOS OFICIAIS (FONTE DA VERDADE) ===================== */
+const CATEGORIAS = ['Balões','Bubble','Foils','Personalização','Estruturas','Acessórios','Hélio'];
 
 const CADASTRO_DEFAULT = [
-  {n:'Balão 9"',cat:'Balões',o:'maior preço p marca',u:50,p:9.80},
-  {n:'Balão 7"',cat:'Balões',o:'maior preço p marca',u:50,p:7.42},
-  {n:'Balão 5"',cat:'Balões',o:'maior preço p marca',u:50,p:6.60},
-  {n:'Balão 16"',cat:'Balões',o:'maior preço p marca',u:12,p:10.56},
-  {n:'Balão 5" platino',cat:'Balões',o:'maior preço p marca',u:25,p:6.39},
-  {n:'Balão 5" pérola',cat:'Balões',o:'maior preço p marca',u:25,p:4.15},
-  {n:'Balão 7" metalizado',cat:'Balões',o:'maior preço p marca',u:50,p:7.90},
-  {n:'Balão 9" Platino',cat:'Balões',o:'maior preço p marca',u:25,p:15.04},
-  {n:'Balão 9" pérola',cat:'Balões',o:'maior preço p marca',u:25,p:7.07},
-  {n:'Balão 9" metalizado',cat:'Balões',o:'maior preço p marca',u:25,p:6.65},
-  {n:'Balão 16" platino',cat:'Balões',o:'maior preço p marca',u:12,p:22.50},
-  {n:'Balão 16" PÉROLA',cat:'Balões',o:'maior preço p marca',u:12,p:14.26},
-  {n:'Balão 25"',cat:'Balões',o:'maior preço p marca',u:1,p:3.38},
-  {n:'Balão 260',cat:'Balões',o:'maior preço p marca',u:25,p:4.70},
-  {n:'Balão 260 platino',cat:'Balões',o:'maior preço p marca',u:25,p:10.46},
-  {n:'Balão 10" platino',cat:'Balões',o:'maior preço p marca',u:25,p:16.73},
-  {n:'11" standart Megatoon',cat:'Balões',o:'Pct 50un',u:50,p:14.86},
-  {n:'11" chrome Megatoon',cat:'Balões',o:'Pct 25un',u:25,p:14.08},
-  {n:'25" PLATINO',cat:'Balões',o:'unidade',u:1,p:9.22},
-  {n:'Balão número 40cm',cat:'Balões',o:'unidade',u:1,p:2.30},
-  {n:'Balão número 80cm',cat:'Balões',o:'unidade',u:1,p:6.43},
-  {n:'Bubble 24"',cat:'Bubble',o:'maior preço p marca',u:50,p:65.55},
-  {n:'Bubble 18"',cat:'Bubble',o:'maior preço p marca',u:50,p:37.00},
-  {n:'Bubble 10"',cat:'Bubble',o:'maior preço p marca',u:50,p:29.99},
-  {n:'Bubble Megatoon 18"',cat:'Bubble',o:'unidade',u:1,p:4.30},
-  {n:'Bubble Megatoon 24"',cat:'Bubble',o:'unidade',u:1,p:5.17},
-  {n:'Estrela 18"',cat:'Foils',o:'unidade',u:1,p:3.90},
-  {n:'Coração 18"',cat:'Foils',o:'unidade',u:1,p:3.90},
-  {n:'Redondo 18"',cat:'Foils',o:'unidade',u:1,p:3.50},
-  {n:'Coração 30"',cat:'Foils',o:'unidade',u:1,p:5.85},
-  {n:'Hélio 9"',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.008},
-  {n:'Hélio 10"',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.010},
-  {n:'Hélio 11" Megatoon',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.0125},
-  {n:'Hélio 16"',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.042},
-  {n:'Hélio 25"',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.178},
-  {n:'Hélio BUBBLE 18"',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.025},
-  {n:'Hélio BUBBLE 24"',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.045},
-  {n:'Hélio BUBBLE 36"',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.130},
-  {n:'Hélio BUBBLE 50"',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.400},
-  {n:'Hélio FOIL 18"',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.017},
-  {n:'Hélio N FOIL 32"',cat:'Hélio',o:'consumo por balão',u:1,p:0,helioC:0.045},
-  {n:'Vinil personalizado',cat:'Personalização',o:'Vendido por unidade',u:33,p:83.00},
-  {n:'Glitter para bubble',cat:'Personalização',o:'Vendido por peso',u:50,p:25.00},
-  {n:'Vareta topo bolo',cat:'Estruturas',o:'Vendido por unidade',u:1,p:1.00},
-  {n:'Vareta bubble',cat:'Estruturas',o:'Vendido por unidade',u:50,p:39.59},
-  {n:'Peso de balão',cat:'Acessórios',o:'Vendido por unidade',u:1,p:4.00},
-  {n:'CETIM 7MM',cat:'Acessórios',o:'unidade',u:10,p:6.70},
-  {n:'CETIM 38MM',cat:'Acessórios',o:'unidade',u:10,p:6.70},
-  {n:'FIXA BALÃO UN',cat:'Acessórios',o:'unidade',u:100,p:58.00}
+  // BALÕES
+  { n:'Balão 5"',                  cat:'Balões', p:0.13, u:1, o:'maior preço p marca' },
+  { n:'Balão 5" platino',          cat:'Balões', p:0.26, u:1, o:'maior preço p marca' },
+  { n:'Balão 5" pérola',           cat:'Balões', p:0.17, u:1, o:'maior preço p marca' },
+  { n:'Balão 7"',                  cat:'Balões', p:0.15, u:1, o:'maior preço p marca' },
+  { n:'Balão 7" metalizado',       cat:'Balões', p:0.16, u:1, o:'maior preço p marca' },
+  { n:'Balão 9"',                  cat:'Balões', p:0.20, u:1, o:'maior preço p marca' },
+  { n:'Balão 9" Platino',          cat:'Balões', p:0.60, u:1, o:'maior preço p marca' },
+  { n:'Balão 9" pérola',           cat:'Balões', p:0.28, u:1, o:'maior preço p marca' },
+  { n:'Balão 9" metalizado',       cat:'Balões', p:0.27, u:1, o:'maior preço p marca' },
+  { n:'Balão 10" platino',         cat:'Balões', p:0.67, u:1, o:'maior preço p marca' },
+  { n:'11" standart Megatoon',     cat:'Balões', p:15.00, u:50, o:'Pct 50un' },
+  { n:'11" chrome Megatoon',       cat:'Balões', p:14.00, u:25, o:'Pct 25un' },
+  { n:'Balão 16"',                 cat:'Balões', p:0.88, u:1, o:'maior preço p marca' },
+  { n:'Balão 16" platino',         cat:'Balões', p:1.88, u:1, o:'maior preço p marca' },
+  { n:'Balão 16" PÉROLA',          cat:'Balões', p:1.19, u:1, o:'maior preço p marca' },
+  { n:'Balão 25"',                 cat:'Balões', p:3.38, u:1, o:'maior preço p marca' },
+  { n:'25" PLATINO',               cat:'Balões', p:9.22, u:1, o:'unidade' },
+  { n:'Balão 260',                 cat:'Balões', p:0.19, u:1, o:'maior preço p marca' },
+  { n:'Balão 260 platino',         cat:'Balões', p:0.42, u:1, o:'maior preço p marca' },
+  { n:'Balão número 40cm',         cat:'Balões', p:2.30, u:1, o:'unidade' },
+  { n:'Balão número 80cm',         cat:'Balões', p:6.43, u:1, o:'unidade' },
+
+  // BUBBLE
+  { n:'Bubble 24"',                cat:'Bubble', p:1.31, u:1, o:'maior preço p marca' },
+  { n:'Bubble 18"',                cat:'Bubble', p:0.74, u:1, o:'maior preço p marca' },
+  { n:'Bubble 10"',                cat:'Bubble', p:0.60, u:1, o:'maior preço p marca' },
+  { n:'Bubble Megatoon 18"',       cat:'Bubble', p:4.30, u:1, o:'unidade' },
+  { n:'Bubble Megatoon 24"',       cat:'Bubble', p:5.17, u:1, o:'unidade' },
+
+  // FOILS
+  { n:'Estrela 18"',               cat:'Foils', p:3.90, u:1, o:'unidade' },
+  { n:'Coração 18"',               cat:'Foils', p:3.90, u:1, o:'unidade' },
+  { n:'Redondo 18"',               cat:'Foils', p:3.50, u:1, o:'unidade' },
+  { n:'Coração 30"',               cat:'Foils', p:5.85, u:1, o:'unidade' },
+
+  // PERSONALIZAÇÃO
+  { n:'Vinil personalizado',       cat:'Personalização', p:2.52, u:1, o:'Vendido por unidade' },
+  { n:'Glitter para bubble',       cat:'Personalização', p:0.50, u:1, o:'Vendido por peso' },
+
+  // ESTRUTURAS
+  { n:'Vareta topo bolo',          cat:'Estruturas', p:1.00, u:1, o:'Vendido por unidade' },
+  { n:'Vareta bubble',             cat:'Estruturas', p:0.79, u:1, o:'Vendido por unidade' },
+
+  // ACESSÓRIOS
+  { n:'Peso de balão',             cat:'Acessórios', p:4.00, u:1, o:'Vendido por unidade' },
+  { n:'CETIM 7MM',                 cat:'Acessórios', p:0.67, u:1, o:'unidade' },
+  { n:'CETIM 38MM',                cat:'Acessórios', p:0.67, u:1, o:'unidade' },
+  { n:'FIXA BALÃO UN',             cat:'Acessórios', p:0.58, u:1, o:'unidade' },
+
+  // HÉLIO (consumo por unidade)
+  { n:'Hélio 9"',                  cat:'Hélio', p:0, u:1, helioC:0.008 },
+  { n:'Hélio 10"',                 cat:'Hélio', p:0, u:1, helioC:0.010 },
+  { n:'Hélio 11" Megatoon',        cat:'Hélio', p:0, u:1, helioC:0.013 },
+  { n:'Hélio 16"',                 cat:'Hélio', p:0, u:1, helioC:0.042 },
+  { n:'Hélio 25"',                 cat:'Hélio', p:0, u:1, helioC:0.178 },
+  { n:'Hélio BUBBLE 18"',          cat:'Hélio', p:0, u:1, helioC:0.025 },
+  { n:'Hélio BUBBLE 24"',          cat:'Hélio', p:0, u:1, helioC:0.045 },
+  { n:'Hélio BUBBLE 36"',          cat:'Hélio', p:0, u:1, helioC:0.130 },
+  { n:'Hélio BUBBLE 50"',          cat:'Hélio', p:0, u:1, helioC:0.400 },
+  { n:'Hélio FOIL 18"',            cat:'Hélio', p:0, u:1, helioC:0.017 },
+  { n:'Hélio N FOIL 32"',          cat:'Hélio', p:0, u:1, helioC:0.045 }
 ];
 
-/* ===== PRODUTOS PRONTOS — gerados da planilha CALCULADORA DE BALÕES (hélio ignorado) ===== */
+const CAT_PRONTOS_DEFAULT = ['Outros'];
+
 const PRONTOS_DEFAULT = [
-  {id:'pp_1',nome:'Base simples chão',preco:10.00,cat:'Decorações',desc:'Importado da planilha'},
-  {id:'pp_2',nome:'Base orgânica chão',preco:15.00,cat:'Decorações',desc:'Importado da planilha'},
-  {id:'pp_3',nome:'Acabamento bubble',preco:5.00,cat:'Outros',desc:'Importado da planilha'},
-  {id:'pp_4',nome:'Personalização vinil',preco:20.00,cat:'Outros',desc:'Importado da planilha'},
-  {id:'pp_5',nome:'Personalização 2 lados',preco:35.00,cat:'Outros',desc:'Importado da planilha'},
-  {id:'pp_6',nome:'Pintura a mão',preco:10.00,cat:'Outros',desc:'Importado da planilha'},
-  {id:'pp_7',nome:'Livre - entrega',preco:210.00,cat:'Outros',desc:'Importado da planilha'},
-  {id:'pp_8',nome:'Centro de mesa bubble (18")',preco:119.90,cat:'Arranjos',desc:'Importado da planilha'},
-  {id:'pp_9',nome:'Centro de mesa Foil',preco:79.90,cat:'Arranjos',desc:'Importado da planilha'},
-  {id:'pp_10',nome:'Arranjo bubble duplo (18")',preco:79.90,cat:'Arranjos',desc:'Importado da planilha'},
-  {id:'pp_11',nome:'Arranjo bubble glitter (18")',preco:89.90,cat:'Arranjos',desc:'Importado da planilha'},
-  {id:'pp_12',nome:'Arranjo bubble mini balões (24")',preco:109.90,cat:'Arranjos',desc:'Importado da planilha'},
-  {id:'pp_13',nome:'Arranjo bubble mix (24")',preco:135.00,cat:'Arranjos',desc:'Importado da planilha'},
-  {id:'pp_14',nome:'Arranjo bubble orgânico tradicional (18")',preco:125.90,cat:'Arranjos',desc:'Importado da planilha'},
-  {id:'pp_15',nome:'Arranjo bubble mix orgânico (24")',preco:159.90,cat:'Arranjos',desc:'Importado da planilha'},
-  {id:'pp_16',nome:'Bubble tower (18")',preco:105.00,cat:'Bubbles',desc:'Importado da planilha'},
-  {id:'pp_17',nome:'Bubble encapsulado (24")',preco:95.00,cat:'Bubbles',desc:'Importado da planilha'},
-  {id:'pp_18',nome:'Mini bubble (10")',preco:54.90,cat:'Bubbles',desc:'Importado da planilha'},
-  {id:'pp_19',nome:'Number tower 1und',preco:145.90,cat:'Decorações',desc:'Importado da planilha'},
-  {id:'pp_20',nome:'Number tower 2und',preco:249.90,cat:'Decorações',desc:'Importado da planilha'},
-  {id:'pp_21',nome:'Foil orgânico',preco:74.90,cat:'Arranjos',desc:'Importado da planilha'},
-  {id:'pp_22',nome:'Foil simples',preco:64.90,cat:'Arranjos',desc:'Importado da planilha'},
-  {id:'pp_23',nome:'Base simples número 18" (1 número)',preco:49.90,cat:'Decorações',desc:'Importado da planilha'},
-  {id:'pp_24',nome:'Base simples número 18" (2 números)',preco:74.90,cat:'Decorações',desc:'Importado da planilha'},
-  {id:'pp_25',nome:'Apliques p/ base',preco:5.00,cat:'Outros',desc:'Importado da planilha'},
-  {id:'pp_26',nome:'Bubble vareta c/ glitter',preco:69.90,cat:'Bubbles',desc:'Importado da planilha'},
-  {id:'pp_27',nome:'Bubble vareta c/ balões',preco:55.00,cat:'Bubbles',desc:'Importado da planilha'},
-  {id:'pp_28',nome:'Bubble na vareta duplo c/ glitter',preco:65.00,cat:'Bubbles',desc:'Importado da planilha'},
-  {id:'pp_29',nome:'Megatoon 11" standart',preco:17.90,cat:'Balcão',desc:'Importado da planilha'},
-  {id:'pp_30',nome:'Megatoon 11" cromado',preco:18.90,cat:'Balcão',desc:'Importado da planilha'},
-  {id:'pp_31',nome:'Cor customizada 11"',preco:21.90,cat:'Balcão',desc:'Importado da planilha'},
-  {id:'pp_32',nome:'Transparente c/ glitter 11"',preco:29.90,cat:'Balcão',desc:'Importado da planilha'},
-  {id:'pp_33',nome:'Pic pic 9/10"',preco:15.00,cat:'Balcão',desc:'Importado da planilha'},
-  {id:'pp_34',nome:'Foil 18"',preco:39.90,cat:'Balcão',desc:'Importado da planilha'},
-  {id:'pp_35',nome:'Número 32"',preco:99.90,cat:'Balcão',desc:'Importado da planilha'},
-  {id:'pp_36',nome:'Bubble 18"',preco:39.90,cat:'Bubbles',desc:'Importado da planilha'},
-  {id:'pp_37',nome:'Bubble 18" c/ mini balões (5/6)',preco:89.90,cat:'Bubbles',desc:'Importado da planilha'},
-  {id:'pp_38',nome:'Bubble 18" encapsulado',preco:49.90,cat:'Bubbles',desc:'Importado da planilha'},
-  {id:'pp_39',nome:'Bubble 18" com glitter (10g max)',preco:59.90,cat:'Bubbles',desc:'Importado da planilha'},
-  {id:'pp_40',nome:'Bubble 24"',preco:65.00,cat:'Bubbles',desc:'Importado da planilha'},
-  {id:'pp_41',nome:'Bubble 24" c/ mini balões (8)',preco:128.00,cat:'Bubbles',desc:'Importado da planilha'},
-  {id:'pp_42',nome:'Bubble 24" encapsulado',preco:79.90,cat:'Bubbles',desc:'Importado da planilha'},
-  {id:'pp_43',nome:'Bubble 24" com glitter (15g max)',preco:89.90,cat:'Bubbles',desc:'Importado da planilha'},
-  {id:'pp_44',nome:'Peso água',preco:2.00,cat:'Balcão',desc:'Importado da planilha'},
-  {id:'pp_45',nome:'Peso grintoy',preco:9.90,cat:'Balcão',desc:'Importado da planilha'}
+  { nome:'Base simples chão',                              preco:10.00,  cat:'Outros' },
+  { nome:'Base orgânica chão',                             preco:15.00,  cat:'Outros' },
+  { nome:'Acabamento bubble',                              preco:5.00,   cat:'Outros' },
+  { nome:'Personalização vinil',                           preco:20.00,  cat:'Outros' },
+  { nome:'Personalização 2 lados',                         preco:35.00,  cat:'Outros' },
+  { nome:'Pintura a mão',                                  preco:10.00,  cat:'Outros' },
+  { nome:'Livre - entrega',                                preco:210.00, cat:'Outros' },
+  { nome:'Centro de mesa bubble (18")',                    preco:119.90, cat:'Outros' },
+  { nome:'Centro de mesa Foil',                            preco:79.90,  cat:'Outros' },
+  { nome:'Arranjo bubble duplo (18")',                     preco:79.90,  cat:'Outros' },
+  { nome:'Arranjo bubble glitter (18")',                   preco:89.90,  cat:'Outros' },
+  { nome:'Arranjo bubble mini balões (24")',               preco:109.90, cat:'Outros' },
+  { nome:'Arranjo bubble mix (24")',                       preco:135.00, cat:'Outros' },
+  { nome:'Arranjo bubble orgânico tradicional (18")',      preco:125.90, cat:'Outros' },
+  { nome:'Arranjo bubble mix orgânico (24")',              preco:159.90, cat:'Outros' },
+  { nome:'Bubble tower (18")',                             preco:105.00, cat:'Outros' },
+  { nome:'Bubble encapsulado (24")',                       preco:95.00,  cat:'Outros' },
+  { nome:'Mini bubble (10")',                              preco:54.90,  cat:'Outros' },
+  { nome:'Number tower 1und',                              preco:145.90, cat:'Outros' },
+  { nome:'Number tower 2und',                              preco:249.90, cat:'Outros' },
+  { nome:'Foil orgânico',                                  preco:74.90,  cat:'Outros' },
+  { nome:'Foil simples',                                   preco:64.90,  cat:'Outros' },
+  { nome:'Base simples número 18" (1 número)',             preco:49.90,  cat:'Outros' },
+  { nome:'Base simples número 18" (2 números)',            preco:74.90,  cat:'Outros' },
+  { nome:'Apliques p/ base',                               preco:5.00,   cat:'Outros' },
+  { nome:'Bubble vareta c/ glitter',                       preco:69.90,  cat:'Outros' },
+  { nome:'Bubble vareta c/ balões',                        preco:55.00,  cat:'Outros' },
+  { nome:'Bubble na vareta duplo c/ glitter',              preco:65.00,  cat:'Outros' },
+  { nome:'Megatoon 11" standart',                          preco:17.90,  cat:'Outros' },
+  { nome:'Megatoon 11" cromado',                           preco:18.90,  cat:'Outros' },
+  { nome:'Cor customizada 11"',                            preco:21.90,  cat:'Outros' },
+  { nome:'Transparente c/ glitter 11"',                    preco:29.90,  cat:'Outros' },
+  { nome:'Pic pic 9/10"',                                  preco:15.00,  cat:'Outros' },
+  { nome:'Foil 18"',                                       preco:39.90,  cat:'Outros' },
+  { nome:'Número 32"',                                     preco:99.90,  cat:'Outros' },
+  { nome:'Bubble 18"',                                     preco:39.90,  cat:'Outros' },
+  { nome:'Bubble 18" c/ mini balões (5/6)',                preco:89.90,  cat:'Outros' },
+  { nome:'Bubble 18" encapsulado',                         preco:49.90,  cat:'Outros' },
+  { nome:'Bubble 18" com glitter (10g max)',               preco:59.90,  cat:'Outros' },
+  { nome:'Bubble 24"',                                     preco:65.00,  cat:'Outros' },
+  { nome:'Bubble 24" c/ mini balões (8)',                  preco:128.00, cat:'Outros' },
+  { nome:'Bubble 24" encapsulado',                         preco:79.90,  cat:'Outros' },
+  { nome:'Bubble 24" com glitter (15g max)',               preco:89.90,  cat:'Outros' },
+  { nome:'Peso água',                                      preco:2.00,   cat:'Outros' },
+  { nome:'Peso grintoy',                                   preco:9.90,   cat:'Outros' }
 ];
 
+/* ===================== STATE ===================== */
 let app = {
-  cadastro: [], prontos: [], modelos: [], catPronto: [],
+  cadastro: [], prontos: [], catPronto: [],
+  modelos: [], orcamentos: [], historico: [],
   custoHelioM3: 232.7586,
   defPerda: 10, defLucro: 40, defLucroModo: 'markup',
-  orcamentos: [], abertoId: null,
-  fb: { apiKey:'', projectId:'', appId:'', code:'', enabled:false }
+  fb: { apiKey:'', projectId:'', appId:'', code:'', enabled:false },
+  abertoId: null, histAbertoId: null,
+  _ts: 0
 };
-const LS_KEY = 'paulifest_baloes_v4';
+let collapsedPP = {}, collapsedLib = {};
 
-/* estado de UI (não persistido na nuvem): categorias recolhidas */
-const collapsedPP = {};   // aba orçamento > prontos
-const collapsedLib = {};  // biblioteca > prontos
-
-/* ===================== ARMAZENAMENTO (Local + Firebase) ===================== */
+/* ===================== FIREBASE STORAGE LAYER ===================== */
 let fbApp=null, fbDb=null, fbDoc=null, fbReady=false, fbUnsub=null;
 let saveTimer=null, applyingRemote=false, lastSyncStamp=0;
 
@@ -771,18 +862,19 @@ function load(){
   if(!app.catPronto?.length) app.catPronto = JSON.parse(JSON.stringify(CAT_PRONTOS_DEFAULT));
   if(!app.modelos)          app.modelos  = [];
   if(!app.orcamentos)       app.orcamentos = [];
+  if(!app.historico)        app.historico = [];
   if(!app.fb)               app.fb = { apiKey:'', projectId:'', appId:'', code:'', enabled:false };
   app.cadastro.forEach((it,i)=>{ if(!it.id) it.id='cad_'+i+'_'+Math.random().toString(36).slice(2,5); });
-  // migração: produto pronto sem categoria
-  app.prontos.forEach(p=>{ if(!p.cat) p.cat='Outros'; });
-  // garante que toda categoria usada por algum pronto existe na lista
-  app.prontos.forEach(p=>{ if(!app.catPronto.includes(p.cat)) app.catPronto.push(p.cat); });
-  // migração: prontos dentro dos orçamentos agora têm qtd
-  app.orcamentos.forEach(o=>{ if(Array.isArray(o.prontos)) o.prontos.forEach(p=>{ if(!p.qtd) p.qtd=1; }); });
+  app.prontos.forEach((p,i)=>{ if(!p.id) p.id='pp_'+i+'_'+Math.random().toString(36).slice(2,5); if(!p.cat) p.cat='Outros'; if(!app.catPronto.includes(p.cat)) app.catPronto.push(p.cat); });
+  app.orcamentos.forEach(o=>{
+    if(Array.isArray(o.prontos)) o.prontos.forEach(p=>{ if(!p.qtd) p.qtd=1; });
+    if(!Array.isArray(o.avulsos)) o.avulsos=[];
+  });
   app.abertoId = null;
+  app.histAbertoId = null;
 }
 
-/* ===================== FIREBASE (carregamento dinâmico) ===================== */
+/* Firebase SDK loader */
 let fbInitDb, fbInitApp, fbDocFn, fbGetDoc, fbSetDocFn, fbOnSnapshot;
 async function loadFirebaseSDK(){
   if(window._fbLoaded) return true;
@@ -839,14 +931,17 @@ function applyRemote(remote){
   app.catPronto = remote.catPronto||app.catPronto;
   app.modelos  = remote.modelos||app.modelos;
   app.orcamentos = remote.orcamentos||app.orcamentos;
+  app.historico = remote.historico||app.historico||[];
   app.custoHelioM3 = remote.custoHelioM3 ?? app.custoHelioM3;
   app.defPerda = remote.defPerda ?? app.defPerda;
   app.defLucro = remote.defLucro ?? app.defLucro;
   app.defLucroModo = remote.defLucroModo || app.defLucroModo;
   app.fb = localFb;
-  // garante integridade pós-sync
   app.prontos.forEach(p=>{ if(!p.cat) p.cat='Outros'; if(!app.catPronto.includes(p.cat)) app.catPronto.push(p.cat); });
-  app.orcamentos.forEach(o=>{ if(Array.isArray(o.prontos)) o.prontos.forEach(p=>{ if(!p.qtd) p.qtd=1; }); });
+  app.orcamentos.forEach(o=>{
+    if(Array.isArray(o.prontos)) o.prontos.forEach(p=>{ if(!p.qtd) p.qtd=1; });
+    if(!Array.isArray(o.avulsos)) o.avulsos=[];
+  });
   persistLocal();
   applyingRemote=false;
   const activeView=document.querySelector('.view.active')?.id?.replace('view-','');
@@ -854,6 +949,8 @@ function applyRemote(remote){
   if(activeView==='cadastro') renderCadastro();
   if(activeView==='biblioteca'){ renderProntos(); renderModelos(); renderCatManage(); }
   if(activeView==='orcamento') renderEditor();
+  if(activeView==='historico') renderHistorico();
+  if(activeView==='dashboard') renderDashboard();
 }
 
 async function fbConectar(){
@@ -909,24 +1006,25 @@ function tempoRel(ts){
   if(d<86400) return Math.floor(d/3600)+'h atrás';
   const dt=new Date(ts); return dt.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'});
 }
+function dataBR(ts){ return new Date(ts).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'}); }
+function ymKey(ts){ const d=new Date(ts); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'); }
+function ymLabel(k){ const [y,m]=k.split('-'); const meses=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez']; return meses[parseInt(m)-1]+'/'+y; }
+function todayISO(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 
-/* ---- ORDENAÇÃO DE BALÕES (Alteração 1): tamanho -> acabamento ---- */
 function tamanhoBalao(nome){
-  // pega primeiro número (polegadas); número grande (40cm/80cm) vai pro fim
   const n=nome.toLowerCase();
-  if(/\d+\s*cm/.test(n)){ const cm=parseFloat(n.match(/(\d+)\s*cm/)[1]); return 9000+cm; } // balões número ao fim
+  if(/\d+\s*cm/.test(n)){ const cm=parseFloat(n.match(/(\d+)\s*cm/)[1]); return 9000+cm; }
   const m=n.match(/(\d+(?:[.,]\d+)?)\s*"?/);
   if(m) return parseFloat(m[1].replace(',','.'));
   return 99999;
 }
-const ORDEM_ACAB = ['', 'platino','pérola','perola','metalizado','metalizada','chrome','cromado','cromada'];
 function acabamentoBalao(nome){
   const n=nome.toLowerCase();
   if(/platino/.test(n)) return 1;
   if(/p[ée]rola/.test(n)) return 2;
   if(/metaliz/.test(n)) return 3;
   if(/chrome|cromad/.test(n)) return 4;
-  return 0; // standard / liso
+  return 0;
 }
 function ordenarBaloes(arr){
   return [...arr].sort((a,b)=>{
@@ -940,9 +1038,7 @@ function ordenarBaloes(arr){
 function labelTamanho(it){
   const t=tamanhoBalao(it.n);
   if(t>=9000) return 'Balão número';
-  const n=it.n.toLowerCase();
-  if(/\d+\s*"/.test(n)){ const pol=it.n.match(/(\d+(?:[.,]\d+)?)\s*"/); if(pol) return 'Balão '+pol[1]+'"'; }
-  // ex: "260", "11" megatoon" -> usa o número
+  if(/\d+\s*"/.test(it.n.toLowerCase())){ const pol=it.n.match(/(\d+(?:[.,]\d+)?)\s*"/); if(pol) return 'Balão '+pol[1]+'"'; }
   const m=it.n.match(/(\d+)/); return m?('Balão '+m[1]):'Balões';
 }
 
@@ -950,19 +1046,21 @@ function novoOrcObj(nome){
   return {
     id: Date.now()+'_'+Math.random().toString(36).slice(2,6),
     nome: nome || 'Sem nome',
-    qtds:{}, helioQtds:{}, maoObra:0, equipe:[], prontos:[],
+    qtds:{}, helioQtds:{}, avulsos:[], maoObra:0, equipe:[], prontos:[],
     perdaPct: app.defPerda, lucroPct: app.defLucro, lucroModo: app.defLucroModo,
     custoHelioM3: app.custoHelioM3,
     log:{dist:0,iv:2,consumo:7.5,gas:7.00,pedagio:0,estac:0,taxa:0,desm:0,extra:0,modo:'apart'},
-    total:0, atualizado:Date.now()
+    total:0, atualizado:Date.now(), criado:Date.now()
   };
 }
 function orcAtual(){ return app.orcamentos.find(o=>o.id===app.abertoId); }
+function histAtual(){ return app.historico.find(o=>o.id===app.histAbertoId); }
 
 /* ===================== NAVEGAÇÃO ===================== */
 function setView(view){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  document.getElementById('view-'+view).classList.add('active');
+  const v=document.getElementById('view-'+view);
+  if(v) v.classList.add('active');
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.view===view));
   document.getElementById('headBack').style.display = view==='orcamento' ? 'flex':'none';
   window.scrollTo(0,0);
@@ -971,6 +1069,9 @@ function setView(view){
   if(view==='biblioteca'){ renderProntos(); renderModelos(); renderCatManage(); }
   if(view==='config') loadConfig();
   if(view==='orcamento') renderEditor();
+  if(view==='historico') renderHistorico();
+  if(view==='histDetail') renderHistDetail();
+  if(view==='dashboard') renderDashboard();
 }
 document.querySelectorAll('.tab').forEach(t=>{
   t.addEventListener('click',()=>{
@@ -1005,20 +1106,20 @@ function delOrcamento(id,e){ e.stopPropagation(); if(!confirm('Apagar este orça
 function voltarHome(){ const o=orcAtual(); if(o){ o.nome=document.getElementById('orcNome').value.trim()||o.nome; o.atualizado=Date.now(); save(); } setView('home'); }
 function salvarEVoltar(){ voltarHome(); toast('Orçamento salvo'); }
 
-function renderHome(filter=''){
-  const f=(filter||document.getElementById('searchHome').value||'').toLowerCase();
+function renderHome(){
+  const f=(document.getElementById('searchHome').value||'').toLowerCase();
   const stats=document.getElementById('homeStats');
   const total=app.orcamentos.length;
   const ultimo=total?Math.max(...app.orcamentos.map(o=>o.atualizado)):0;
   const somaFinal=app.orcamentos.reduce((s,o)=>s+(o.total||0),0);
   stats.innerHTML=`
-    <div class="stat-card"><div class="sv">${total}</div><div class="sl">Orçamentos</div></div>
+    <div class="stat-card"><div class="sv">${total}</div><div class="sl">Orçamentos ativos</div></div>
     <div class="stat-card"><div class="sv" style="font-size:18px">${total?tempoRel(ultimo):'—'}</div><div class="sl">Última edição</div></div>
     <div class="stat-card" style="grid-column:1/-1"><div class="sv">${brl(somaFinal)}</div><div class="sl">Soma dos preços finais</div></div>`;
   const list=document.getElementById('orcamentosList');
   const filtrados=app.orcamentos.filter(o=>o.nome.toLowerCase().includes(f));
   if(!app.orcamentos.length){
-    list.innerHTML=`<div class="empty-state"><div class="es-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#D98A2B" stroke-width="1.6"><ellipse cx="12" cy="9" rx="6" ry="7.2"/><path d="M10.8 15.5l1.2 1.6 1.2-1.6M12 17v4.5"/></svg></div><h3>Nenhum orçamento ainda</h3><p>Toque em "Novo orçamento" pra criar o primeiro.</p></div>`;
+    list.innerHTML=`<div class="empty-state"><div class="es-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#D98A2B" stroke-width="1.6"><ellipse cx="12" cy="9" rx="6" ry="7.2"/><path d="M10.8 15.5l1.2 1.6 1.2-1.6M12 17v4.5"/></svg></div><h3>Nenhum orçamento ativo</h3><p>Toque em "Novo orçamento" pra criar.</p></div>`;
     return;
   }
   list.innerHTML=filtrados.map(o=>`
@@ -1047,18 +1148,16 @@ function renderEditor(){
   document.getElementById('logPedagio').value=L.pedagio; document.getElementById('logEstac').value=L.estac;
   document.getElementById('logTaxa').value=L.taxa; document.getElementById('logDesm').value=L.desm;
   document.getElementById('logExtra').value=L.extra; document.getElementById('logModo').value=L.modo;
-  renderOrcList(); renderHelioList(); renderEquipe(); renderPPChips(); renderPPAdded();
+  renderOrcList(); renderHelioList(); renderAvulsos(); renderEquipe(); renderPPChips(); renderPPAdded();
   calcular();
 }
 
-/* Materiais — Balões agrupados por tamanho; demais categorias normais */
-function renderOrcList(filter=''){
+function renderOrcList(){
   const o=orcAtual(); if(!o)return;
-  const f=(filter||document.getElementById('searchOrc').value||'').toLowerCase();
+  const f=(document.getElementById('searchOrc').value||'').toLowerCase();
   const itens=app.cadastro.filter(it=>!isHelioItem(it) && it.n.toLowerCase().includes(f));
   document.getElementById('orcCount').textContent=`${app.cadastro.filter(i=>!isHelioItem(i)).length} materiais`;
 
-  // separa por categoria preservando ordem das CATEGORIAS
   const cats=[...new Set(itens.map(i=>i.cat))];
   cats.sort((a,b)=>{ const ia=CATEGORIAS.indexOf(a), ib=CATEGORIAS.indexOf(b); return (ia<0?99:ia)-(ib<0?99:ib); });
 
@@ -1088,8 +1187,13 @@ function linhaMaterial(it,o){
     <div class="subtotal-tag">${brl(sub)}</div>
   </div>`;
 }
-function setQtd(id,v){ const o=orcAtual(); if(!o)return; const q=Math.max(0,parseInt(v)||0); if(q)o.qtds[id]=q; else delete o.qtds[id]; o.atualizado=Date.now(); save(); calcular();
-  const row=event.target.closest('.item-row'); if(row){ row.classList.toggle('has-qty',q>0); const it=app.cadastro.find(i=>i.id===id); const tag=row.querySelector('.subtotal-tag'); if(tag)tag.textContent=brl(q*custoUnit(it)); }
+function setQtd(id,v){
+  const o=orcAtual(); if(!o)return;
+  const q=Math.max(0,parseInt(v)||0);
+  if(q)o.qtds[id]=q; else delete o.qtds[id];
+  o.atualizado=Date.now(); save(); calcular();
+  const row=event.target.closest('.item-row');
+  if(row){ row.classList.toggle('has-qty',q>0); const it=app.cadastro.find(i=>i.id===id); const tag=row.querySelector('.subtotal-tag'); if(tag)tag.textContent=brl(q*custoUnit(it)); }
 }
 document.getElementById('searchOrc').addEventListener('input',()=>renderOrcList());
 document.getElementById('orcNome').addEventListener('input',e=>{ const o=orcAtual(); if(o){o.nome=e.target.value; document.getElementById('resumoNome').textContent=e.target.value||'Resumo'; save();} });
@@ -1108,6 +1212,33 @@ function renderHelioList(){
 function setHelioQtd(id,v){ const o=orcAtual(); if(!o)return; const q=Math.max(0,parseInt(v)||0); if(q)o.helioQtds[id]=q; else delete o.helioQtds[id]; o.atualizado=Date.now(); save(); calcular(); renderHelioList(); }
 document.getElementById('custoHelioM3').addEventListener('input',e=>{ const o=orcAtual(); if(o){o.custoHelioM3=num(e.target.value); save(); calcular();} });
 
+/* ---- AVULSOS DE HÉLIO ---- */
+function renderAvulsos(){
+  const o=orcAtual(); if(!o)return;
+  const arr=o.avulsos||[];
+  const box=document.getElementById('avulsoList');
+  if(!arr.length){ box.innerHTML='<p style="color:var(--txt-faint);font-size:12.5px;padding:6px 0 10px">Nenhum item avulso. Toque abaixo pra adicionar.</p>'; return; }
+  box.innerHTML=arr.map((av,i)=>{
+    const sub=(av.consumo||0)*(av.qtd||0);
+    return `<div class="avulso-row">
+      <div class="avulso-grid">
+        <div><span class="lbl">Nome (opcional)</span><input type="text" value="${esc(av.nome||'')}" placeholder="Ex: balão especial" oninput="setAvulso(${i},'nome',this.value)"></div>
+        <div><span class="lbl">m³ / un</span><input type="number" step="0.001" min="0" inputmode="decimal" value="${av.consumo||''}" oninput="setAvulso(${i},'consumo',this.value)"></div>
+        <div><span class="lbl">Qtd</span><input type="number" step="1" min="0" inputmode="numeric" value="${av.qtd||''}" oninput="setAvulso(${i},'qtd',this.value)"></div>
+        <button class="av-del" onclick="delAvulso(${i})" title="Remover"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      </div>
+      <div class="avulso-sub">Subtotal: ${sub.toLocaleString('pt-BR',{minimumFractionDigits:3})} m³</div>
+    </div>`;
+  }).join('');
+}
+function addAvulso(){ const o=orcAtual(); if(!o)return; o.avulsos=o.avulsos||[]; o.avulsos.push({nome:'',consumo:0,qtd:0}); save(); renderAvulsos(); calcular(); }
+function setAvulso(i,k,v){ const o=orcAtual(); if(!o)return; if(!o.avulsos[i])return; if(k==='nome') o.avulsos[i][k]=v; else o.avulsos[i][k]=num(v); o.atualizado=Date.now(); save(); calcular();
+  // atualiza só o subtotal visual
+  const av=o.avulsos[i]; const sub=(av.consumo||0)*(av.qtd||0);
+  const rows=document.querySelectorAll('#avulsoList .avulso-row'); if(rows[i]){ const s=rows[i].querySelector('.avulso-sub'); if(s) s.textContent='Subtotal: '+sub.toLocaleString('pt-BR',{minimumFractionDigits:3})+' m³'; }
+}
+function delAvulso(i){ const o=orcAtual(); if(!o)return; o.avulsos.splice(i,1); save(); renderAvulsos(); calcular(); }
+
 function renderEquipe(){
   const o=orcAtual(); if(!o)return;
   document.getElementById('equipeList').innerHTML=(o.equipe||[]).map((aj,i)=>`
@@ -1122,13 +1253,12 @@ function setAjudante(i,k,v){ const o=orcAtual(); if(!o)return; o.equipe[i][k]= k
 function delAjudante(i){ const o=orcAtual(); if(!o)return; o.equipe.splice(i,1); save(); renderEquipe(); calcular(); }
 document.getElementById('maoObra').addEventListener('input',e=>{ const o=orcAtual(); if(o){o.maoObra=num(e.target.value); save(); calcular();} });
 
-/* ---- PRODUTOS PRONTOS: chips agrupados por categoria recolhível (Alt 5,6,7) ---- */
-function renderPPChips(filter=''){
-  const f=(filter||document.getElementById('searchPP').value||'').toLowerCase();
+/* ---- PRODUTOS PRONTOS ---- */
+function renderPPChips(){
+  const f=(document.getElementById('searchPP').value||'').toLowerCase();
   const lista=app.prontos.filter(p=>p.nome.toLowerCase().includes(f));
   const box=document.getElementById('ppChips');
   if(!lista.length){ box.innerHTML='<p style="color:var(--txt-faint);font-size:13px">Nenhum produto pronto.</p>'; return; }
-  // ordena categorias conforme app.catPronto, extras no fim
   const cats=[...new Set(lista.map(p=>p.cat||'Outros'))].sort((a,b)=>{
     const ia=app.catPronto.indexOf(a), ib=app.catPronto.indexOf(b);
     return (ia<0?999:ia)-(ib<0?999:ib);
@@ -1155,7 +1285,6 @@ function renderPPChips(filter=''){
 function togglePP(cat){ collapsedPP[cat]=!collapsedPP[cat]; renderPPChips(); }
 document.getElementById('searchPP').addEventListener('input',()=>renderPPChips());
 
-/* ---- MODAL QUANTIDADE (Alt 2) ---- */
 let qmProntoId=null, qmPreco=0;
 function abrirModalQtd(id){
   const p=app.prontos.find(x=>x.id===id); if(!p)return;
@@ -1180,7 +1309,6 @@ function qmConfirmar(){
   const p=app.prontos.find(x=>x.id===qmProntoId); if(!p){ fecharModal('modalQtd'); return; }
   let q=parseInt(document.getElementById('qmQty').value)||1; if(q<1)q=1;
   o.prontos=o.prontos||[];
-  // se já existe o mesmo produto, soma a quantidade
   const ex=o.prontos.find(x=>x.nome===p.nome && x.preco===p.preco);
   if(ex){ ex.qtd=(ex.qtd||1)+q; } else { o.prontos.push({nome:p.nome,preco:p.preco,qtd:q}); }
   o.atualizado=Date.now(); save(); fecharModal('modalQtd'); renderPPAdded(); calcular();
@@ -1234,13 +1362,14 @@ function calcLogistica(o){
   const pedEst=L.pedagio+L.estac; const outros=L.taxa+L.desm+L.extra;
   return {distTot,comb,pedEst,outros,total:comb+pedEst+outros};
 }
-function calcular(){
-  const o=orcAtual(); if(!o)return;
+function calcularSnapshot(o){
   let custoMat=0;
   for(const id in o.qtds){ const it=app.cadastro.find(i=>i.id===id); if(it)custoMat+=o.qtds[id]*custoUnit(it); }
   let helioM3=0;
   for(const id in o.helioQtds){ const it=app.cadastro.find(i=>i.id===id); if(it)helioM3+=o.helioQtds[id]*(it.helioC||0); }
-  const helioRS=helioM3*(o.custoHelioM3/5.8);
+  (o.avulsos||[]).forEach(av=>{ helioM3+=(av.consumo||0)*(av.qtd||0); });
+  // FÓRMULA CORRIGIDA: helioRS = helioM3 * custoHelioM3 (R$/m³)
+  const helioRS=helioM3*(o.custoHelioM3||0);
   const perda=(custoMat+helioRS)*(o.perdaPct/100);
   const subInsumos=custoMat+helioRS+perda;
   const mo=o.maoObra||0;
@@ -1248,59 +1377,230 @@ function calcular(){
   const log=calcLogistica(o);
   const logIncl = o.log.modo==='incluso'?log.total:0;
   const logApart = o.log.modo==='apart'?log.total:0;
-
-  // CUSTO TOTAL — sem produtos prontos (Alt 3)
   const custoTotal=subInsumos+mo+equipe+logIncl;
-
-  // LUCRO só sobre o orçamento principal (Alt 3)
   let precoOrc;
   if(o.lucroModo==='margem'){ const m=Math.min(o.lucroPct,89)/100; precoOrc=custoTotal/(1-m); }
   else { precoOrc=custoTotal*(1+o.lucroPct/100); }
   const lucro=precoOrc-custoTotal;
-
-  // PRODUTOS PRONTOS — somados só no final, sem margem (Alt 3 e 4)
   const arr=o.prontos||[];
   const prontosTotal=arr.reduce((s,p)=>s+(p.preco||0)*(p.qtd||1),0);
   const prontosQtd=arr.reduce((s,p)=>s+(p.qtd||1),0);
-
-  // TOTAL AO CLIENTE = orçamento + prontos (Alt 4)
   const precoFinal=precoOrc+prontosTotal;
-
-  o.total=precoFinal; save();
-
-  // resumo
-  document.getElementById('rCusto').textContent=brl(custoMat);
-  document.getElementById('rHelio').textContent=brl(helioRS);
+  return { custoMat, helioM3, helioRS, perda, subInsumos, mo, equipe, log, logIncl, logApart, custoTotal, precoOrc, lucro, prontosTotal, prontosQtd, precoFinal };
+}
+function calcular(){
+  const o=orcAtual(); if(!o)return;
+  const c=calcularSnapshot(o);
+  o.total=c.precoFinal; save();
+  document.getElementById('rCusto').textContent=brl(c.custoMat);
+  document.getElementById('rHelio').textContent=brl(c.helioRS);
   document.getElementById('rPerdaPct').textContent=`(${o.perdaPct}%)`;
-  document.getElementById('rPerda').textContent=brl(perda);
-  document.getElementById('rSubInsumos').textContent=brl(subInsumos);
-  document.getElementById('rMO').textContent=brl(mo);
-  document.getElementById('rEquipe').textContent=brl(equipe);
-  document.getElementById('rLogIncl').textContent=brl(logIncl);
-  document.getElementById('rCustoTotal').textContent=brl(custoTotal);
+  document.getElementById('rPerda').textContent=brl(c.perda);
+  document.getElementById('rSubInsumos').textContent=brl(c.subInsumos);
+  document.getElementById('rMO').textContent=brl(c.mo);
+  document.getElementById('rEquipe').textContent=brl(c.equipe);
+  document.getElementById('rLogIncl').textContent=brl(c.logIncl);
+  document.getElementById('rCustoTotal').textContent=brl(c.custoTotal);
   document.getElementById('rLucroInfo').textContent=`(${o.lucroModo==='margem'?'margem':'markup'} ${o.lucroPct}%)`;
-  document.getElementById('rLucro').textContent=brl(lucro);
-  document.getElementById('rPrecoOrc').textContent=brl(precoOrc);
-  document.getElementById('rProntos').textContent=brl(prontosTotal);
-  document.getElementById('rProntosInfo').textContent=prontosQtd?`(${prontosQtd} ${prontosQtd>1?'itens':'item'})`:'';
-  document.getElementById('rFinal').textContent=brl(precoFinal);
-  document.getElementById('rLogApart').textContent=brl(logApart);
-  // helio summary
-  document.getElementById('helioM3').textContent=helioM3.toLocaleString('pt-BR',{minimumFractionDigits:3})+' m³';
-  document.getElementById('helioRS').textContent=brl(helioRS);
-  // logistica painel
-  document.getElementById('logDistTot').textContent=log.distTot.toLocaleString('pt-BR')+' km';
-  document.getElementById('logComb').textContent=brl(log.comb);
-  document.getElementById('logPedEst').textContent=brl(log.pedEst);
-  document.getElementById('logOutros').textContent=brl(log.outros);
-  document.getElementById('logTotal').textContent=brl(log.total);
+  document.getElementById('rLucro').textContent=brl(c.lucro);
+  document.getElementById('rPrecoOrc').textContent=brl(c.precoOrc);
+  document.getElementById('rProntos').textContent=brl(c.prontosTotal);
+  document.getElementById('rProntosInfo').textContent=c.prontosQtd?`(${c.prontosQtd} ${c.prontosQtd>1?'itens':'item'})`:'';
+  document.getElementById('rFinal').textContent=brl(c.precoFinal);
+  document.getElementById('rLogApart').textContent=brl(c.logApart);
+  document.getElementById('helioM3').textContent=c.helioM3.toLocaleString('pt-BR',{minimumFractionDigits:3})+' m³';
+  document.getElementById('helioRS').textContent=brl(c.helioRS);
+  document.getElementById('logDistTot').textContent=c.log.distTot.toLocaleString('pt-BR')+' km';
+  document.getElementById('logComb').textContent=brl(c.log.comb);
+  document.getElementById('logPedEst').textContent=brl(c.log.pedEst);
+  document.getElementById('logOutros').textContent=brl(c.log.outros);
+  document.getElementById('logTotal').textContent=brl(c.log.total);
+}
+
+/* ===================== VENDA / HISTÓRICO ===================== */
+function abrirModalVenda(){
+  const o=orcAtual(); if(!o){ toast('Abra um orçamento'); return; }
+  document.getElementById('vendaData').value=todayISO();
+  abrirModal('modalVenda');
+}
+function confirmarVenda(){
+  const o=orcAtual(); if(!o){ fecharModal('modalVenda'); return; }
+  const dataStr=document.getElementById('vendaData').value;
+  if(!dataStr){ toast('Escolha uma data'); return; }
+  const [y,m,d]=dataStr.split('-').map(Number);
+  const dataVenda=new Date(y,m-1,d,12,0,0).getTime();
+  const c=calcularSnapshot(o);
+  const snapshot={
+    custoMat:c.custoMat, helioM3:c.helioM3, helioRS:c.helioRS, perda:c.perda, subInsumos:c.subInsumos,
+    maoObra:c.mo, equipe:c.equipe, equipeDetalhe:JSON.parse(JSON.stringify(o.equipe||[])),
+    logIncl:c.logIncl, logApart:c.logApart, custoTotal:c.custoTotal,
+    precoOrc:c.precoOrc, lucro:c.lucro, lucroPct:o.lucroPct, lucroModo:o.lucroModo,
+    prontosTotal:c.prontosTotal, prontosQtd:c.prontosQtd,
+    precoFinal:c.precoFinal
+  };
+  const vendido={
+    ...JSON.parse(JSON.stringify(o)),
+    vendido:true,
+    dataVenda,
+    snapshot
+  };
+  app.historico.unshift(vendido);
+  app.orcamentos=app.orcamentos.filter(x=>x.id!==o.id);
+  app.abertoId=null;
+  save();
+  fecharModal('modalVenda');
+  toast('Venda registrada ✓');
+  document.querySelector('.tab[data-needs-orc]').disabled=true;
+  setView('historico');
+}
+
+function renderHistorico(){
+  const f=(document.getElementById('searchHist').value||'').toLowerCase();
+  const list=document.getElementById('histList');
+  const arr=(app.historico||[]).slice().sort((a,b)=>(b.dataVenda||0)-(a.dataVenda||0)).filter(o=>o.nome.toLowerCase().includes(f));
+  if(!app.historico?.length){
+    list.innerHTML=`<div class="empty-state"><div class="es-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#D98A2B" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Nenhuma venda ainda</h3><p>Marque um orçamento como vendido pra aparecer aqui.</p></div>`;
+    return;
+  }
+  list.innerHTML=arr.map(o=>`
+    <div class="orc-card sold" onclick="abrirHistorico('${o.id}')">
+      <div class="oc-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <div class="oc-body"><div class="oc-name">${esc(o.nome)}<span class="sold-badge">Vendido</span></div><div class="oc-meta">Venda: ${dataBR(o.dataVenda)}</div></div>
+      <div class="oc-price"><div class="v">${brl(o.snapshot?.precoFinal||o.total||0)}</div><div class="l">Final</div></div>
+    </div>`).join('');
+}
+document.getElementById('searchHist').addEventListener('input',()=>renderHistorico());
+
+function abrirHistorico(id){ app.histAbertoId=id; setView('histDetail'); }
+
+function renderHistDetail(){
+  const o=histAtual(); if(!o){ setView('historico'); return; }
+  document.getElementById('hdNome').textContent=o.nome;
+  document.getElementById('hdDate').textContent='Vendido em '+dataBR(o.dataVenda);
+  const s=o.snapshot||{};
+  document.getElementById('hdSummary').innerHTML=`
+    <div class="card-h"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 2v20M2 12h20"/></svg></div><div><div class="ttl">Resumo da venda</div></div></div>
+    <div class="detail-line"><span class="dn">Materiais</span><span class="dv">${brl(s.custoMat||0)}</span></div>
+    <div class="detail-line"><span class="dn">Hélio (${(s.helioM3||0).toLocaleString('pt-BR',{minimumFractionDigits:3})} m³)</span><span class="dv">${brl(s.helioRS||0)}</span></div>
+    <div class="detail-line"><span class="dn">Perda</span><span class="dv">${brl(s.perda||0)}</span></div>
+    <div class="detail-line"><span class="dn">Mão de obra</span><span class="dv">${brl(s.maoObra||0)}</span></div>
+    <div class="detail-line"><span class="dn">Equipe (ajudantes)</span><span class="dv">${brl(s.equipe||0)}</span></div>
+    <div class="detail-line"><span class="dn">Logística inclusa</span><span class="dv">${brl(s.logIncl||0)}</span></div>
+    <div class="detail-line"><span class="dn">Custo total</span><span class="dv">${brl(s.custoTotal||0)}</span></div>
+    <div class="detail-line"><span class="dn">Lucro (${s.lucroModo||'markup'} ${s.lucroPct||0}%)</span><span class="dv" style="color:var(--green)">${brl(s.lucro||0)}</span></div>
+    <div class="detail-line"><span class="dn">Preço do orçamento</span><span class="dv">${brl(s.precoOrc||0)}</span></div>
+    <div class="detail-line"><span class="dn">Produtos prontos (${s.prontosQtd||0})</span><span class="dv">${brl(s.prontosTotal||0)}</span></div>
+    <div class="detail-line" style="border-top:2px solid var(--gold);padding-top:10px;margin-top:6px"><span class="dn" style="font-weight:700;color:var(--txt)">Total ao cliente</span><span class="dv" style="font-size:18px;color:var(--gold-deep)">${brl(s.precoFinal||0)}</span></div>
+    <div class="detail-line"><span class="dn">+ Logística à parte</span><span class="dv">${brl(s.logApart||0)}</span></div>
+  `;
+  // itens
+  let itensHtml='';
+  // materiais
+  const mats=Object.keys(o.qtds||{}).map(id=>{ const it=app.cadastro.find(x=>x.id===id); return it?{nome:it.n,qtd:o.qtds[id],cu:custoUnit(it)}:null; }).filter(Boolean);
+  if(mats.length){
+    itensHtml+=`<div class="detail-section"><h4>Materiais</h4>`;
+    mats.forEach(m=>{ itensHtml+=`<div class="detail-line"><span class="dn">${esc(m.nome)} × ${m.qtd}</span><span class="dv">${brl(m.qtd*m.cu)}</span></div>`; });
+    itensHtml+=`</div>`;
+  }
+  // hélio cadastrado
+  const helios=Object.keys(o.helioQtds||{}).map(id=>{ const it=app.cadastro.find(x=>x.id===id); return it?{nome:it.n,qtd:o.helioQtds[id],c:it.helioC||0}:null; }).filter(Boolean);
+  if(helios.length){
+    itensHtml+=`<div class="detail-section"><h4>Hélio</h4>`;
+    helios.forEach(h=>{ itensHtml+=`<div class="detail-line"><span class="dn">${esc(h.nome)} × ${h.qtd}</span><span class="dv">${(h.qtd*h.c).toLocaleString('pt-BR',{minimumFractionDigits:3})} m³</span></div>`; });
+    itensHtml+=`</div>`;
+  }
+  // avulsos
+  if((o.avulsos||[]).length){
+    itensHtml+=`<div class="detail-section"><h4>Hélio avulso</h4>`;
+    o.avulsos.forEach(av=>{ const m3=(av.consumo||0)*(av.qtd||0); itensHtml+=`<div class="detail-line"><span class="dn">${esc(av.nome||'Item avulso')} × ${av.qtd||0}</span><span class="dv">${m3.toLocaleString('pt-BR',{minimumFractionDigits:3})} m³</span></div>`; });
+    itensHtml+=`</div>`;
+  }
+  // prontos
+  if((o.prontos||[]).length){
+    itensHtml+=`<div class="detail-section"><h4>Produtos prontos</h4>`;
+    o.prontos.forEach(p=>{ itensHtml+=`<div class="detail-line"><span class="dn">${esc(p.nome)} × ${p.qtd||1}</span><span class="dv">${brl((p.preco||0)*(p.qtd||1))}</span></div>`; });
+    itensHtml+=`</div>`;
+  }
+  // equipe
+  if((s.equipeDetalhe||[]).length){
+    itensHtml+=`<div class="detail-section"><h4>Ajudantes</h4>`;
+    s.equipeDetalhe.forEach(a=>{ itensHtml+=`<div class="detail-line"><span class="dn">${esc(a.nome||'Ajudante')}</span><span class="dv">${brl(a.valor||0)}</span></div>`; });
+    itensHtml+=`</div>`;
+  }
+  document.getElementById('hdItems').innerHTML=itensHtml||'<p style="color:var(--txt-faint);font-size:13px">Sem itens.</p>';
+}
+function reabrirVenda(){
+  const o=histAtual(); if(!o)return;
+  if(!confirm('Reabrir esta venda? Vai voltar pra Home como orçamento ativo.'))return;
+  const reab={...JSON.parse(JSON.stringify(o))};
+  delete reab.vendido; delete reab.dataVenda; delete reab.snapshot;
+  reab.atualizado=Date.now();
+  app.historico=app.historico.filter(x=>x.id!==o.id);
+  app.orcamentos.unshift(reab);
+  app.histAbertoId=null;
+  save(); toast('Venda reaberta'); setView('home');
+}
+function excluirHistorico(){
+  const o=histAtual(); if(!o)return;
+  if(!confirm('Apagar do histórico permanentemente?'))return;
+  app.historico=app.historico.filter(x=>x.id!==o.id);
+  app.histAbertoId=null;
+  save(); setView('historico');
+}
+
+/* ===================== DASHBOARD ===================== */
+function renderDashboard(){
+  const arr=app.historico||[];
+  const monthsSet=new Set();
+  arr.forEach(o=>{ if(o.dataVenda) monthsSet.add(ymKey(o.dataVenda)); });
+  const hoje=ymKey(Date.now()); monthsSet.add(hoje);
+  const months=[...monthsSet].sort().reverse();
+  const sel=document.getElementById('dashMonth');
+  const prev=sel.value||hoje;
+  sel.innerHTML=months.map(m=>`<option value="${m}">${ymLabel(m)}</option>`).join('');
+  sel.value=months.includes(prev)?prev:months[0];
+  sel.onchange=renderDashboard;
+
+  const mk=sel.value;
+  const doMes=arr.filter(o=>o.dataVenda && ymKey(o.dataVenda)===mk);
+
+  let faturado=0, mo=0, equipe=0, lucro=0, prontos=0;
+  doMes.forEach(o=>{
+    const s=o.snapshot||{};
+    faturado += (s.precoOrc||0);
+    mo += (s.maoObra||0);
+    equipe += (s.equipe||0);
+    lucro += (s.lucro||0);
+    prontos += (s.prontosTotal||0);
+  });
+
+  document.getElementById('dashCards').innerHTML=`
+    <div class="dash-card full"><div class="dv">${brl(faturado)}</div><div class="dl">Faturado (balões/decoração)</div><div class="ds">${doMes.length} venda${doMes.length===1?'':'s'} no mês</div></div>
+    <div class="dash-card green"><div class="dv">${brl(lucro)}</div><div class="dl">Lucro</div></div>
+    <div class="dash-card"><div class="dv">${brl(mo)}</div><div class="dl">Mão de obra</div></div>
+    <div class="dash-card"><div class="dv">${brl(equipe)}</div><div class="dl">Equipe / ajudantes</div></div>
+    <div class="dash-card"><div class="dv">${doMes.length}</div><div class="dl">Qtd de vendas</div></div>
+    <div class="dash-card full" style="background:linear-gradient(160deg,#FFFFFF,#F8F2E5);border-color:var(--line)"><div class="dv" style="color:var(--txt)">${brl(prontos)}</div><div class="dl">Vendas de produtos prontos</div><div class="ds">Separado — não soma no faturamento nem no lucro</div></div>
+  `;
+
+  const sales=document.getElementById('dashSales');
+  if(!doMes.length){
+    sales.innerHTML='<p style="color:var(--txt-faint);font-size:13px;text-align:center;padding:14px 0">Nenhuma venda neste mês.</p>';
+    return;
+  }
+  sales.innerHTML=doMes.sort((a,b)=>(b.dataVenda||0)-(a.dataVenda||0)).map(o=>`
+    <div class="sale-row" onclick="abrirHistorico('${o.id}')">
+      <div class="sr-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <div class="sr-body"><div class="sr-name">${esc(o.nome)}</div><div class="sr-date">${dataBR(o.dataVenda)}</div></div>
+      <div class="sr-v">${brl(o.snapshot?.precoFinal||o.total||0)}</div>
+    </div>`).join('');
 }
 
 /* ===================== CADASTRO ===================== */
-function renderCadastro(filter=''){
+function renderCadastro(){
   const sel=document.getElementById('qkCat');
   if(sel && !sel.options.length){ sel.innerHTML=CATEGORIAS.map(c=>`<option value="${c}">${c}</option>`).join(''); }
-  const f=(filter||document.getElementById('searchCad').value||'').toLowerCase();
+  const f=(document.getElementById('searchCad').value||'').toLowerCase();
   const itens=app.cadastro.filter(it=>it.n.toLowerCase().includes(f));
   document.getElementById('cadCount').textContent=`${app.cadastro.length} produtos cadastrados`;
 
@@ -1355,10 +1655,10 @@ function addProdutoRapido(){
 function resetCadastro(){ if(!confirm('Restaurar a tabela original? Seus produtos cadastrados serão substituídos.'))return; app.cadastro=JSON.parse(JSON.stringify(CADASTRO_DEFAULT)); app.cadastro.forEach((it,i)=>it.id='cad_'+i+'_'+Math.random().toString(36).slice(2,5)); save(); renderCadastro(); toast('Tabela restaurada'); }
 document.getElementById('searchCad').addEventListener('input',()=>renderCadastro());
 
-/* ===================== BIBLIOTECA: PRONTOS (agrupados por categoria recolhível) ===================== */
+/* ===================== BIBLIOTECA: PRONTOS ===================== */
 let editPPId=null;
-function renderProntos(filter=''){
-  const f=(filter||document.getElementById('searchLibPP').value||'').toLowerCase();
+function renderProntos(){
+  const f=(document.getElementById('searchLibPP').value||'').toLowerCase();
   const lista=app.prontos.filter(p=>p.nome.toLowerCase().includes(f));
   const box=document.getElementById('prontosList');
   if(!lista.length){ box.innerHTML='<p style="color:var(--txt-faint);font-size:13px;text-align:center;padding:20px 0">Nenhum produto pronto.</p>'; return; }
@@ -1398,7 +1698,6 @@ function abrirModalPronto(id){
   editPPId=id||null;
   document.getElementById('prontoTitulo').textContent=id?'Editar produto pronto':'Novo produto pronto';
   const p=id?app.prontos.find(x=>x.id===id):{nome:'',preco:'',desc:'',cat:app.catPronto[0]||'Outros'};
-  // popula categorias
   const sel=document.getElementById('prontoCat');
   sel.innerHTML=app.catPronto.map(c=>`<option ${c===p.cat?'selected':''}>${esc(c)}</option>`).join('');
   document.getElementById('prontoNome').value=p.nome||'';
@@ -1419,7 +1718,7 @@ function salvarPronto(){
 }
 function delProntoLib(id){ if(!confirm('Apagar este produto pronto?'))return; app.prontos=app.prontos.filter(p=>p.id!==id); save(); renderProntos(); renderCatManage(); }
 
-/* ===================== BIBLIOTECA: GERENCIAR CATEGORIAS DE PRONTOS ===================== */
+/* ===================== CATEGORIAS DE PRONTOS ===================== */
 function renderCatManage(){
   const box=document.getElementById('catManageList'); if(!box)return;
   box.innerHTML=app.catPronto.map((c,i)=>{
@@ -1440,7 +1739,6 @@ function addCatPronto(){
 function renomearCat(i,v){
   const novo=v.trim(); const antigo=app.catPronto[i]; if(!novo||novo===antigo){ renderCatManage(); return; }
   if(app.catPronto.some((c,idx)=>idx!==i && c.toLowerCase()===novo.toLowerCase())){ toast('Já existe uma categoria com esse nome'); renderCatManage(); return; }
-  // atualiza produtos que usavam a categoria antiga
   app.prontos.forEach(p=>{ if((p.cat||'Outros')===antigo) p.cat=novo; });
   app.catPronto[i]=novo; save(); renderProntos(); renderCatManage(); toast('Categoria renomeada ✓');
 }
@@ -1452,7 +1750,7 @@ function delCatPronto(i){
   app.catPronto.splice(i,1); save(); renderCatManage(); renderProntos();
 }
 
-/* ===================== BIBLIOTECA: MODELOS ===================== */
+/* ===================== MODELOS ===================== */
 function renderModelos(){
   document.getElementById('modelosList').innerHTML=(app.modelos||[]).map(m=>`
     <div class="lib-row">
