@@ -1,0 +1,24 @@
+{
+  "name": "Pauli Fest Bal\u00f5es",
+  "short_name": "Pauli Fest",
+  "description": "Sistema de precifica\u00e7\u00e3o para Pauli Fest Bal\u00f5es",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#FBF8F3",
+  "theme_color": "#D98A2B",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
